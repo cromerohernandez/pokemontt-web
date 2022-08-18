@@ -1,6 +1,6 @@
-import Pokedex, { Pokemon } from 'pokedex-promise-v2';
+import Pokedex, { Pokemon, Move } from 'pokedex-promise-v2';
 
-import { isAValidPokemon } from '../utils/helpers/pokemon-helper'
+import { isAValidPokemon } from '../utils/helpers/pokemon-helpers'
 
 const pokedex = new Pokedex();
 
@@ -13,7 +13,7 @@ const getRandomPokemonName = (): Promise<string> => {
     pokedex.getPokemonsList({})
       .then(response => {
         const pokemonsListLength = response.count
-        const randomPokemonKey = Math.floor(Math.random() * (pokemonsListLength + 1))
+        const randomPokemonKey = Math.floor(Math.random() * (pokemonsListLength))
         const randomPokemonName = response.results[randomPokemonKey].name
         resolve(randomPokemonName)
       })
@@ -52,9 +52,35 @@ const getRandomPokemonName = (): Promise<string> => {
   })
 }
 
+/**
+ * @description function to get move data by name
+ * @param name string
+ * @returns Promise<Move | undefined>
+ */
+ const getMoveDataByName = (name: string): Promise<Move> => {
+  return new Promise((resolve, reject) => {
+    pokedex.getMoveByName(name)
+      .then((response: Move | Move[]) => {
+        let moveData: Move
+
+        if (Array.isArray(response)) {
+          moveData = response[0]
+        } else {
+          moveData = response
+        }
+
+        resolve(moveData)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
 const PokedexService = {
   getRandomPokemonName,
-  getPokemonDataByName
+  getPokemonDataByName,
+  getMoveDataByName
 }
 
 export default PokedexService
