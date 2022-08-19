@@ -1,16 +1,23 @@
-import React from 'react';
+import { FunctionComponent } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom';
 
+import Home from './components/Home';
+import Config from './components/Config';
+import Battle from './components/Battle';
 import Test from './components/Test';
 
-import './App.scss';
-
-function App() {
+const App: FunctionComponent = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Pokemontt Arena</h1>
-        <Test />
-      </header>
+    <div className='app-container'>
+      <h1>Pokemonnt Arena</h1>
+
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/config' element={<Config />} />
+        <Route path='/battle' element={<Battle />} />
+        <Route path='/test' element={<Test /> /*TODOCRH: delete*/} />
+        <Route path='*' element={<Navigate to="/" replace />} />
+      </Routes>
     </div>
   );
 }
