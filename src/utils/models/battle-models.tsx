@@ -1,4 +1,4 @@
-import { Pokemon } from 'pokedex-promise-v2';
+import { Move, Pokemon } from 'pokedex-promise-v2';
 
 export enum OwnerTypes {
   player,
@@ -8,10 +8,12 @@ export enum OwnerTypes {
 export interface BattleData {
   isPlayerTurn: boolean | undefined;
   playerPokemon: BattlePokemonData | undefined;
+  playerCurrentMove: string | undefined;
   opponentPokemon: BattlePokemonData | undefined;
   changeTurn: () => void;
-  setPokemon: (owner: OwnerTypes, pokemonData: Pokemon | undefined) =>  void;
+  setPokemon: (owner: OwnerTypes, pokemonData: Pokemon | undefined, randomMovesData: Move[] | void) =>  void;
   setPokemonHealth: (owner: OwnerTypes, newHealthValue: number) =>  void;
+  updatePlayerCurrentMove: (updatedMove: string) => void;
   resetBattleData: () => void,
 }
 
@@ -22,6 +24,12 @@ export interface BattlePokemonData {
   hp: number,
   attack: number,
   defense: number,
-  moves: string[],
+  moves: BattleMoveData[],
   image: string | null,
+}
+
+export interface BattleMoveData {
+  name: string,
+  power: number | null,
+  type: string,
 }

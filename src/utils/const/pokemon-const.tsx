@@ -4,7 +4,7 @@ export const pokemonRequiredFields = [
   //types (at least one)
   ['types', '0', 'type', 'name'],
   //experience (experience = level^3)
-    ['base_experience'],
+  ['base_experience'],
   //hp
   ['stats', '0', 'base_stat'],
   ['stats', '0', 'stat', 'name'],
