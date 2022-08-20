@@ -1,9 +1,15 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, MouseEventHandler } from 'react';
 
-const BattleView: FunctionComponent = () => {
+interface BattleProps {
+  onSurrender: MouseEventHandler<HTMLButtonElement> | undefined;
+}
 
+const BattleView: FunctionComponent<BattleProps> = ({ onSurrender }) => {
   return (
-    <h3>BATTLE</h3>
+    <>
+      <h3>BATTLE</h3>
+      <button onClick={onSurrender}>SURRENDER</button>
+    </>
   )
 }
  
