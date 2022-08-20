@@ -75,12 +75,42 @@ export const BattleContextProvider = (props: ProviderProps<BattleData>) => {
     }
   }
 
+  /**
+   * @description function to set new pokemon health value
+   * @param owner OwnerTypes
+   * @param newHealthValue number
+   * @returns void
+   */
+  const setPokemonHealth = (owner: OwnerTypes, newHealthValue: number): void => {     
+    if (owner === OwnerTypes.player) {
+      const newPlayerPokemonData = {...playerPokemon, hp: newHealthValue} as BattlePokemonData
+      setPlayerPokemon(newPlayerPokemonData)
+    }
+
+    if (owner === OwnerTypes.opponent) {
+      const newOpponentPokemonData = {...opponentPokemon, hp: newHealthValue} as BattlePokemonData
+      setPlayerPokemon(newOpponentPokemonData)
+    }
+  }
+
+  /**
+   * @description function to reset battle data 
+   * @returns void
+   */
+  const resetBattleData = (): void => {     
+    setIsPlayerTurn(battleDefaultValue.isPlayerTurn)
+    setPlayerPokemon(battleDefaultValue.playerPokemon)
+    setOpponentPokemon(battleDefaultValue.opponentPokemon)
+  }
+
   const value: BattleData = {
     isPlayerTurn: isPlayerTurn,
     playerPokemon: playerPokemon,
     opponentPokemon: opponentPokemon,
     changeTurn: changeTurn,
-    setPokemon: setPokemon
+    setPokemon: setPokemon,
+    setPokemonHealth: setPokemonHealth,
+    resetBattleData: resetBattleData
   }
 
   return (

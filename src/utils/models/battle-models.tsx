@@ -11,6 +11,8 @@ export interface BattleData {
   opponentPokemon: BattlePokemonData | undefined;
   changeTurn: () => void;
   setPokemon: (owner: OwnerTypes, pokemonData: Pokemon | undefined) =>  void;
+  setPokemonHealth: (owner: OwnerTypes, newHealthValue: number) =>  void;
+  resetBattleData: () => void,
 }
 
 export interface BattlePokemonData {
