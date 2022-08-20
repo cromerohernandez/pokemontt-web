@@ -12,5 +12,6 @@ export interface SettingsViewProps {
 
 export interface BattleViewProps {
   onChangeMove: ChangeEventHandler<HTMLSelectElement>;
+  onAttack: MouseEventHandler<HTMLButtonElement> | undefined;
   onSurrender: MouseEventHandler<HTMLButtonElement> | undefined;
 }

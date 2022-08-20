@@ -75,6 +75,7 @@ export const BattleContextProvider = (props: ProviderProps<BattleData>) => {
     const battlePokemonData = pokemonData ? _mapBattlePokemonData(pokemonData, randomMovesData ?? []) : undefined
     
     if (owner === OwnerTypes.player) {
+      setIsPlayerTurn(Math.random() < 0.5)
       setPlayerPokemon(battlePokemonData)
     }
 

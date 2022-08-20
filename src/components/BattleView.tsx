@@ -4,8 +4,8 @@ import BattleContext from '../contexts/BattleContext';
 
 import { BattleViewProps } from '../utils/models/view-models'
 
-const BattleView: FunctionComponent<BattleViewProps> = ({ onChangeMove, onSurrender }) => {
-  const { playerPokemon, opponentPokemon } = useContext(BattleContext)
+const BattleView: FunctionComponent<BattleViewProps> = ({ onChangeMove, onAttack, onSurrender }) => {
+  const { isPlayerTurn, playerPokemon, playerCurrentMove, opponentPokemon } = useContext(BattleContext)
 
   return (
     <div>
@@ -22,6 +22,7 @@ const BattleView: FunctionComponent<BattleViewProps> = ({ onChangeMove, onSurren
                 <option key={index} value={move.name}>{move.name}</option>
               )}
             </select>
+            <button disabled={(!isPlayerTurn || !playerCurrentMove)} onClick={onAttack}>ATTACK</button>
           </div>
 
           <div>

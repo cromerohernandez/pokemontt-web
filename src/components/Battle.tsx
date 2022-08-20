@@ -11,35 +11,15 @@ import { getRandomMovesForBattle } from '../utils/helpers/moves-helpers';
 import { OwnerTypes } from '../utils/models/battle-models'
 
 const Battle: FunctionComponent = () => {
-  const { playerPokemon, opponentPokemon, setPokemon, updatePlayerCurrentMove } = useContext(BattleContext)
+  const { 
+    playerPokemon,
+    opponentPokemon,
+    changeTurn,
+    setPokemon,
+    updatePlayerCurrentMove,
+    resetBattleData
+  } = useContext(BattleContext)
   const navigate = useNavigate()
-
-  /**
-   * @description function to get pokemon data from PokedexService and set pokemon data in BattleContext
-   * @param moves MoveElement[] | undefined
-   * @returns void
-   */
-  const getMovesData = (moves: MoveElement[] | undefined): Promise<Move[] | void> => {
-    const randomMovesForBattle = getRandomMovesForBattle(moves ?? [])
-
-    return Promise.all<Move>(
-      randomMovesForBattle.map(move => {
-        return PokedexService.getMoveDataByName(move.move.name)
-          .then(response => {
-            return response
-          })
-          .catch(error => {
-            return error
-          })
-      })
-    )
-      .then (movesData => {
-        return movesData
-      })
-      .catch(error => {
-        console.log(error) //TODOCRH
-      })
-  }
 
   /**
    * @description function to get pokemon data from PokedexService and set pokemon data in BattleContext
@@ -84,14 +64,57 @@ const Battle: FunctionComponent = () => {
     !opponentPokemon && getRandomPokemon(OwnerTypes.opponent)
   }, [playerPokemon, opponentPokemon, getRandomPokemon])
 
+  /**
+   * @description function to get pokemon data from PokedexService and set pokemon data in BattleContext
+   * @param moves MoveElement[] | undefined
+   * @returns void
+  */
+  const getMovesData = (moves: MoveElement[] | undefined): Promise<Move[] | void> => {
+    const randomMovesForBattle = getRandomMovesForBattle(moves ?? [])
+
+    return Promise.all<Move>(
+      randomMovesForBattle.map(move => {
+        return PokedexService.getMoveDataByName(move.move.name)
+          .then(response => {
+            return response
+          })
+          .catch(error => {
+            return error
+          })
+      })
+    )
+      .then (movesData => {
+        return movesData
+      })
+      .catch(error => {
+        console.log(error) //TODOCRH
+      })
+  }
+
   const onChangeMove = (event: ChangeEvent<HTMLSelectElement>): void => {
     updatePlayerCurrentMove(event.target.value)
   }
 
-  const onSurrender = () => navigate('/')
+  const onAttack = (): void => {
+    changeTurn()
+    /* TODOCRH:
+    PokemonttService.getAttackResult(playerPokemon, opponentPokemon, playerCurrentMove)
+      .then(response => {
+        setPokemonHealth(OwnerTypes.opponent, response)
+      })
+      .catch(error => {
+        console.log(error) //TODOCRH
+      })
+    */
+  }
+
+  const onSurrender = (): void => {
+    resetBattleData()
+    navigate('/')
+  }
 
   return (
-    <BattleView onChangeMove={onChangeMove} onSurrender={onSurrender} />
+    <BattleView onChangeMove={onChangeMove} onAttack={onAttack} onSurrender={onSurrender} />
   )
 }
  
