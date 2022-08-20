@@ -1,17 +1,17 @@
 import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import ConfigView from './ConfigView'
+import SettingsView from './SettingsView'
 
-const Config: FunctionComponent = () => {
+const Settings: FunctionComponent = () => {
   const navigate = useNavigate()
 
   const onApply = () => navigate('/')
   const onCancel = () => navigate('/')
 
   return (
-    <ConfigView onApply={onApply} onCancel={onCancel} />
+    <SettingsView onApply={onApply} onCancel={onCancel} />
   )
 }
  
-export default Config
+export default Settings

@@ -6,11 +6,11 @@ import HomeView from './HomeView'
 const Home: FunctionComponent = () => {
   const navigate = useNavigate()
 
-  const onConfig = () => navigate('/config')
+  const onSettings = () => navigate('/settings')
   const onBattle = () => navigate('/battle')
 
   return (
-    <HomeView onConfig={onConfig} onBattle={onBattle} />
+    <HomeView onSettings={onSettings} onBattle={onBattle} />
   )
 }
  

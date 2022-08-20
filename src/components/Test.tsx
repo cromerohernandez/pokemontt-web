@@ -2,6 +2,7 @@ import { FunctionComponent, useState, useCallback, useEffect } from 'react';
 import { Pokemon, Move } from 'pokedex-promise-v2';
 
 import PokedexService from '../services/PokedexService';
+
 import TestView from './TestView'
 
 import { getRandomMovesForBattle } from '../utils/helpers/moves-helpers'

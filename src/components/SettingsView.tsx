@@ -1,11 +1,8 @@
-import { FunctionComponent, MouseEventHandler } from 'react';
+import { FunctionComponent } from 'react';
 
-interface ConfigProps {
-  onApply: MouseEventHandler<HTMLButtonElement> | undefined;
-  onCancel: MouseEventHandler<HTMLButtonElement> | undefined;
-}
+import { SettingsViewProps } from '../utils/models/view-models'
 
-const ConfigView: FunctionComponent<ConfigProps> = ({ onApply, onCancel }) => {
+const SettingsView: FunctionComponent<SettingsViewProps> = ({ onApply, onCancel }) => {
   return (
     <>
       <h3>CONFIG</h3>
@@ -42,4 +39,4 @@ const ConfigView: FunctionComponent<ConfigProps> = ({ onApply, onCancel }) => {
   )
 }
  
-export default ConfigView
+export default SettingsView

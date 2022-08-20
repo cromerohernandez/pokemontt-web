@@ -1,15 +1,30 @@
-import { FunctionComponent, MouseEventHandler } from 'react';
+import { FunctionComponent, useContext } from 'react';
 
-interface BattleProps {
-  onSurrender: MouseEventHandler<HTMLButtonElement> | undefined;
-}
+import BattleContext from '../contexts/BattleContext';
 
-const BattleView: FunctionComponent<BattleProps> = ({ onSurrender }) => {
+import { BattleViewProps } from '../utils/models/view-models'
+
+const BattleView: FunctionComponent<BattleViewProps> = ({ onSurrender }) => {
+  const { playerPokemon, opponentPokemon } = useContext(BattleContext)
+
   return (
-    <>
-      <h3>BATTLE</h3>
+    <div>
       <button onClick={onSurrender}>SURRENDER</button>
-    </>
+
+      {playerPokemon && opponentPokemon &&
+        <>
+          <div>
+            <h4>{ opponentPokemon.name }</h4>
+            <h4>{ playerPokemon.name }</h4>
+          </div>
+
+          <div>
+            <img src={opponentPokemon.image ?? undefined} alt="pokemon-sprite"></img>
+            <img src={playerPokemon.image ?? undefined} alt="pokemon-sprite"></img>
+          </div>
+        </>
+      }
+    </div>
   )
 }
  

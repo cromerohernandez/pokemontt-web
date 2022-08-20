@@ -1,15 +1,12 @@
-import { FunctionComponent, MouseEventHandler } from 'react';
+import { FunctionComponent } from 'react';
 
-interface HomeProps {
-  onConfig: MouseEventHandler<HTMLButtonElement> | undefined;
-  onBattle: MouseEventHandler<HTMLButtonElement> | undefined;
-}
+import { HomeViewProps } from '../utils/models/view-models'
 
-const HomeView: FunctionComponent<HomeProps> = ({ onConfig, onBattle }) => {
+const HomeView: FunctionComponent<HomeViewProps> = ({ onSettings, onBattle }) => {
   return (
     <>
       <h3>HOME</h3>
-      <button onClick={onConfig}>CONFIG</button>
+      <button onClick={onSettings}>SETTINGS</button>
       <button onClick={onBattle}>BATTLE</button>
     </>
   )

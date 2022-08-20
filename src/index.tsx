@@ -2,8 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
+import { BattleContextProvider } from './contexts/BattleContext';
+
 import App from './App';
+
 import reportWebVitals from './reportWebVitals';
+import { battleDefaultValue } from './utils/const/battle-const'
 
 import './styles/main.scss';
 
@@ -13,7 +17,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <BattleContextProvider value={battleDefaultValue}>
+        <App />
+      </BattleContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
