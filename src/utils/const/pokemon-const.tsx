@@ -1,10 +1,10 @@
 export const pokemonRequiredFields = [
   //name
   ['name'],
-  //type
+  //types (at least one)
   ['types', '0', 'type', 'name'],
   //experience (experience = level^3)
-    ['base_experience'],
+  ['base_experience'],
   //hp
   ['stats', '0', 'base_stat'],
   ['stats', '0', 'stat', 'name'],
@@ -15,7 +15,7 @@ export const pokemonRequiredFields = [
   ['stats', '2', 'base_stat'],
   ['stats', '2', 'stat', 'name'],
   //moves (at least one)
-  ['moves', '0'],
+  ['moves', '0', 'move', 'name'],
   //image
   ['sprites', 'other', 'home', 'front_default']
 ]

@@ -4,8 +4,8 @@ import { numberOfMovesForBattle } from '../const/move-const'
 
 /**
  * @description function to select random pokemon moves for battle
- * @param pokemonMoves Move[]
- * @returns Move[]
+ * @param pokemonMoves MoveElement[]
+ * @returns MoveElement[]
  */
 export const getRandomMovesForBattle = (pokemonMoves: MoveElement[]): MoveElement[] => {
   let remainingMoves = [...pokemonMoves]
