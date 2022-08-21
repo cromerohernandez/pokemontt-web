@@ -7,7 +7,7 @@ import { BattleContextProvider } from './contexts/BattleContext';
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
-import { battleDefaultValue } from './utils/const/battle-const'
+import { battleDefaultValue } from './utils/const/battle.const';
 
 import './styles/main.scss';
 

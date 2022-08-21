@@ -1,6 +1,6 @@
 import { MoveElement } from 'pokedex-promise-v2';
 
-import { numberOfMovesForBattle } from '../const/move-const'
+import { numberOfMovesForBattle } from '../const/move.const'
 
 /**
  * @description function to select random pokemon moves for battle

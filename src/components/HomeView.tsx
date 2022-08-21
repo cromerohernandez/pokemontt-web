@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { HomeViewProps } from '../utils/models/view-models'
+import { HomeViewProps } from '../utils/models/view.models';
 
 const HomeView: FunctionComponent<HomeViewProps> = ({ onSettings, onBattle }) => {
   return (
@@ -12,4 +12,4 @@ const HomeView: FunctionComponent<HomeViewProps> = ({ onSettings, onBattle }) =>
   )
 }
  
-export default HomeView
+export default HomeView;

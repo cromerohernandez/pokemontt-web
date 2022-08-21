@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { SettingsViewProps } from '../utils/models/view-models'
+import { SettingsViewProps } from '../utils/models/view.models';
 
 const SettingsView: FunctionComponent<SettingsViewProps> = ({ onApply, onCancel }) => {
   return (
@@ -39,4 +39,4 @@ const SettingsView: FunctionComponent<SettingsViewProps> = ({ onApply, onCancel 
   )
 }
  
-export default SettingsView
+export default SettingsView;

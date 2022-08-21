@@ -1,6 +1,6 @@
 import { Pokemon } from 'pokedex-promise-v2';
 
-import { pokemonRequiredFields } from '../const/pokemon-const'
+import { pokemonRequiredFields } from '../const/pokemon.const'
 
 /**
  * @description function to check if pokemonData has a value for each pokemonRequiredFields

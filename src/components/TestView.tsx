@@ -39,4 +39,4 @@ const TestView: FunctionComponent<TestProps> = ({ pokemonA, pokemonB }) => {
   )
 }
  
-export default TestView
+export default TestView;

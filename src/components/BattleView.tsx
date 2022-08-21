@@ -2,7 +2,7 @@ import { FunctionComponent, useContext } from 'react';
 
 import BattleContext from '../contexts/BattleContext';
 
-import { BattleViewProps } from '../utils/models/view-models'
+import { BattleViewProps } from '../utils/models/view.models';
 
 const BattleView: FunctionComponent<BattleViewProps> = ({ onChangeMove, onAttack, onSurrender }) => {
   const { isPlayerTurn, playerPokemon, playerCurrentMove, opponentPokemon } = useContext(BattleContext)
@@ -35,4 +35,4 @@ const BattleView: FunctionComponent<BattleViewProps> = ({ onChangeMove, onAttack
   )
 }
  
-export default BattleView
+export default BattleView;

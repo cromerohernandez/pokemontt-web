@@ -5,10 +5,10 @@ import { Move, MoveElement, Pokemon } from 'pokedex-promise-v2';
 import BattleContext from '../contexts/BattleContext';
 import PokedexService from '../services/PokedexService';
 
-import BattleView from './BattleView'
+import BattleView from './BattleView';
 
-import { getRandomMovesForBattle } from '../utils/helpers/moves-helpers';
-import { OwnerTypes } from '../utils/models/battle-models'
+import { getRandomMovesForBattle } from '../utils/helpers/moves.helpers';
+import { OwnerTypes } from '../utils/models/battle.models';
 
 const Battle: FunctionComponent = () => {
   const { 
@@ -118,4 +118,4 @@ const Battle: FunctionComponent = () => {
   )
 }
  
-export default Battle
+export default Battle;
