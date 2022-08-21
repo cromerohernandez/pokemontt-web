@@ -12,7 +12,7 @@ export const getRandomMovesForBattle = (pokemonMoves: MoveElement[]): MoveElemen
   let selectedMoves: MoveElement[] = []
   
   for (let numberOfMoves = numberOfMovesForBattle; numberOfMoves > 0 && remainingMoves.length > 0; numberOfMoves--) {
-    const randomIndex = Math.floor(Math.random() * (remainingMoves.length))
+    const randomIndex = Math.floor(Math.random() * remainingMoves.length)
     selectedMoves.push(remainingMoves[randomIndex])
     remainingMoves.splice(randomIndex, 1)
   }

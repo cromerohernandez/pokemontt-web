@@ -13,7 +13,7 @@ const getRandomPokemonName = (): Promise<string> => {
     pokedex.getPokemonsList({})
       .then(response => {
         const pokemonsListLength = response.count
-        const randomPokemonKey = Math.floor(Math.random() * (pokemonsListLength))
+        const randomPokemonKey = Math.floor(Math.random() * pokemonsListLength)
         const randomPokemonName = response.results[randomPokemonKey].name
         resolve(randomPokemonName)
       })

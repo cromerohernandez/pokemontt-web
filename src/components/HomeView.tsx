@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
-import { HomeViewProps } from '../utils/models/view.models';
+import { IHomeViewProps } from '../utils/models/view.models';
 
-const HomeView: FunctionComponent<HomeViewProps> = ({ onSettings, onBattle }) => {
+const HomeView: FunctionComponent<IHomeViewProps> = ({ onSettings, onBattle }) => {
   return (
     <>
       <h3>HOME</h3>

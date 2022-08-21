@@ -2,9 +2,9 @@ import { FunctionComponent, useContext } from 'react';
 
 import BattleContext from '../contexts/BattleContext';
 
-import { BattleViewProps } from '../utils/models/view.models';
+import { IBattleViewProps } from '../utils/models/view.models';
 
-const BattleView: FunctionComponent<BattleViewProps> = ({ onChangeMove, onAttack, onSurrender }) => {
+const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttack, onSurrender }) => {
   const { isPlayerTurn, playerPokemon, playerCurrentMove, opponentPokemon } = useContext(BattleContext)
 
   return (
@@ -15,7 +15,9 @@ const BattleView: FunctionComponent<BattleViewProps> = ({ onChangeMove, onAttack
         <>
           <div>
             <h4>{ opponentPokemon.name }</h4>
+            <h5>{ opponentPokemon.hp }</h5>
             <h4>{ playerPokemon.name }</h4>
+            <h5>{ playerPokemon.hp }</h5>
             <select onChange={onChangeMove} defaultValue={'default'}>
               <option value='default' disabled hidden>SELECT A MOVE</option>
               {playerPokemon.moves.map((move, index) =>

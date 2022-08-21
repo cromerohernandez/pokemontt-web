@@ -5,30 +5,41 @@ export enum OwnerTypes {
   opponent
 }
 
-export interface BattleData {
-  isPlayerTurn: boolean | undefined;
-  playerPokemon: BattlePokemonData | undefined;
-  playerCurrentMove: string | undefined;
-  opponentPokemon: BattlePokemonData | undefined;
-  changeTurn: () => void;
-  setPokemon: (owner: OwnerTypes, pokemonData: Pokemon | undefined, randomMovesData: Move[] | void) =>  void;
-  setPokemonHealth: (owner: OwnerTypes, newHealthValue: number) =>  void;
-  updatePlayerCurrentMove: (updatedMove: string) => void;
+export interface IAttackData {
+  attackingPokemon: IBattlePokemonData | undefined,
+  defendingPokemon: IBattlePokemonData | undefined,
+  attackMoveName: string | undefined,
+}
+
+export interface IAttackResponse { //TODOCRH: check if it is used
+  damage: number,
+  newDefendignPokemonHealth: number,
+}
+
+export interface IBattleData {
+  isPlayerTurn: boolean | undefined,
+  playerPokemon: IBattlePokemonData | undefined,
+  playerCurrentMove: string | undefined,
+  opponentPokemon: IBattlePokemonData | undefined,
+  changeTurn: () => void,
+  setPokemon: (owner: OwnerTypes, pokemonData: Pokemon | undefined, randomMovesData: Move[] | void) =>  void,
+  updatePokemonHealth: (owner: OwnerTypes, damage: number) =>  void,
+  updatePlayerCurrentMove: (updatedMove: string) => void,
   resetBattleData: () => void,
 }
 
-export interface BattlePokemonData {
+export interface IBattlePokemonData {
   name: string,
   types: string[],
   experience: number,
   hp: number,
   attack: number,
   defense: number,
-  moves: BattleMoveData[],
+  moves: IBattleMoveData[],
   image: string | null,
 }
 
-export interface BattleMoveData {
+export interface IBattleMoveData {
   name: string,
   power: number | null,
   type: string,
