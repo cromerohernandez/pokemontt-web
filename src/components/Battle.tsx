@@ -4,18 +4,21 @@ import { Move, MoveElement, Pokemon } from 'pokedex-promise-v2';
 
 import BattleContext from '../contexts/BattleContext';
 import PokedexService from '../services/PokedexService';
+import PokemonttService from '../services/PokemonttService';
 
 import BattleView from './BattleView';
 
 import { getRandomMovesForBattle } from '../utils/helpers/moves.helpers';
-import { OwnerTypes } from '../utils/models/battle.models';
+import { OwnerTypes, IAttackData } from '../utils/models/battle.models';
 
 const Battle: FunctionComponent = () => {
   const { 
     playerPokemon,
+    playerCurrentMove,
     opponentPokemon,
     changeTurn,
     setPokemon,
+    updatePokemonHealth,
     updatePlayerCurrentMove,
     resetBattleData
   } = useContext(BattleContext)
@@ -96,16 +99,22 @@ const Battle: FunctionComponent = () => {
   }
 
   const onAttack = (): void => {
-    changeTurn()
-    /* TODOCRH:
-    PokemonttService.getAttackResult(playerPokemon, opponentPokemon, playerCurrentMove)
+    //changeTurn() //TODOCRH: on changeTurn
+
+    const attackData: IAttackData = {
+      attackingPokemon: playerPokemon,
+      defendingPokemon: opponentPokemon,
+      attackMoveName: playerCurrentMove,
+    }
+
+    PokemonttService.sendAttack(attackData)
       .then(response => {
-        setPokemonHealth(OwnerTypes.opponent, response)
+        const { damage, newDefendignPokemonHealth } = response.data //TODOCRH: use damage to message
+        updatePokemonHealth(OwnerTypes.opponent, newDefendignPokemonHealth)
       })
       .catch(error => {
         console.log(error) //TODOCRH
       })
-    */
   }
 
   const onSurrender = (): void => {

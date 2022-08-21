@@ -1,16 +1,16 @@
 import { MouseEventHandler, ChangeEventHandler } from 'react';
 
-export interface HomeViewProps {
+export interface IHomeViewProps {
   onSettings: MouseEventHandler<HTMLButtonElement> | undefined;
   onBattle: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
-export interface SettingsViewProps {
+export interface ISettingsViewProps {
   onApply: MouseEventHandler<HTMLButtonElement> | undefined;
   onCancel: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
-export interface BattleViewProps {
+export interface IBattleViewProps {
   onChangeMove: ChangeEventHandler<HTMLSelectElement>;
   onAttack: MouseEventHandler<HTMLButtonElement> | undefined;
   onSurrender: MouseEventHandler<HTMLButtonElement> | undefined;

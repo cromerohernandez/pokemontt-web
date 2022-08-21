@@ -5,7 +5,7 @@ export const battleDefaultValue = {
   opponentPokemon: undefined,
   changeTurn: () => undefined,
   setPokemon: () => undefined,
-  setPokemonHealth: () => undefined,
+  updatePokemonHealth: () => undefined,
   updatePlayerCurrentMove: () => undefined,
   resetBattleData: () => undefined,
 }
