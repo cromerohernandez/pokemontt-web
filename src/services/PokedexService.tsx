@@ -1,6 +1,6 @@
 import Pokedex, { Pokemon, Move } from 'pokedex-promise-v2';
 
-import { isAValidPokemon } from '../utils/helpers/pokemon-helpers'
+import { isAValidPokemon } from '../utils/helpers/pokemon.helpers';
 
 const pokedex = new Pokedex();
 
@@ -81,6 +81,6 @@ const PokedexService = {
   getRandomPokemonName,
   getPokemonDataByName,
   getMoveDataByName
-}
+};
 
-export default PokedexService
+export default PokedexService;

@@ -1,11 +1,11 @@
 import { createContext, ProviderProps, ConsumerProps, FunctionComponent, useState } from "react";
 import { Move, Pokemon } from 'pokedex-promise-v2';
 
-import { OwnerTypes, BattleData, BattlePokemonData, BattleMoveData } from '../utils/models/battle-models'
-import { battleDefaultValue } from '../utils/const/battle-const'
-import { defaultPowerMoveValue } from "../utils/const/move-const";
+import { OwnerTypes, BattleData, BattlePokemonData, BattleMoveData } from '../utils/models/battle.models';
+import { battleDefaultValue } from '../utils/const/battle.const';
+import { defaultPowerMoveValue } from "../utils/const/move.const";
 
-const BattleContext = createContext<BattleData>(battleDefaultValue)
+const BattleContext = createContext<BattleData>(battleDefaultValue);
 
 export const BattleContextProvider = (props: ProviderProps<BattleData>) => {
   const [isPlayerTurn, setIsPlayerTurn] = useState<boolean | undefined>()
@@ -75,6 +75,7 @@ export const BattleContextProvider = (props: ProviderProps<BattleData>) => {
     const battlePokemonData = pokemonData ? _mapBattlePokemonData(pokemonData, randomMovesData ?? []) : undefined
     
     if (owner === OwnerTypes.player) {
+      setIsPlayerTurn(Math.random() < 0.5)
       setPlayerPokemon(battlePokemonData)
     }
 
@@ -146,4 +147,4 @@ export const WithBattleConsumer = (WrappedComponent: FunctionComponent<any>) => 
   </BattleContext.Consumer>
 }
 
-export default BattleContext
+export default BattleContext;

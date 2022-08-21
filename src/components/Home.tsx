@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import HomeView from './HomeView'
+import HomeView from './HomeView';
 
 const Home: FunctionComponent = () => {
   const navigate = useNavigate()
@@ -14,4 +14,4 @@ const Home: FunctionComponent = () => {
   )
 }
  
-export default Home
+export default Home;

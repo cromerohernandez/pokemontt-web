@@ -3,9 +3,9 @@ import { Pokemon, Move } from 'pokedex-promise-v2';
 
 import PokedexService from '../services/PokedexService';
 
-import TestView from './TestView'
+import TestView from './TestView';
 
-import { getRandomMovesForBattle } from '../utils/helpers/moves-helpers'
+import { getRandomMovesForBattle } from '../utils/helpers/moves.helpers';
 
 const Test: FunctionComponent = () => {
   const [pokemonA, setPokemonA] = useState<Pokemon>()
@@ -57,4 +57,4 @@ const Test: FunctionComponent = () => {
   )
 }
  
-export default Test
+export default Test;

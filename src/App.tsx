@@ -5,7 +5,7 @@ import Home from './components/Home';
 import Settings from './components/Settings';
 import Battle from './components/Battle';
 
-import pokemonttLogo from './assets/img/pokemonttLogo.png'
+import pokemonttLogo from './assets/img/pokemonttLogo.png';
 
 const App: FunctionComponent = () => {
   return (
