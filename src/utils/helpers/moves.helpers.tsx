@@ -1,5 +1,6 @@
 import { MoveElement } from 'pokedex-promise-v2';
 
+import { IBattleMoveData } from '../models/battle.models'
 import { numberOfMovesForBattle } from '../const/move.const'
 
 /**
@@ -18,4 +19,16 @@ export const getRandomMovesForBattle = (pokemonMoves: MoveElement[]): MoveElemen
   }
 
   return selectedMoves
+}
+
+/**
+ * @description function to select a random move from computer's pokemon
+ * @param computerPokemonMoves IBattleMoveData[]
+ * @returns IBattleMoveData
+ */
+export const getComputerMoveToAttack = (computerPokemonMoves: IBattleMoveData[]): IBattleMoveData => {
+  //TODOCRH: develop AI
+  const randomKey = Math.floor(Math.random() * computerPokemonMoves.length)
+  
+  return computerPokemonMoves[randomKey]
 }

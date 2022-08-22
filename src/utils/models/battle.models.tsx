@@ -1,8 +1,13 @@
 import { Move, Pokemon } from 'pokedex-promise-v2';
 
+export enum OpponentTypes {
+  COMPUTER = 'computer',
+  HUMAN = 'human'
+}
+
 export enum OwnerTypes {
-  player,
-  opponent
+  PLAYER = 'player',
+  OPPONENT = 'opponent',
 }
 
 export interface IAttackData {
@@ -11,20 +16,17 @@ export interface IAttackData {
   attackMoveName: string | undefined,
 }
 
-export interface IAttackResponse { //TODOCRH: check if it is used
-  damage: number,
-  newDefendignPokemonHealth: number,
-}
-
 export interface IBattleData {
   isPlayerTurn: boolean | undefined,
   playerPokemon: IBattlePokemonData | undefined,
-  playerCurrentMove: string | undefined,
+  playerCurrentMoveName: string | undefined,
   opponentPokemon: IBattlePokemonData | undefined,
-  changeTurn: () => void,
+  opponentType: OpponentTypes | undefined,
+  changeTurn: (isPlayerTurn: boolean | undefined) => void,
   setPokemon: (owner: OwnerTypes, pokemonData: Pokemon | undefined, randomMovesData: Move[] | void) =>  void,
-  updatePokemonHealth: (owner: OwnerTypes, damage: number) =>  void,
+  updatePokemonHealthInBattle: (owner: OwnerTypes, damage: number) =>  void,
   updatePlayerCurrentMove: (updatedMove: string) => void,
+  setBattleOpponentType: (type: OpponentTypes) => void,
   resetBattleData: () => void,
 }
 
@@ -33,6 +35,7 @@ export interface IBattlePokemonData {
   types: string[],
   experience: number,
   hp: number,
+  hpInBattle: number,
   attack: number,
   defense: number,
   moves: IBattleMoveData[],

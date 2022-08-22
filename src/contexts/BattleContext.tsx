@@ -1,7 +1,7 @@
 import { createContext, ProviderProps, ConsumerProps, FunctionComponent, useState } from "react";
 import { Move, Pokemon } from 'pokedex-promise-v2';
 
-import { OwnerTypes, IBattleData, IBattlePokemonData, IBattleMoveData } from '../utils/models/battle.models';
+import { OpponentTypes, OwnerTypes, IBattleData, IBattlePokemonData, IBattleMoveData } from '../utils/models/battle.models';
 import { battleDefaultValue } from '../utils/const/battle.const';
 import { defaultPowerMoveValue } from "../utils/const/move.const";
 
@@ -10,8 +10,9 @@ const BattleContext = createContext<IBattleData>(battleDefaultValue);
 export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   const [isPlayerTurn, setIsPlayerTurn] = useState<boolean | undefined>()
   const [playerPokemon, setPlayerPokemon] = useState<IBattlePokemonData | undefined>()
-  const [playerCurrentMove, setPlayerCurrentMove]= useState<string | undefined>()
-  const [opponentPokemon, setOpponentPokemon]= useState<IBattlePokemonData | undefined>()
+  const [playerCurrentMoveName, setPlayerCurrentMoveName] = useState<string | undefined>()
+  const [opponentPokemon, setOpponentPokemon] = useState<IBattlePokemonData | undefined>()
+  const [opponentType, setOpponentType] = useState<OpponentTypes | undefined>()
 
   /**
    * @description function to map pokemon data for battle
@@ -25,6 +26,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
       types: _mapTypeNames(pokemonData),
       experience: pokemonData.base_experience,
       hp: pokemonData.stats[0].base_stat,
+      hpInBattle: pokemonData.stats[0].base_stat,
       attack: pokemonData.stats[1].base_stat,
       defense: pokemonData.stats[2].base_stat,
       moves: _mapBattleMovesData(randomMovesData),
@@ -58,10 +60,10 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
 
   /**
    * @description function to change turn between player and opponent
-   * @returns void
+   * @param isPlayerTurn boolean
    */
-  const changeTurn = (): void => {
-    setIsPlayerTurn(!isPlayerTurn)
+  const changeTurn = (isPlayerTurn: boolean | undefined): void => {
+    setIsPlayerTurn(isPlayerTurn)
   }
 
   /**
@@ -69,17 +71,15 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
    * @param owner OwnerTypes
    * @param pokemonData Pokemon | undefined
    * @param randomMovesData Move[] | void
-   * @returns void
    */
   const setPokemon = (owner: OwnerTypes, pokemonData: Pokemon | undefined, randomMovesData: Move[] | void): void => {
     const battlePokemonData = pokemonData ? _mapBattlePokemonData(pokemonData, randomMovesData ?? []) : undefined
     
-    if (owner === OwnerTypes.player) {
-      setIsPlayerTurn(true/*Math.random() < 0.5*/) //TODOCRH
+    if (owner === OwnerTypes.PLAYER) {
       setPlayerPokemon(battlePokemonData)
     }
 
-    if (owner === OwnerTypes.opponent) {
+    if (owner === OwnerTypes.OPPONENT) {
       setOpponentPokemon(battlePokemonData)
     }
   }
@@ -88,16 +88,15 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
    * @description function to set new pokemon health value
    * @param owner OwnerTypes
    * @param newDefendignPokemonHealth: number
-   * @returns void
    */
-  const updatePokemonHealth = (owner: OwnerTypes, newDefendignPokemonHealth: number): void => {
-    if (owner === OwnerTypes.player) {
-      const newPlayerPokemonData = {...playerPokemon, hp: newDefendignPokemonHealth} as IBattlePokemonData
+  const updatePokemonHealthInBattle = (owner: OwnerTypes, newDefendignPokemonHealth: number): void => {
+    if (owner === OwnerTypes.PLAYER) {
+      const newPlayerPokemonData = {...playerPokemon, hpInBattle: newDefendignPokemonHealth} as IBattlePokemonData
       setPlayerPokemon(newPlayerPokemonData)
     }
 
-    if (owner === OwnerTypes.opponent) { 
-      const newOpponentPokemonData = {...opponentPokemon, hp: newDefendignPokemonHealth} as IBattlePokemonData
+    if (owner === OwnerTypes.OPPONENT) { 
+      const newOpponentPokemonData = {...opponentPokemon, hpInBattle: newDefendignPokemonHealth} as IBattlePokemonData
       setOpponentPokemon(newOpponentPokemonData)
     }
   }
@@ -105,32 +104,40 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   /**
    * @description function to update player current move
    * @param updatedMove string
-   * @returns void
    */
   const updatePlayerCurrentMove = (updatedMove: string): void => {
-    setPlayerCurrentMove(updatedMove)
+    setPlayerCurrentMoveName(updatedMove)
+  }
+
+  /**
+   * @description function to set opponent type for the battle
+   * @param type OpponentTypes
+   */
+  const setBattleOpponentType = (type: OpponentTypes): void => {
+    setOpponentType(type)
   }
 
   /**
    * @description function to reset battle data 
-   * @returns void
    */
     const resetBattleData = (): void => {
     setIsPlayerTurn(battleDefaultValue.isPlayerTurn)
     setPlayerPokemon(battleDefaultValue.playerPokemon)
     setOpponentPokemon(battleDefaultValue.opponentPokemon)
-    setPlayerCurrentMove(battleDefaultValue.playerCurrentMove)
+    setPlayerCurrentMoveName(battleDefaultValue.playerCurrentMoveName)
   }
 
   const value: IBattleData = {
     isPlayerTurn: isPlayerTurn,
     playerPokemon: playerPokemon,
-    playerCurrentMove: playerCurrentMove,
+    playerCurrentMoveName: playerCurrentMoveName,
     opponentPokemon: opponentPokemon,
+    opponentType: opponentType,
     changeTurn: changeTurn,
     setPokemon: setPokemon,
-    updatePokemonHealth: updatePokemonHealth,
+    updatePokemonHealthInBattle: updatePokemonHealthInBattle,
     updatePlayerCurrentMove: updatePlayerCurrentMove,
+    setBattleOpponentType: setBattleOpponentType,
     resetBattleData: resetBattleData
   }
 
