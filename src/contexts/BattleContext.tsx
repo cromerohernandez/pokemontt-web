@@ -91,7 +91,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
    * @param newDefendignPokemonHealth: number
    * @returns void
    */
-  const updatePokemonHealth = (owner: OwnerTypes, newDefendignPokemonHealth: number): void => {
+  const updatePokemonHealthInBattle = (owner: OwnerTypes, newDefendignPokemonHealth: number): void => {
     if (owner === OwnerTypes.player) {
       const newPlayerPokemonData = {...playerPokemon, hpInBattle: newDefendignPokemonHealth} as IBattlePokemonData
       setPlayerPokemon(newPlayerPokemonData)
@@ -130,7 +130,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
     opponentPokemon: opponentPokemon,
     changeTurn: changeTurn,
     setPokemon: setPokemon,
-    updatePokemonHealth: updatePokemonHealth,
+    updatePokemonHealthInBattle: updatePokemonHealthInBattle,
     updatePlayerCurrentMove: updatePlayerCurrentMove,
     resetBattleData: resetBattleData
   }

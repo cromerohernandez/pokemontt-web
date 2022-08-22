@@ -18,7 +18,7 @@ const Battle: FunctionComponent = () => {
     opponentPokemon,
     changeTurn,
     setPokemon,
-    updatePokemonHealth,
+    updatePokemonHealthInBattle,
     updatePlayerCurrentMove,
     resetBattleData
   } = useContext(BattleContext)
@@ -110,7 +110,7 @@ const Battle: FunctionComponent = () => {
     PokemonttService.sendAttack(attackData)
       .then(response => {
         const { damage, newDefendignPokemonHealth } = response.data //TODOCRH: use damage to message
-        updatePokemonHealth(OwnerTypes.opponent, newDefendignPokemonHealth)
+        updatePokemonHealthInBattle(OwnerTypes.opponent, newDefendignPokemonHealth)
       })
       .catch(error => {
         console.log(error) //TODOCRH

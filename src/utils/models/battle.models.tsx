@@ -23,7 +23,7 @@ export interface IBattleData {
   opponentPokemon: IBattlePokemonData | undefined,
   changeTurn: () => void,
   setPokemon: (owner: OwnerTypes, pokemonData: Pokemon | undefined, randomMovesData: Move[] | void) =>  void,
-  updatePokemonHealth: (owner: OwnerTypes, damage: number) =>  void,
+  updatePokemonHealthInBattle: (owner: OwnerTypes, damage: number) =>  void,
   updatePlayerCurrentMove: (updatedMove: string) => void,
   resetBattleData: () => void,
 }
