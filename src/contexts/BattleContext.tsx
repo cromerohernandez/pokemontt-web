@@ -25,6 +25,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
       types: _mapTypeNames(pokemonData),
       experience: pokemonData.base_experience,
       hp: pokemonData.stats[0].base_stat,
+      hpInBattle: pokemonData.stats[0].base_stat,
       attack: pokemonData.stats[1].base_stat,
       defense: pokemonData.stats[2].base_stat,
       moves: _mapBattleMovesData(randomMovesData),
@@ -92,12 +93,12 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
    */
   const updatePokemonHealth = (owner: OwnerTypes, newDefendignPokemonHealth: number): void => {
     if (owner === OwnerTypes.player) {
-      const newPlayerPokemonData = {...playerPokemon, hp: newDefendignPokemonHealth} as IBattlePokemonData
+      const newPlayerPokemonData = {...playerPokemon, hpInBattle: newDefendignPokemonHealth} as IBattlePokemonData
       setPlayerPokemon(newPlayerPokemonData)
     }
 
     if (owner === OwnerTypes.opponent) { 
-      const newOpponentPokemonData = {...opponentPokemon, hp: newDefendignPokemonHealth} as IBattlePokemonData
+      const newOpponentPokemonData = {...opponentPokemon, hpInBattle: newDefendignPokemonHealth} as IBattlePokemonData
       setOpponentPokemon(newOpponentPokemonData)
     }
   }

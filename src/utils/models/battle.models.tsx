@@ -33,6 +33,7 @@ export interface IBattlePokemonData {
   types: string[],
   experience: number,
   hp: number,
+  hpInBattle: number,
   attack: number,
   defense: number,
   moves: IBattleMoveData[],
