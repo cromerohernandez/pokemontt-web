@@ -1,11 +1,13 @@
 export const battleDefaultValue = {
-  isPlayerTurn: false,
+  isPlayerTurn: undefined,
   playerPokemon: undefined,
-  playerCurrentMove: undefined,
+  playerCurrentMoveName: undefined,
   opponentPokemon: undefined,
+  opponentType: undefined,
   changeTurn: () => undefined,
   setPokemon: () => undefined,
   updatePokemonHealthInBattle: () => undefined,
   updatePlayerCurrentMove: () => undefined,
+  setBattleOpponentType: () => undefined,
   resetBattleData: () => undefined,
 }

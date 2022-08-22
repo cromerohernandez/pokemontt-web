@@ -43,7 +43,7 @@ const getRandomPokemonName = (): Promise<string> => {
         if (isAValidPokemon(pokemonData)) {
           resolve(pokemonData)
         } else {
-          reject('Error en la carga del pokemon') //TODOCRH
+          reject('Error en la carga del pokemon') //TODOCRH: to modal
         }
       })
       .catch(error => {
