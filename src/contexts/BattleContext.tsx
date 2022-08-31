@@ -13,6 +13,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   const { currentUser } = useContext(AuthContext)
 
   const [isPlayerTurn, setIsPlayerTurn] = useState<boolean | undefined>()
+  const [isBattleInProgress, setIsBattleInProgress] = useState<boolean | undefined>()
   const [playerPokemon, setPlayerPokemon] = useState<IBattlePokemonData | undefined>()
   const [playerCurrentMoveName, setPlayerCurrentMoveName] = useState<string | undefined>()
   const [opponentPokemon, setOpponentPokemon] = useState<IBattlePokemonData | undefined>()
@@ -67,8 +68,8 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
    * @description function to change turn between player and opponent
    * @param isPlayerTurn boolean
    */
-  const changeTurn = (isPlayerTurn: boolean | undefined): void => {
-    setIsPlayerTurn(isPlayerTurn)
+  const changeTurn = (newIsPlayerTurn: boolean | undefined): void => {
+    setIsPlayerTurn(newIsPlayerTurn)
   }
 
   /**
@@ -137,11 +138,13 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
 
   const value: IBattleData = {
     isPlayerTurn: isPlayerTurn,
+    isBattleInProgress: isBattleInProgress,
     playerPokemon: playerPokemon,
     playerCurrentMoveName: playerCurrentMoveName,
     opponentPokemon: opponentPokemon,
     opponentType: opponentType,
     changeTurn: changeTurn,
+    setIsBattleInProgress: setIsBattleInProgress,
     setPokemon: setPokemon,
     updatePokemonHealthInBattle: updatePokemonHealthInBattle,
     updatePlayerCurrentMove: updatePlayerCurrentMove,

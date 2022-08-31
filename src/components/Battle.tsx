@@ -18,6 +18,7 @@ const Battle: FunctionComponent = () => {
     opponentPokemon,
     opponentType,
     changeTurn,
+    setIsBattleInProgress,
     setPokemon,
     updatePokemonHealthInBattle,
     updatePlayerCurrentMove,
@@ -102,6 +103,7 @@ const Battle: FunctionComponent = () => {
   const handleAttack = (): void => {
     if (playerPokemon && opponentPokemon && playerCurrentMoveName) {
       sendAttack(playerPokemon, opponentPokemon, OwnerTypes.PLAYER, playerCurrentMoveName)
+      changeTurn(false)
     }
   }
 
@@ -178,8 +180,6 @@ const Battle: FunctionComponent = () => {
    */
   const continueBattle = (attackingPokemonOwner: OwnerTypes): void => {
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
-      changeTurn(false)
-
       if (opponentType === OpponentTypes.COMPUTER) {
         startComputerAttack()
       }
@@ -198,6 +198,7 @@ const Battle: FunctionComponent = () => {
   */
   const finishBattle = (attackingPokemonOwner: OwnerTypes, attackingPokemonScoreIncrease: number, defendingPokemonScoreIncrease: number): void => {
     changeTurn(undefined)
+    setIsBattleInProgress(false)
 
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
       console.log(`La batalla ha finalizado. ¡Has vencido y has ganado ${attackingPokemonScoreIncrease} puntos!`) //TODOCRH: to modal
@@ -222,6 +223,7 @@ const Battle: FunctionComponent = () => {
   const handleStart = (): void => {
     const firstTurn = Math.random() < 0.5
     changeTurn(firstTurn)
+    setIsBattleInProgress(true)
 
     if (!firstTurn && opponentType === OpponentTypes.COMPUTER) {
       startComputerAttack()
