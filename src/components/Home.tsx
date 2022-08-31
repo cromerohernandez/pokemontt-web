@@ -27,6 +27,17 @@ const Home: FunctionComponent = () => {
   }
 
   const handleSettings = (): void => navigate('/settings')
+
+  const handleRanking = (): void => {
+    PokemonttService.getRanking()
+      .then(usersRanking => {
+        //TODOCRH: develop
+        console.log(usersRanking.data) //TODOCRH: delete
+      })
+      .catch(error => {
+        console.log(error) //TODOCRH: delete
+      })
+  }
   
   const handleBattle = (): void => {
     setBattleOpponentType(OpponentTypes.COMPUTER)
@@ -34,7 +45,7 @@ const Home: FunctionComponent = () => {
   }
 
   return (
-    <HomeView onLogout={handleLogout} onSettings={handleSettings} onBattle={handleBattle} />
+    <HomeView onLogout={handleLogout} onSettings={handleSettings} onRanking={handleRanking} onBattle={handleBattle} />
   )
 }
  

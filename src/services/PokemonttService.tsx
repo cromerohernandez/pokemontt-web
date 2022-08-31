@@ -21,6 +21,7 @@ http.interceptors.response.use(
 
 //users
 const signup = (userData: IUserDataForRequest) => http.post('/users/new', userData);
+const getRanking = () => http.get('/users/ranking');
 
 //battles
 const sendAttack = (attackData: IAttackData) => http.post('/battles/attack', attackData);
@@ -31,6 +32,7 @@ const logout = () => http.post('/logout');
 
 const PokemonttService = {
   signup,
+  getRanking,
   sendAttack,
   login,
   logout

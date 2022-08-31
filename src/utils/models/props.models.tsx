@@ -15,6 +15,7 @@ export interface IBattleViewProps {
 export interface IHomeViewProps {
   onLogout: MouseEventHandler<HTMLButtonElement> | undefined;
   onSettings: MouseEventHandler<HTMLButtonElement> | undefined;
+  onRanking: MouseEventHandler<HTMLButtonElement> | undefined;
   onBattle: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
