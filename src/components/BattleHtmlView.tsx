@@ -4,7 +4,7 @@ import BattleContext from '../contexts/BattleContext';
 
 import { IBattleViewProps } from '../utils/models/props.models';
 
-const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttack, onSurrender, onGoHome, onStart }) => {
+const BattleHtmlView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttack, onSurrender, onGoHome, onStart }) => {
   const { isPlayerTurn, isBattleInProgress, playerPokemon, playerCurrentMoveName, opponentPokemon } = useContext(BattleContext)
 
   return (
@@ -45,4 +45,4 @@ const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttac
   )
 }
  
-export default BattleView;
+export default BattleHtmlView;
