@@ -8,6 +8,7 @@ export interface IBattleViewProps {
   onChangeMove: ChangeEventHandler<HTMLSelectElement>;
   onAttack: MouseEventHandler<HTMLButtonElement> | undefined;
   onSurrender: MouseEventHandler<HTMLButtonElement> | undefined;
+  onGoHome: MouseEventHandler<HTMLButtonElement> | undefined;
   onStart: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 

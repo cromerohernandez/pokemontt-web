@@ -218,6 +218,13 @@ const Battle: FunctionComponent = () => {
   }
 
   /**
+   * @description function to go home
+  */
+    const handleGoHome = (): void => {
+      navigate('/')
+    }
+
+  /**
    * @description function to start battle from button's event click
   */
   const handleStart = (): void => {
@@ -231,7 +238,7 @@ const Battle: FunctionComponent = () => {
   }
 
   return (
-    <BattleView onChangeMove={handleChangeMove} onAttack={handleAttack} onSurrender={handleSurrender} onStart={handleStart} />
+    <BattleView onChangeMove={handleChangeMove} onAttack={handleAttack} onSurrender={handleSurrender} onGoHome={handleGoHome} onStart={handleStart} />
   )
 }
  

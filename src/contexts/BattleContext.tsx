@@ -131,9 +131,11 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
    */
   const resetBattleData = (): void => {
     setIsPlayerTurn(BATTLE_DEFAULT_VALUES.isPlayerTurn)
+    setIsBattleInProgress(BATTLE_DEFAULT_VALUES.isBattleInProgress)
     setPlayerPokemon(BATTLE_DEFAULT_VALUES.playerPokemon)
     setOpponentPokemon(BATTLE_DEFAULT_VALUES.opponentPokemon)
     setPlayerCurrentMoveName(BATTLE_DEFAULT_VALUES.playerCurrentMoveName)
+    setOpponentType(BATTLE_DEFAULT_VALUES.opponentType)
   }
 
   const value: IBattleData = {
