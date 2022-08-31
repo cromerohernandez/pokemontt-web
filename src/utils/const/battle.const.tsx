@@ -1,4 +1,4 @@
-export const battleDefaultValue = {
+export const BATTLE_DEFAULT_VALUES = {
   isPlayerTurn: undefined,
   playerPokemon: undefined,
   playerCurrentMoveName: undefined,

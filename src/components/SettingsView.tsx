@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { ISettingsViewProps } from '../utils/models/view.models';
+import { ISettingsViewProps } from '../utils/models/props.models';
 
 const SettingsView: FunctionComponent<ISettingsViewProps> = ({ onApply, onCancel }) => {
   return (

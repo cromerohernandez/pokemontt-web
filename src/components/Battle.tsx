@@ -92,14 +92,14 @@ const Battle: FunctionComponent = () => {
       })
   }
 
-  const onChangeMove = (event: ChangeEvent<HTMLSelectElement>): void => {
+  const handleChangeMove = (event: ChangeEvent<HTMLSelectElement>): void => {
     updatePlayerCurrentMove(event.target.value)
   }
 
   /**
    * @description function to start player (human) attack from button's event click
    */
-  const onAttack = (): void => {
+  const handleAttack = (): void => {
     if (playerPokemon && opponentPokemon && playerCurrentMoveName) {
       sendAttack(playerPokemon, opponentPokemon, OwnerTypes.PLAYER, playerCurrentMoveName)
     }
@@ -211,7 +211,7 @@ const Battle: FunctionComponent = () => {
   /**
    * @description function to surrender from button's event click
   */
-  const onSurrender = (): void => {
+  const handleSurrender = (): void => {
     resetBattleData()
     navigate('/')
   }
@@ -219,7 +219,7 @@ const Battle: FunctionComponent = () => {
   /**
    * @description function to start battle from button's event click
   */
-  const onStart = (): void => {
+  const handleStart = (): void => {
     const firstTurn = Math.random() < 0.5
     changeTurn(firstTurn)
 
@@ -229,7 +229,7 @@ const Battle: FunctionComponent = () => {
   }
 
   return (
-    <BattleView onChangeMove={onChangeMove} onAttack={onAttack} onSurrender={onSurrender} onStart={onStart} />
+    <BattleView onChangeMove={handleChangeMove} onAttack={handleAttack} onSurrender={handleSurrender} onStart={handleStart} />
   )
 }
  

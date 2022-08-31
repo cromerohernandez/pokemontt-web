@@ -30,8 +30,8 @@ const TestView: FunctionComponent<TestProps> = ({ pokemonA, pokemonB }) => {
           </div>
 
           <div>
-            <img src={pokemonA.sprites.other.home.front_default ?? undefined} alt="pokemon-sprite" style={styleImg}></img>
-            <img src={pokemonB.sprites.other.home.front_default ?? undefined} alt="pokemon-sprite"></img>
+            <img src={pokemonA.sprites.other.home.front_default ?? undefined} alt='pokemon-sprite' style={styleImg}></img>
+            <img src={pokemonB.sprites.other.home.front_default ?? undefined} alt='pokemon-sprite'></img>
           </div>
         </>
       }

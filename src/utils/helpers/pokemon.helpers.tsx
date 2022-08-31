@@ -1,16 +1,16 @@
 import { Pokemon } from 'pokedex-promise-v2';
 
-import { pokemonRequiredFields } from '../const/pokemon.const'
+import { POKEMON_REQUIRED_FIELDS } from '../const/pokemon.const'
 
 /**
- * @description function to check if pokemonData has a value for each pokemonRequiredFields
+ * @description function to check if pokemonData has a value for each pokemon required field
  * @param pokemonData Pokemon
  * @returns boolean
  */
 export const isAValidPokemon = (pokemonData: Pokemon): boolean => {
   let isValid = true
 
-  pokemonRequiredFields.forEach(requiredField => {
+  POKEMON_REQUIRED_FIELDS.forEach(requiredField => {
     let requiredEntry = undefined
 
     if (requiredField.length === 1) {
