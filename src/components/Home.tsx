@@ -29,14 +29,7 @@ const Home: FunctionComponent = () => {
   const handleSettings = (): void => navigate('/settings')
 
   const handleRanking = (): void => {
-    PokemonttService.getRanking()
-      .then(usersRanking => {
-        //TODOCRH: develop
-        console.log(usersRanking.data) //TODOCRH: delete
-      })
-      .catch(error => {
-        console.log(error) //TODOCRH: delete
-      })
+    navigate('/ranking')
   }
   
   const handleBattle = (): void => {

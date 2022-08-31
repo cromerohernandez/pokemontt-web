@@ -36,6 +36,15 @@ export interface INotAuthenticatedRouteProps {
   children: JSX.Element
 }
 
+export interface IRankingViewProps {
+  usersRanking: IUserRanking[] | undefined;
+  onGoHome: MouseEventHandler<HTMLButtonElement> | undefined;
+}
+
+export interface IUserRanking {
+  username: string,
+  score: number
+}
 export interface ISettingsViewProps {
   onApply: MouseEventHandler<HTMLButtonElement> | undefined;
   onCancel: MouseEventHandler<HTMLButtonElement> | undefined;
