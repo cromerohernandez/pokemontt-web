@@ -1,13 +1,17 @@
-import { createContext, ProviderProps, ConsumerProps, FunctionComponent, useState } from "react";
+import { createContext, ConsumerProps, FunctionComponent, ProviderProps, useContext, useState } from 'react';
 import { Move, Pokemon } from 'pokedex-promise-v2';
 
-import { OpponentTypes, OwnerTypes, IBattleData, IBattlePokemonData, IBattleMoveData } from '../utils/models/battle.models';
-import { battleDefaultValue } from '../utils/const/battle.const';
-import { defaultPowerMoveValue } from "../utils/const/move.const";
+import AuthContext from './AuthContext';
 
-const BattleContext = createContext<IBattleData>(battleDefaultValue);
+import { OpponentTypes, OwnerTypes, IBattleData, IBattlePokemonData, IBattleMoveData } from '../utils/models/battle.models';
+import { BATTLE_DEFAULT_VALUES } from '../utils/const/battle.const';
+import { DEFAULT_POWER_MOVE_VALUE } from '../utils/const/move.const';
+
+const BattleContext = createContext<IBattleData>(BATTLE_DEFAULT_VALUES);
 
 export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
+  const { currentUser } = useContext(AuthContext)
+
   const [isPlayerTurn, setIsPlayerTurn] = useState<boolean | undefined>()
   const [playerPokemon, setPlayerPokemon] = useState<IBattlePokemonData | undefined>()
   const [playerCurrentMoveName, setPlayerCurrentMoveName] = useState<string | undefined>()
@@ -22,6 +26,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
    */
   const _mapBattlePokemonData = (pokemonData: Pokemon, randomMovesData: Move[]): IBattlePokemonData => {
     return {
+      userId: null,
       name: pokemonData.name,
       types: _mapTypeNames(pokemonData),
       experience: pokemonData.base_experience,
@@ -52,7 +57,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
     return randomMovesData.map(move => {
       return {
         name: move.name,
-        power: move.power ?? defaultPowerMoveValue,
+        power: move.power ?? DEFAULT_POWER_MOVE_VALUE,
         type: move.type.name,
       }
   })
@@ -76,6 +81,9 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
     const battlePokemonData = pokemonData ? _mapBattlePokemonData(pokemonData, randomMovesData ?? []) : undefined
     
     if (owner === OwnerTypes.PLAYER) {
+      if (battlePokemonData) {
+        battlePokemonData.userId = currentUser.data.id
+      }
       setPlayerPokemon(battlePokemonData)
     }
 
@@ -120,11 +128,11 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   /**
    * @description function to reset battle data 
    */
-    const resetBattleData = (): void => {
-    setIsPlayerTurn(battleDefaultValue.isPlayerTurn)
-    setPlayerPokemon(battleDefaultValue.playerPokemon)
-    setOpponentPokemon(battleDefaultValue.opponentPokemon)
-    setPlayerCurrentMoveName(battleDefaultValue.playerCurrentMoveName)
+  const resetBattleData = (): void => {
+    setIsPlayerTurn(BATTLE_DEFAULT_VALUES.isPlayerTurn)
+    setPlayerPokemon(BATTLE_DEFAULT_VALUES.playerPokemon)
+    setOpponentPokemon(BATTLE_DEFAULT_VALUES.opponentPokemon)
+    setPlayerCurrentMoveName(BATTLE_DEFAULT_VALUES.playerCurrentMoveName)
   }
 
   const value: IBattleData = {

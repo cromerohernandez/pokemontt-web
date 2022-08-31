@@ -31,6 +31,7 @@ export interface IBattleData {
 }
 
 export interface IBattlePokemonData {
+  userId: number | null,
   name: string,
   types: string[],
   experience: number,

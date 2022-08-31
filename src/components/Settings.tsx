@@ -4,14 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import SettingsView from './SettingsView';
 
 const Settings: FunctionComponent = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const onApply = () => navigate('/')
-  const onCancel = () => navigate('/')
+  const handleApply = (): void => navigate('/');
+  
+  const handleCancel = (): void => navigate('/');
 
   return (
-    <SettingsView onApply={onApply} onCancel={onCancel} />
+    <SettingsView onApply={handleApply} onCancel={handleCancel} />
   )
-}
+};
  
 export default Settings;

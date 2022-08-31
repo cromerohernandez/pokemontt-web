@@ -2,7 +2,7 @@ import { FunctionComponent, useContext } from 'react';
 
 import BattleContext from '../contexts/BattleContext';
 
-import { IBattleViewProps } from '../utils/models/view.models';
+import { IBattleViewProps } from '../utils/models/props.models';
 
 const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttack, onSurrender, onStart }) => {
   const { isPlayerTurn, playerPokemon, playerCurrentMoveName, opponentPokemon } = useContext(BattleContext)
@@ -31,8 +31,8 @@ const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttac
           </div>
 
           <div>
-            <img src={opponentPokemon.image ?? undefined} alt="pokemon-sprite"></img>
-            <img src={playerPokemon.image ?? undefined} alt="pokemon-sprite"></img>
+            <img src={opponentPokemon.image ?? undefined} alt='pokemon-sprite'></img>
+            <img src={playerPokemon.image ?? undefined} alt='pokemon-sprite'></img>
           </div>
         </>
       }

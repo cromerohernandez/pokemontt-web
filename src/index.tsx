@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
+import { AuthContextProvider } from './contexts/AuthContext';
 import { BattleContextProvider } from './contexts/BattleContext';
 
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
-import { battleDefaultValue } from './utils/const/battle.const';
+import { AUTH_DEFAULT_VALUES } from './utils/const/user.const'
+import { BATTLE_DEFAULT_VALUES } from './utils/const/battle.const';
 
 import './styles/main.scss';
 
@@ -17,9 +19,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <BattleContextProvider value={battleDefaultValue}>
-        <App />
-      </BattleContextProvider>
+      <AuthContextProvider value={AUTH_DEFAULT_VALUES}>
+        <BattleContextProvider value={BATTLE_DEFAULT_VALUES}>
+          <App />
+        </BattleContextProvider>
+      </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

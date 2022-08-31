@@ -1,3 +1,3 @@
-export const numberOfMovesForBattle = 4
+export const NUMBER_OF_MOVES_FOR_BATTLE = 4
 
-export const defaultPowerMoveValue = 10
+export const DEFAULT_POWER_MOVE_VALUE = 10

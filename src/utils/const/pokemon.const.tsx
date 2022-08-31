@@ -1,4 +1,4 @@
-export const pokemonRequiredFields = [
+export const POKEMON_REQUIRED_FIELDS = [
   //name
   ['name'],
   //types (at least one)
