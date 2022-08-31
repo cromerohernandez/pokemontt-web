@@ -8,12 +8,14 @@ export interface IBattleViewProps {
   onChangeMove: ChangeEventHandler<HTMLSelectElement>;
   onAttack: MouseEventHandler<HTMLButtonElement> | undefined;
   onSurrender: MouseEventHandler<HTMLButtonElement> | undefined;
+  onGoHome: MouseEventHandler<HTMLButtonElement> | undefined;
   onStart: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 export interface IHomeViewProps {
   onLogout: MouseEventHandler<HTMLButtonElement> | undefined;
   onSettings: MouseEventHandler<HTMLButtonElement> | undefined;
+  onRanking: MouseEventHandler<HTMLButtonElement> | undefined;
   onBattle: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 

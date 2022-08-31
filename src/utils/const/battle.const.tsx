@@ -1,10 +1,12 @@
 export const BATTLE_DEFAULT_VALUES = {
   isPlayerTurn: undefined,
+  isBattleInProgress: false,
   playerPokemon: undefined,
   playerCurrentMoveName: undefined,
   opponentPokemon: undefined,
   opponentType: undefined,
   changeTurn: () => undefined,
+  setIsBattleInProgress: () => undefined,
   setPokemon: () => undefined,
   updatePokemonHealthInBattle: () => undefined,
   updatePlayerCurrentMove: () => undefined,

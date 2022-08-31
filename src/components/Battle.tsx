@@ -2,22 +2,27 @@ import { FunctionComponent, ChangeEvent, useContext, useCallback, useEffect } fr
 import { useNavigate } from 'react-router-dom';
 import { Move, MoveElement, Pokemon } from 'pokedex-promise-v2';
 
+import AuthContext from '../contexts/AuthContext';
 import BattleContext from '../contexts/BattleContext';
 import PokedexService from '../services/PokedexService';
 import PokemonttService from '../services/PokemonttService';
 
-import BattleView from './BattleView';
+import BattleHtmlView from './BattleHtmlView';
+import BattleCanvasView from './BattleCanvasView';
 
 import { getRandomMovesForBattle, getComputerMoveToAttack } from '../utils/helpers/moves.helpers';
+import { RenderTypes } from '../utils/models/context.models';
 import { OpponentTypes, OwnerTypes, IAttackData, IBattlePokemonData } from '../utils/models/battle.models';
 
 const Battle: FunctionComponent = () => {
+  const { currentUser } = useContext(AuthContext)
   const { 
     playerPokemon,
     playerCurrentMoveName,
     opponentPokemon,
     opponentType,
     changeTurn,
+    setIsBattleInProgress,
     setPokemon,
     updatePokemonHealthInBattle,
     updatePlayerCurrentMove,
@@ -102,6 +107,7 @@ const Battle: FunctionComponent = () => {
   const handleAttack = (): void => {
     if (playerPokemon && opponentPokemon && playerCurrentMoveName) {
       sendAttack(playerPokemon, opponentPokemon, OwnerTypes.PLAYER, playerCurrentMoveName)
+      changeTurn(false)
     }
   }
 
@@ -178,8 +184,6 @@ const Battle: FunctionComponent = () => {
    */
   const continueBattle = (attackingPokemonOwner: OwnerTypes): void => {
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
-      changeTurn(false)
-
       if (opponentType === OpponentTypes.COMPUTER) {
         startComputerAttack()
       }
@@ -198,6 +202,7 @@ const Battle: FunctionComponent = () => {
   */
   const finishBattle = (attackingPokemonOwner: OwnerTypes, attackingPokemonScoreIncrease: number, defendingPokemonScoreIncrease: number): void => {
     changeTurn(undefined)
+    setIsBattleInProgress(false)
 
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
       console.log(`La batalla ha finalizado. ¡Has vencido y has ganado ${attackingPokemonScoreIncrease} puntos!`) //TODOCRH: to modal
@@ -217,11 +222,19 @@ const Battle: FunctionComponent = () => {
   }
 
   /**
+   * @description function to go home
+  */
+    const handleGoHome = (): void => {
+      navigate('/')
+    }
+
+  /**
    * @description function to start battle from button's event click
   */
   const handleStart = (): void => {
     const firstTurn = Math.random() < 0.5
     changeTurn(firstTurn)
+    setIsBattleInProgress(true)
 
     if (!firstTurn && opponentType === OpponentTypes.COMPUTER) {
       startComputerAttack()
@@ -229,7 +242,15 @@ const Battle: FunctionComponent = () => {
   }
 
   return (
-    <BattleView onChangeMove={handleChangeMove} onAttack={handleAttack} onSurrender={handleSurrender} onStart={handleStart} />
+    <>
+      {currentUser.data.render === RenderTypes.HTML &&
+        <BattleHtmlView onChangeMove={handleChangeMove} onAttack={handleAttack} onSurrender={handleSurrender} onGoHome={handleGoHome} onStart={handleStart} />
+      }
+
+      {currentUser.data.render === RenderTypes.CANVAS &&
+        <BattleCanvasView onChangeMove={handleChangeMove} onAttack={handleAttack} onSurrender={handleSurrender} onGoHome={handleGoHome} onStart={handleStart} />
+      }
+    </>
   )
 }
  
