@@ -3,7 +3,7 @@ import { ConsumerProps, createContext, FunctionComponent, ProviderProps, useStat
 import PokemonttService from '../services/PokemonttService';
 
 import { IAuthData } from '../utils/models/context.models';
-import { AUTH_DEFAULT_VALUES } from '../utils/const/auth.const';
+import { AUTH_DEFAULT_VALUES, DEFAULT_LANGUAGE, DEFAULT_THEME } from '../utils/const/auth.const';
 import i18next from 'i18next';
 
 const AuthContext = createContext<IAuthData>(AUTH_DEFAULT_VALUES);
@@ -20,9 +20,26 @@ export const AuthContextProvider = (props: ProviderProps<IAuthData>) => {
     setCurrentUser(user?.data ?? null)
 
     if (user) {
-      i18next.changeLanguage(user.data.language ?? 'en')
+      setLanguage(user.data.language ?? DEFAULT_LANGUAGE)
+      setTheme(user.data.theme ?? DEFAULT_THEME)
     }
   };
+
+  /**
+   * @description function to set app language
+   * @param language string
+   */
+  const setLanguage = (language: string): void => {
+    i18next.changeLanguage(language)
+  };
+
+  /**
+   * @description function to set app theme
+   * @param theme string
+   */
+  const setTheme = (theme: string): void => {
+    document.documentElement.className = theme
+  }
 
   /**
    * @description function to delete current user

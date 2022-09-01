@@ -29,6 +29,6 @@ export const es = {
     LIGHT: 'Claro',
     RENDER: 'Render',
     SPANISH: 'Español',
-    THEMING: 'Tema',
+    THEME: 'Tema',
   }
 }

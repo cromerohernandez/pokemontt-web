@@ -29,6 +29,6 @@ export const en = {
     LIGHT: 'Light',
     RENDER: 'Render',
     SPANISH: 'Spanish',
-    THEMING: 'Theming',
+    THEME: 'Theme',
   }
 }
