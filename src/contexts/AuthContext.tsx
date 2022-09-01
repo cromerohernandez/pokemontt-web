@@ -4,6 +4,7 @@ import PokemonttService from '../services/PokemonttService';
 
 import { IAuthData } from '../utils/models/context.models';
 import { AUTH_DEFAULT_VALUES } from '../utils/const/auth.const';
+import i18next from 'i18next';
 
 const AuthContext = createContext<IAuthData>(AUTH_DEFAULT_VALUES);
 
@@ -15,8 +16,12 @@ export const AuthContextProvider = (props: ProviderProps<IAuthData>) => {
    * @param user 
    */
   const setUser = (user: any) => { //TODOCRH: review any
-    localStorage.setItem('user', user ? JSON.stringify(user) : '') //TODOCRH: review password in local storage
-    setCurrentUser(user)
+    localStorage.setItem('user', user ? JSON.stringify(user.data) : '')
+    setCurrentUser(user?.data ?? null)
+
+    if (user) {
+      i18next.changeLanguage(user.data.language ?? 'en')
+    }
   };
 
   /**

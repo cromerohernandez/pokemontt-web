@@ -26,14 +26,14 @@ const Login: FunctionComponent = () => {
       type: 'text',
       name: 'username',
       value: username,
-      label: 'Username',
+      label: 'AUTH.USERNAME',
       actions: usernameActions
     },
     { 
       type: 'password',
       name: 'password',
       value: password,
-      label: 'Password',
+      label: 'AUTH.PASSWORD',
       actions: passwordActions
     },
   ];

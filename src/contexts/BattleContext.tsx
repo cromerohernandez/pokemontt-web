@@ -83,7 +83,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
     
     if (owner === OwnerTypes.PLAYER) {
       if (battlePokemonData) {
-        battlePokemonData.userId = currentUser.data.id
+        battlePokemonData.userId = currentUser.id
       }
       setPlayerPokemon(battlePokemonData)
     }

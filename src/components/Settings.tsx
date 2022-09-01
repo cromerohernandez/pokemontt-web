@@ -17,37 +17,37 @@ const Settings: FunctionComponent = () => {
   const {
     value: language,
     actions: languageActions,
-  } = useFormInput({initialValue: currentUser.data.language});
+  } = useFormInput({initialValue: currentUser.language});
 
   const {
     value: theming,
     actions: themingActions,
-  } = useFormInput({initialValue: currentUser.data.theming});
+  } = useFormInput({initialValue: currentUser.theming});
 
   const {
     value: render,
     actions: renderActions,
-  } = useFormInput({initialValue: currentUser.data.render});
+  } = useFormInput({initialValue: currentUser.render});
 
   const formData = [
     { 
       name: 'language',
       value: language,
-      label: 'Language',
+      label: 'SETTINGS.LANGUAGE',
       options: LANGUAGES_OPTIONS,
       actions: languageActions
     },
     { 
       name: 'theming',
       value: theming,
-      label: 'Theming',
+      label: 'SETTINGS.THEMING',
       options: THEMING_OPTIONS,
       actions: themingActions
     },
     { 
       name: 'render',
       value: render,
-      label: 'Render',
+      label: 'SETTINGS.RENDER',
       options: RENDER_OPTIONS,
       actions: renderActions
     },

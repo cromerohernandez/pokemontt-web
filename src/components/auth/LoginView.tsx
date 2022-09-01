@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import FormInput from '../UI/form/FormInput';
 
 import { ILoginViewProps } from '../../utils/models/props.models';
+import { translate } from '../../utils/i18n/i18n.index';
 
 const LoginView: FunctionComponent<ILoginViewProps> = ({ formData, onLogin, onGoToSignUp }) => {
   return (
@@ -18,8 +19,8 @@ const LoginView: FunctionComponent<ILoginViewProps> = ({ formData, onLogin, onGo
         />
       )}
 
-      <button type='submit'>LOGIN</button>
-      <button onClick={onGoToSignUp}>SIGNUP</button>
+      <button type='submit'>{ translate('BUTTONS.LOGIN') }</button>
+      <button onClick={onGoToSignUp}>{ translate('BUTTONS.SIGN_UP') }</button>
     </form>
   )
 }

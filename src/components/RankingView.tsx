@@ -5,8 +5,7 @@ import { IRankingViewProps } from '../utils/models/props.models';
 const RankingView: FunctionComponent<IRankingViewProps> = ({ usersRanking, onGoHome }) => {
   return (
     <>
-      <h3>RANKING</h3>
-      <button onClick={onGoHome}>HOME</button>
+      <button onClick={onGoHome}>CRH-HOME</button>
 
       {usersRanking &&
         usersRanking.map((user, index) =>

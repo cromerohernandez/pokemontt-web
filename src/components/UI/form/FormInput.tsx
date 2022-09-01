@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 
 import { IFormInput } from '../../../utils/models/form.models';
+import { translate } from '../../../utils/i18n/i18n.index';
 
 const FormInput: FunctionComponent<IFormInput> = (formInputProps: IFormInput) => {
   const {
@@ -18,19 +19,19 @@ const FormInput: FunctionComponent<IFormInput> = (formInputProps: IFormInput) =>
 
   return (
     <>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>{ translate(label ?? '') }</label>
       <input
         type={type}
         id={name}
         name={name}
-        placeholder={placeholder ? placeholder : name}
+        placeholder={placeholder ? translate(placeholder) : ''}
         disabled={disabled ? disabled : false}
         defaultValue={value ?? ''}
         onChange={onChange}
         onBlur={onBlur}
       />
       {touch && errorMessage && (
-        <span>{ errorMessage }</span>
+        <span>{ translate(errorMessage) }</span>
       )}
     </>
   )
