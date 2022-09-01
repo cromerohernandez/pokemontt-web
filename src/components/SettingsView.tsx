@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import FormSelect from './UI/form/FormSelect';
 
 import { ISettingsViewProps } from '../utils/models/props.models';
+import { translate } from '../utils/i18n/i18n.index';
 
 const SettingsView: FunctionComponent<ISettingsViewProps> = ({ formData, onApply, onCancel }) => {
   return (
@@ -20,8 +21,8 @@ const SettingsView: FunctionComponent<ISettingsViewProps> = ({ formData, onApply
           />
         )}
 
-        <button onClick={onCancel}>CANCEL</button>
-        <button type='submit'>APPLY</button>
+        <button onClick={onCancel}>{ translate('BUTTONS.CANCEL') }</button>
+        <button type='submit'>{ translate('BUTTONS.APPLY') }</button>
       </form>
     </>
   )

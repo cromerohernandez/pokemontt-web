@@ -8,6 +8,7 @@ import ArenaHtml from './ArenaHtml';
 
 import { RenderTypes } from '../utils/const/settings.const';
 import { IBattleViewProps } from '../utils/models/props.models';
+import { translate } from '../utils/i18n/i18n.index';
 
 const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttack, onSurrender, onGoHome, onStart }) => {
   const { currentUser } = useContext(AuthContext);
@@ -16,12 +17,12 @@ const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttac
   return (
     <div>
       {isBattleInProgress &&
-        <button onClick={onSurrender}>SURRENDER</button>
+        <button onClick={onSurrender}>{ translate('BUTTONS.SURRENDER') }</button>
       }
       {!isBattleInProgress &&
         <>
-          <button onClick={onGoHome}>HOME</button>
-          <button disabled={(!playerPokemon || !opponentPokemon)} onClick={onStart}>START</button>
+          <button onClick={onGoHome}>CRH-HOME</button>
+          <button disabled={(!playerPokemon || !opponentPokemon)} onClick={onStart}>{ translate('BUTTONS.START') }</button>
         </>
       }
 
@@ -29,19 +30,19 @@ const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttac
         <>
           <div>
             <select disabled={!isPlayerTurn} onChange={onChangeMove} defaultValue={'default'}>
-              <option value='default' disabled hidden>SELECT A MOVE</option>
+              <option value='default' disabled hidden>{ translate('BATTLE.SELECT_MOVE') }</option>
               {playerPokemon.moves.map((move, index) =>
                 <option key={index} value={move.name}>{move.name}</option>
               )}
             </select>
-            <button disabled={(!isPlayerTurn || !playerCurrentMoveName)} onClick={onAttack}>ATTACK</button>
+            <button disabled={(!isPlayerTurn || !playerCurrentMoveName)} onClick={onAttack}>{ translate('BUTTONS.ATTACK') }</button>
           </div>
 
-          {currentUser.data.render === RenderTypes.CANVAS &&
+          {currentUser.render === RenderTypes.CANVAS &&
             <ArenaCanvas />
           }
 
-          {currentUser.data.render === RenderTypes.HTML &&
+          {currentUser.render === RenderTypes.HTML &&
             <ArenaHtml />
           }
         </>

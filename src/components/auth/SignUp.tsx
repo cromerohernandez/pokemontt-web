@@ -29,21 +29,21 @@ const SignUp: FunctionComponent = () => {
       type: 'text',
       name: 'username',
       value: username,
-      label: 'Username',
+      label: 'AUTH.USERNAME',
       actions: usernameActions
     },
     { 
       type: 'password',
       name: 'password',
       value: password,
-      label: 'Password',
+      label: 'AUTH.PASSWORD',
       actions: passwordActions
     },
     { 
       type: 'password',
       name: 'repeatPassword',
       value: repeatPassword,
-      label: 'Repeat password',
+      label: 'AUTH.REPEAT_PASSWORD',
       actions:  repetaPasswordActions
     },
   ]

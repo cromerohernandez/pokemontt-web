@@ -5,11 +5,11 @@ export enum Languages {
 
 export const LANGUAGES_OPTIONS = [
   {
-    name: 'english',
+    name: 'SETTINGS.ENGLISH',
     value: Languages.EN,
   },
   {
-    name: 'spanish',
+    name: 'SETTINGS.SPANISH',
     value: Languages.ES
   }
 ]
@@ -21,11 +21,11 @@ export enum RenderTypes {
 
 export const RENDER_OPTIONS = [
   {
-    name: 'canvas',
+    name: 'SETTINGS.CANVAS',
     value: RenderTypes.CANVAS,
   },
   {
-    name: 'HTML',
+    name: 'SETTINGS.HTML',
     value: RenderTypes.HTML,
   },
 ]
@@ -37,11 +37,11 @@ export enum ThemingTypes {
 
 export const THEMING_OPTIONS = [
   {
-    name: 'dark',
+    name: 'SETTINGS.DARK',
     value: ThemingTypes.DARK,
   },
   {
-    name: 'light',
+    name: 'SETTINGS.LIGHT',
     value: ThemingTypes.LIGHT,
   },
 ]

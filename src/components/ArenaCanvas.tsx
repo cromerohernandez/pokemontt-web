@@ -8,7 +8,7 @@ const ArenaCanvas: FunctionComponent = () => {
   return (
     <>
       {playerPokemon && opponentPokemon &&
-        <h3>CANVAS</h3>
+        <h3>CRH-CANVAS</h3>
       }
     </>
   )
