@@ -1,2 +1,14 @@
 $color_ntt-dark: #425272;
 $color_ntt-100: #6785C1;
+
+:root.light {
+  --color_primary: #425272;
+  --color_secondary: #6785C1;
+  --color_text: black;
+}
+  
+:root.dark {
+  --color_primary: #1f293d;
+  --color_secondary: #3f588b;
+  --color_text: white;
+}

@@ -1,6 +1,6 @@
 export interface ISettingsDataForRequest {
   language: string | null,
-  theming: string | null,
+  theme: string | null,
   render: string | null,
 }
 

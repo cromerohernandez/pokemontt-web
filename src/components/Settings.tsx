@@ -8,7 +8,7 @@ import useFormInput from '../hooks/useFormInput';
 
 import SettingsView from './SettingsView';
 
-import { LANGUAGES_OPTIONS, RENDER_OPTIONS, THEMING_OPTIONS } from '../utils/const/settings.const';
+import { LANGUAGES_OPTIONS, RENDER_OPTIONS, THEME_OPTIONS } from '../utils/const/settings.const';
 
 const Settings: FunctionComponent = () => {
   const { currentUser, setUser } = useContext(AuthContext);
@@ -20,9 +20,9 @@ const Settings: FunctionComponent = () => {
   } = useFormInput({initialValue: currentUser.language});
 
   const {
-    value: theming,
-    actions: themingActions,
-  } = useFormInput({initialValue: currentUser.theming});
+    value: theme,
+    actions: themeActions,
+  } = useFormInput({initialValue: currentUser.theme});
 
   const {
     value: render,
@@ -38,11 +38,11 @@ const Settings: FunctionComponent = () => {
       actions: languageActions
     },
     { 
-      name: 'theming',
-      value: theming,
-      label: 'SETTINGS.THEMING',
-      options: THEMING_OPTIONS,
-      actions: themingActions
+      name: 'theme',
+      value: theme,
+      label: 'SETTINGS.THEME',
+      options: THEME_OPTIONS,
+      actions: themeActions
     },
     { 
       name: 'render',
@@ -58,7 +58,7 @@ const Settings: FunctionComponent = () => {
 
     const settingsData = {
       language: language,
-      theming: theming,
+      theme: theme,
       render: render,
     }
 

@@ -30,18 +30,18 @@ export const RENDER_OPTIONS = [
   },
 ]
 
-export enum ThemingTypes {
+export enum ThemeTypes {
   DARK = 'dark',
   LIGHT = 'light',
 }
 
-export const THEMING_OPTIONS = [
+export const THEME_OPTIONS = [
   {
     name: 'SETTINGS.DARK',
-    value: ThemingTypes.DARK,
+    value: ThemeTypes.DARK,
   },
   {
     name: 'SETTINGS.LIGHT',
-    value: ThemingTypes.LIGHT,
+    value: ThemeTypes.LIGHT,
   },
 ]
