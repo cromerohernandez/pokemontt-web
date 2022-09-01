@@ -5,7 +5,7 @@ import { ISettingsDataForRequest, IUserDataForRequest } from '../utils/models/us
 
 const http = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
-  withCredentials:true
+  withCredentials: true,
 });
 
 http.interceptors.response.use(

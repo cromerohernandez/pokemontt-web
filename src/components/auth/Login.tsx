@@ -45,7 +45,7 @@ const Login: FunctionComponent = () => {
     PokemonttService.login(loginData)
       .then(user => {
         auth.setUser(user)
-        navigate('/')
+        //navigate('/')
       })
       .catch(error => {
         console.log(error) //TODOCRH: delete
