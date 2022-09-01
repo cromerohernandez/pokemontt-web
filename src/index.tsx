@@ -17,15 +17,13 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <AuthContextProvider value={AUTH_DEFAULT_VALUES}>
-        <BattleContextProvider value={BATTLE_DEFAULT_VALUES}>
-          <App />
-        </BattleContextProvider>
-      </AuthContextProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <AuthContextProvider value={AUTH_DEFAULT_VALUES}>
+      <BattleContextProvider value={BATTLE_DEFAULT_VALUES}>
+        <App />
+      </BattleContextProvider>
+    </AuthContextProvider>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

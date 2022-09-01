@@ -40,10 +40,12 @@ const Battle: FunctionComponent = () => {
             setPokemon(owner, pokemonData, movesData)
           })
           .catch(error => {
+            getRandomPokemon(owner)
             console.log(error) //TODOCRH
           })
       })
       .catch(error => {
+        getRandomPokemon(owner)
         console.log(error) //TODOCRH
       })
   }, [setPokemon])
@@ -65,8 +67,12 @@ const Battle: FunctionComponent = () => {
 
   useEffect(() => {
     !playerPokemon && getRandomPokemon(OwnerTypes.PLAYER)
+  }, [playerPokemon])
+
+  useEffect(() => {
     !opponentPokemon && getRandomPokemon(OwnerTypes.OPPONENT)
-  }, [changeTurn, playerPokemon, opponentPokemon, getRandomPokemon])
+  }, [opponentPokemon])
+
 
   /**
    * @description function to get pokemon data from PokedexService and set pokemon data in BattleContext
