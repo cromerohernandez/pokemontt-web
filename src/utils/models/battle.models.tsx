@@ -1,14 +1,5 @@
 import { Move, Pokemon } from 'pokedex-promise-v2';
-
-export enum OpponentTypes {
-  COMPUTER = 'computer',
-  HUMAN = 'human'
-}
-
-export enum OwnerTypes {
-  PLAYER = 'player',
-  OPPONENT = 'opponent',
-}
+import { OpponentTypes, OwnerTypes } from '../const/battle.const';
 
 export interface IAttackData {
   attackingPokemon: IBattlePokemonData | undefined,

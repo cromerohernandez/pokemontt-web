@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { IAttackData } from '../utils/models/battle.models';
-import { IUserDataForRequest } from '../utils/models/user.models';
+import { ISettingsDataForRequest, IUserDataForRequest } from '../utils/models/user.models';
 
 const http = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
@@ -22,6 +22,7 @@ http.interceptors.response.use(
 //users
 const signup = (userData: IUserDataForRequest) => http.post('/users/new', userData);
 const getRanking = () => http.get('/users/ranking');
+const updateSettings = (settingsData: ISettingsDataForRequest) => http.patch('/users/update/settings', settingsData);
 
 //battles
 const sendAttack = (attackData: IAttackData) => http.post('/battles/attack', attackData);
@@ -33,6 +34,7 @@ const logout = () => http.post('/logout');
 const PokemonttService = {
   signup,
   getRanking,
+  updateSettings,
   sendAttack,
   login,
   logout

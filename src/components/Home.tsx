@@ -8,7 +8,7 @@ import BattleContext from '../contexts/BattleContext';
 
 import HomeView from './HomeView';
 
-import { OpponentTypes } from '../utils/models/battle.models';
+import { OpponentTypes } from '../utils/const/battle.const';
 
 const Home: FunctionComponent = () => {
   const auth = useContext(AuthContext)

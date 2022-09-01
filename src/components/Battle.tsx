@@ -2,20 +2,17 @@ import { FunctionComponent, ChangeEvent, useContext, useCallback, useEffect } fr
 import { useNavigate } from 'react-router-dom';
 import { Move, MoveElement, Pokemon } from 'pokedex-promise-v2';
 
-import AuthContext from '../contexts/AuthContext';
 import BattleContext from '../contexts/BattleContext';
 import PokedexService from '../services/PokedexService';
 import PokemonttService from '../services/PokemonttService';
 
-import BattleHtmlView from './BattleHtmlView';
-import BattleCanvasView from './BattleCanvasView';
+import BattleView from './BattleView';
 
 import { getRandomMovesForBattle, getComputerMoveToAttack } from '../utils/helpers/moves.helpers';
-import { RenderTypes } from '../utils/models/context.models';
-import { OpponentTypes, OwnerTypes, IAttackData, IBattlePokemonData } from '../utils/models/battle.models';
+import { IAttackData, IBattlePokemonData } from '../utils/models/battle.models';
+import { OpponentTypes, OwnerTypes } from '../utils/const/battle.const';
 
 const Battle: FunctionComponent = () => {
-  const { currentUser } = useContext(AuthContext)
   const { 
     playerPokemon,
     playerCurrentMoveName,
@@ -242,15 +239,7 @@ const Battle: FunctionComponent = () => {
   }
 
   return (
-    <>
-      {currentUser.data.render === RenderTypes.HTML &&
-        <BattleHtmlView onChangeMove={handleChangeMove} onAttack={handleAttack} onSurrender={handleSurrender} onGoHome={handleGoHome} onStart={handleStart} />
-      }
-
-      {currentUser.data.render === RenderTypes.CANVAS &&
-        <BattleCanvasView onChangeMove={handleChangeMove} onAttack={handleAttack} onSurrender={handleSurrender} onGoHome={handleGoHome} onStart={handleStart} />
-      }
-    </>
+    <BattleView onChangeMove={handleChangeMove} onAttack={handleAttack} onSurrender={handleSurrender} onGoHome={handleGoHome} onStart={handleStart} />
   )
 }
  

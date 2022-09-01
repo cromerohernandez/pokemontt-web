@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent, useContext } from 'react';
+import { FormEvent, FunctionComponent, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AuthContext from '../../contexts/AuthContext';
@@ -38,7 +38,7 @@ const Login: FunctionComponent = () => {
     },
   ];
 
-  const handleLogin = (event: ChangeEvent<HTMLFormElement>): void => {
+  const handleLogin = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const loginData = { username, password };
 

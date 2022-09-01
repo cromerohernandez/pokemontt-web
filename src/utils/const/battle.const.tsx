@@ -13,3 +13,13 @@ export const BATTLE_DEFAULT_VALUES = {
   setBattleOpponentType: () => undefined,
   resetBattleData: () => undefined,
 }
+
+export enum OpponentTypes {
+  COMPUTER = 'computer',
+  HUMAN = 'human'
+}
+
+export enum OwnerTypes {
+  PLAYER = 'player',
+  OPPONENT = 'opponent',
+}
