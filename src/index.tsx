@@ -8,7 +8,7 @@ import { BattleContextProvider } from './contexts/BattleContext';
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
-import { AUTH_DEFAULT_VALUES } from './utils/const/user.const'
+import { AUTH_DEFAULT_VALUES } from './utils/const/auth.const'
 import { BATTLE_DEFAULT_VALUES } from './utils/const/battle.const';
 
 import './styles/main.scss';

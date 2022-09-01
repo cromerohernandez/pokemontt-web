@@ -1,40 +1,28 @@
 import { FunctionComponent } from 'react';
 
+import FormSelect from './UI/form/FormSelect';
+
 import { ISettingsViewProps } from '../utils/models/props.models';
 
-const SettingsView: FunctionComponent<ISettingsViewProps> = ({ onApply, onCancel }) => {
+const SettingsView: FunctionComponent<ISettingsViewProps> = ({ formData, onApply, onCancel }) => {
   return (
     <>
       <h3>CONFIG</h3>
+      <form onSubmit={onApply}>
+        {formData.map((select, index) =>
+          <FormSelect
+            name={select.name}
+            options={select.options}
+            value={select.value}
+            label={select.label}
+            {...select.actions}
+            key={index}
+          />
+        )}
 
-      <div>
-        <label htmlFor='language'>LANGUAGE</label>
-        <select name='language'>
-          <option value='english'>english</option>
-          <option value='spanish'>spanish</option>
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor='theming'>THEMING</label>
-        <select name='theming'>
-          <option value='dark'>dark</option>
-          <option value='light'>light</option>
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor='render'>RENDER</label>
-        <select name='render'>
-          <option value='html'>HTML</option>
-          <option value='canvas'>canvas</option>
-        </select>
-      </div>
-
-      <div>
         <button onClick={onCancel}>CANCEL</button>
-        <button onClick={onApply}>APPLY</button>
-      </div>
+        <button type='submit'>APPLY</button>
+      </form>
     </>
   )
 }

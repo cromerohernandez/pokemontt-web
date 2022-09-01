@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Login from './components/auth/Login';
 import NotAuthenticatedRoute from './components/auth/NotAuthenticatedRoute';
 import Settings from './components/Settings';
+import Ranking from './components/Ranking';
 import SignUp from './components/auth/SignUp';
 
 import pokemonttLogo from './assets/img/pokemonttLogo.png';
@@ -49,6 +50,15 @@ const App: FunctionComponent = () => {
           element={
             <AuthenticatedRoute>
               <Settings />
+            </AuthenticatedRoute>
+          }
+        />
+
+        <Route 
+          path='/ranking'
+          element={
+            <AuthenticatedRoute>
+              <Ranking />
             </AuthenticatedRoute>
           }
         />

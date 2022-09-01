@@ -8,7 +8,7 @@ import BattleContext from '../contexts/BattleContext';
 
 import HomeView from './HomeView';
 
-import { OpponentTypes } from '../utils/models/battle.models';
+import { OpponentTypes } from '../utils/const/battle.const';
 
 const Home: FunctionComponent = () => {
   const auth = useContext(AuthContext)
@@ -29,14 +29,7 @@ const Home: FunctionComponent = () => {
   const handleSettings = (): void => navigate('/settings')
 
   const handleRanking = (): void => {
-    PokemonttService.getRanking()
-      .then(usersRanking => {
-        //TODOCRH: develop
-        console.log(usersRanking.data) //TODOCRH: delete
-      })
-      .catch(error => {
-        console.log(error) //TODOCRH: delete
-      })
+    navigate('/ranking')
   }
   
   const handleBattle = (): void => {

@@ -1,10 +1,16 @@
 import { FunctionComponent, useContext } from 'react';
 
+import AuthContext from '../contexts/AuthContext';
 import BattleContext from '../contexts/BattleContext';
 
+import ArenaCanvas from './ArenaCanvas';
+import ArenaHtml from './ArenaHtml';
+
+import { RenderTypes } from '../utils/const/settings.const';
 import { IBattleViewProps } from '../utils/models/props.models';
 
-const BattleHtmlView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttack, onSurrender, onGoHome, onStart }) => {
+const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttack, onSurrender, onGoHome, onStart }) => {
+  const { currentUser } = useContext(AuthContext);
   const { isPlayerTurn, isBattleInProgress, playerPokemon, playerCurrentMoveName, opponentPokemon } = useContext(BattleContext)
 
   return (
@@ -22,10 +28,6 @@ const BattleHtmlView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onA
       {playerPokemon && opponentPokemon &&
         <>
           <div>
-            <h4>COM - { opponentPokemon.name }</h4>
-            <h5>{ opponentPokemon.hpInBattle }</h5>
-            <h4>PLAYER - { playerPokemon.name }</h4>
-            <h5>{ playerPokemon.hpInBattle }</h5>
             <select disabled={!isPlayerTurn} onChange={onChangeMove} defaultValue={'default'}>
               <option value='default' disabled hidden>SELECT A MOVE</option>
               {playerPokemon.moves.map((move, index) =>
@@ -35,14 +37,17 @@ const BattleHtmlView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onA
             <button disabled={(!isPlayerTurn || !playerCurrentMoveName)} onClick={onAttack}>ATTACK</button>
           </div>
 
-          <div>
-            <img src={opponentPokemon.image ?? undefined} alt='pokemon-sprite'></img>
-            <img src={playerPokemon.image ?? undefined} alt='pokemon-sprite'></img>
-          </div>
+          {currentUser.data.render === RenderTypes.CANVAS &&
+            <ArenaCanvas />
+          }
+
+          {currentUser.data.render === RenderTypes.HTML &&
+            <ArenaHtml />
+          }
         </>
       }
     </div>
   )
 }
  
-export default BattleHtmlView;
+export default BattleView;

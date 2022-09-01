@@ -15,3 +15,24 @@ export interface IFormInput {
   touch?: boolean,
   errorMessage?: string,
 }
+
+export interface IFormSelect {
+  name: string,
+  label?: string,
+  placeholder?: string,
+  options: ISelectOptions[],
+  value: string | null,
+  disabled?: boolean,
+  //actions
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void,
+  onBlur?: (event: ChangeEvent<HTMLSelectElement>) => void,
+  resetError?: (newMessage: string) => void,
+  //validation
+  touch?: boolean,
+  errorMessage?: string,
+}
+
+export interface ISelectOptions {
+  name: string,
+  value: string | number,
+}

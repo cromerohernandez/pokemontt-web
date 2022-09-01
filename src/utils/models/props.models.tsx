@@ -1,4 +1,6 @@
-import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from 'react';
+import { ChangeEvent, ChangeEventHandler, FormEvent, MouseEventHandler } from 'react';
+
+import { ISelectOptions } from './form.models';
 
 export interface IAuthenticatedRouteProps {
   children: JSX.Element
@@ -28,7 +30,7 @@ export interface ILoginViewProps {
     actions: IInputActions,
     validation?: IInputValidation,
   }[],
-  onLogin: (event: ChangeEvent<HTMLFormElement>) => void,
+  onLogin: (event: FormEvent<HTMLFormElement>) => void,
   onGoToSignUp: () => void,
 }
 
@@ -36,9 +38,32 @@ export interface INotAuthenticatedRouteProps {
   children: JSX.Element
 }
 
+export interface IRankingViewProps {
+  usersRanking: IUserRanking[] | undefined;
+  onGoHome: MouseEventHandler<HTMLButtonElement> | undefined;
+}
+
+export interface IUserRanking {
+  username: string,
+  score: number
+}
 export interface ISettingsViewProps {
-  onApply: MouseEventHandler<HTMLButtonElement> | undefined;
-  onCancel: MouseEventHandler<HTMLButtonElement> | undefined;
+  formData: {
+    name: string
+    value: string | null,
+    label?: string,
+    options: ISelectOptions[],
+    actions: ISelectActions,
+    validation?: IInputValidation,
+  }[],
+  onApply: (event: FormEvent<HTMLFormElement>) => void;
+  onCancel: () => void;
+}
+
+interface ISelectActions {
+  onChange: ((event: ChangeEvent<HTMLSelectElement>) => void)
+  onBlur?: ((event: ChangeEvent<HTMLSelectElement>) => void)
+  resetError?: ((newMessage: string) => void)
 }
 
 export interface ISignUpViewProps {
@@ -50,7 +75,7 @@ export interface ISignUpViewProps {
     actions: IInputActions,
     validation?: IInputValidation,
   }[],
-  onSignUp: (event: ChangeEvent<HTMLFormElement>) => void,
+  onSignUp: (event: FormEvent<HTMLFormElement>) => void,
   onGoToLogin: () => void,
 }
 

@@ -3,8 +3,8 @@ import { Move, Pokemon } from 'pokedex-promise-v2';
 
 import AuthContext from './AuthContext';
 
-import { OpponentTypes, OwnerTypes, IBattleData, IBattlePokemonData, IBattleMoveData } from '../utils/models/battle.models';
-import { BATTLE_DEFAULT_VALUES } from '../utils/const/battle.const';
+import { IBattleData, IBattlePokemonData, IBattleMoveData } from '../utils/models/battle.models';
+import { BATTLE_DEFAULT_VALUES, OpponentTypes, OwnerTypes } from '../utils/const/battle.const';
 import { DEFAULT_POWER_MOVE_VALUE } from '../utils/const/move.const';
 
 const BattleContext = createContext<IBattleData>(BATTLE_DEFAULT_VALUES);

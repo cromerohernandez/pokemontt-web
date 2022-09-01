@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent } from 'react';
+import { FormEvent, FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import PokemonttService from '../../services/PokemonttService';
@@ -48,7 +48,7 @@ const SignUp: FunctionComponent = () => {
     },
   ]
 
-  const handleSignUp = (event: ChangeEvent<HTMLFormElement>): void => {
+  const handleSignUp = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
 
     const userData = { username, password }

@@ -19,7 +19,7 @@ const LoginView: FunctionComponent<ILoginViewProps> = ({ formData, onLogin, onGo
       )}
 
       <button type='submit'>LOGIN</button>
-      <button type='button' onClick={onGoToSignUp}>SIGNUP</button>
+      <button onClick={onGoToSignUp}>SIGNUP</button>
     </form>
   )
 }
