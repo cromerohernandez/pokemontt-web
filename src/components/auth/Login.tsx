@@ -48,6 +48,10 @@ const Login: FunctionComponent = () => {
     },
   ];
 
+  /**
+   * @description function to check if there is any error in some form input
+   * @return boolean
+   */
   const anyError = (): boolean => {
     const errors = [
       usernameValidation?.error.active,
@@ -57,6 +61,10 @@ const Login: FunctionComponent = () => {
     return errors.some(x => x === true)
   }
 
+  /**
+   * @description function to login and redirect to home route
+   * @param event FormEvent<HTMLFormElement>
+   */
   const handleLogin = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const loginData = { username, password };
@@ -73,6 +81,9 @@ const Login: FunctionComponent = () => {
       })
   }
 
+  /**
+   * @description function to redirect to signup route
+   */
   const handleGoToSignUp = (): void => navigate('/signup');
 
   return (

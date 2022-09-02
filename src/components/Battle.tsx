@@ -37,7 +37,7 @@ const Battle: FunctionComponent = () => {
   const getPokemonData = useCallback((owner: OwnerTypes, pokemonName: string): void => {
     PokedexService.getPokemonDataByName(pokemonName)
       .then((pokemonData: Pokemon | undefined) => {      
-        getMovesData(pokemonData?.moves)
+        _getMovesData(pokemonData?.moves)
           .then((movesData: Move[] | void) => {
             setPokemon(owner, pokemonData, movesData)
           })
@@ -77,10 +77,10 @@ const Battle: FunctionComponent = () => {
 
 
   /**
-   * @description function to get pokemon data from PokedexService and set pokemon data in BattleContext
+   * @description private function to get pokemon data from PokedexService and set pokemon data in BattleContext
    * @param moves MoveElement[] | undefined
-  */
-  const getMovesData = (moves: MoveElement[] | undefined): Promise<Move[] | void> => {
+   */
+  const _getMovesData = (moves: MoveElement[] | undefined): Promise<Move[] | void> => {
     const randomMovesForBattle = getRandomMovesForBattle(moves ?? [])
 
     return Promise.all<Move>(
@@ -102,6 +102,10 @@ const Battle: FunctionComponent = () => {
       })
   }
 
+  /**
+   * @description function to set player selected move
+   * @param event ChangeEvent<HTMLSelectElement>
+   */
   const handleChangeMove = (event: ChangeEvent<HTMLSelectElement>): void => {
     updatePlayerCurrentMove(event.target.value)
   }
@@ -111,32 +115,31 @@ const Battle: FunctionComponent = () => {
    */
   const handleAttack = (): void => {
     if (playerPokemon && opponentPokemon && playerCurrentMoveName) {
-      sendAttack(playerPokemon, opponentPokemon, OwnerTypes.PLAYER, playerCurrentMoveName)
+      _sendAttack(playerPokemon, opponentPokemon, OwnerTypes.PLAYER, playerCurrentMoveName)
       changeTurn(false)
     }
   }
 
   /**
-   * @description function to start computer attack
+   * @description private function to start computer attack
    */
-  const startComputerAttack = (): void => {
+  const _startComputerAttack = (): void => {
     if (playerPokemon && opponentPokemon) {
       const computerAttack = getComputerMoveToAttack(opponentPokemon.moves)
-      //TODOCRH: review
       setTimeout(() => {
-        sendAttack(opponentPokemon, playerPokemon, OwnerTypes.OPPONENT, computerAttack.name)
+        _sendAttack(opponentPokemon, playerPokemon, OwnerTypes.OPPONENT, computerAttack.name)
       }, 1500)
     }
   }
 
   /**
-   * @description function to send an attack from attackingPokemon to defendingPokemon
+   * @description private function to send an attack from attackingPokemon to defendingPokemon
    * @param attackingPokemon IBattlePokemonData
    * @param defendingPokemon IBattlePokemonData
    * @param attackingPokemonOwner OwnerTypes
    * @param attackMoveName string
    */
-  const sendAttack = (
+  const _sendAttack = (
     attackingPokemon: IBattlePokemonData,
     defendingPokemon: IBattlePokemonData,
     attackingPokemonOwner: OwnerTypes,
@@ -160,12 +163,12 @@ const Battle: FunctionComponent = () => {
           newDefendingPokemonScore
         } = response.data
 
-        setAttackResult(attackingPokemonOwner, damage, usedMoveName, newDefendignPokemonHealth)
+        _setAttackResult(attackingPokemonOwner, damage, usedMoveName, newDefendignPokemonHealth)
 
         if (newDefendignPokemonHealth > 0) {
-          continueBattle(attackingPokemonOwner)
+          _continueBattle(attackingPokemonOwner)
         } else {
-          finishBattle(attackingPokemonOwner, attackingPokemonScoreIncrease, defendingPokemonScoreIncrease, newAttackingPokemonScore, newDefendingPokemonScore)
+          _finishBattle(attackingPokemonOwner, attackingPokemonScoreIncrease, defendingPokemonScoreIncrease, newAttackingPokemonScore, newDefendingPokemonScore)
         }
       })
       .catch(error => {
@@ -174,13 +177,13 @@ const Battle: FunctionComponent = () => {
   }
 
   /**
-   * @description function to set defending pokemon's health and message from attack result
+   * @description private function to set defending pokemon's health and message from attack result
    * @param attackingPokemonOwner OwnerTypes
    * @param damage number
    * @param usedMoveName string
    * @param newDefendignPokemonHealth number
-  */
-  const setAttackResult = (attackingPokemonOwner: OwnerTypes, damage: number, usedMoveName: string, newDefendignPokemonHealth: number): void => {
+   */
+  const _setAttackResult = (attackingPokemonOwner: OwnerTypes, damage: number, usedMoveName: string, newDefendignPokemonHealth: number): void => {
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
       updatePokemonHealthInBattle(OwnerTypes.OPPONENT, newDefendignPokemonHealth)
       console.log(`Tu movimiento '${usedMoveName}' ha causado ${damage} punto${damage !== 1 ? 's' : ''} de daño a tu oponente.`) //TODOCRH: to modal
@@ -193,13 +196,13 @@ const Battle: FunctionComponent = () => {
   }
 
   /**
-   * @description function to continue battle flow
+   * @description private function to continue battle flow
    * @param attackingPokemonOwner OwnerTypes
    */
-  const continueBattle = (attackingPokemonOwner: OwnerTypes): void => {
+  const _continueBattle = (attackingPokemonOwner: OwnerTypes): void => {
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
       if (opponentType === OpponentTypes.COMPUTER) {
-        startComputerAttack()
+        _startComputerAttack()
       }
     }
     
@@ -209,12 +212,12 @@ const Battle: FunctionComponent = () => {
   }
 
   /**
-   * @description function to finish battle flow
+   * @description private function to finish battle flow
    * @param attackingPokemonOwner OwnerTypes
    * @param attackingPokemonScoreIncrease number
    * @param defendingPokemonScoreIncrease number
-  */
-  const finishBattle = (
+   */
+  const _finishBattle = (
     attackingPokemonOwner: OwnerTypes,
     attackingPokemonScoreIncrease: number,
     defendingPokemonScoreIncrease: number,
@@ -225,21 +228,21 @@ const Battle: FunctionComponent = () => {
     setIsBattleInProgress(false)
 
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
-      setNewCurrentUserScore(newAttackingPokemonScore)
+      _setNewCurrentUserScore(newAttackingPokemonScore)
       console.log(`La batalla ha finalizado. ¡Has vencido y has ganado ${attackingPokemonScoreIncrease} puntos!`) //TODOCRH: to modal
     }
     
     if (attackingPokemonOwner === OwnerTypes.OPPONENT) {
-      setNewCurrentUserScore(newDefendingPokemonScore)
+      _setNewCurrentUserScore(newDefendingPokemonScore)
       console.log(`La batalla ha finalizado. Has sido derrotado... pero has conseguido ${defendingPokemonScoreIncrease} puntos!`) //TODOCRH: to modal
     }
   }
 
   /**
-   * @description function to set new currentUser score (AuthContext)
+   * @description private function to set new currentUser score (AuthContext)
    * @param newScore number
    */
-  const setNewCurrentUserScore = (newScore: number): void => {
+  const _setNewCurrentUserScore = (newScore: number): void => {
     const newCurrentUserData = {
       ...currentUser,
       score: newScore
@@ -254,7 +257,7 @@ const Battle: FunctionComponent = () => {
 
   /**
    * @description function to surrender from button's event click
-  */
+   */
   const handleSurrender = (): void => {
     resetBattleData()
     navigate('/')
@@ -262,21 +265,21 @@ const Battle: FunctionComponent = () => {
 
   /**
    * @description function to go home
-  */
+   */
     const handleGoHome = (): void => {
       navigate('/')
     }
 
   /**
    * @description function to start battle from button's event click
-  */
+   */
   const handleStart = (): void => {
     const firstTurn = Math.random() < 0.5
     changeTurn(firstTurn)
     setIsBattleInProgress(true)
 
     if (!firstTurn && opponentType === OpponentTypes.COMPUTER) {
-      startComputerAttack()
+      _startComputerAttack()
     }
   }
 

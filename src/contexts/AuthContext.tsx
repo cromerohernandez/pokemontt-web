@@ -20,24 +20,24 @@ export const AuthContextProvider = (props: ProviderProps<IAuthData>) => {
     setCurrentUser(user?.data ?? null)
 
     if (user) {
-      setLanguage(user.data.language ?? DEFAULT_LANGUAGE)
-      setTheme(user.data.theme ?? DEFAULT_THEME)
+      _setLanguage(user.data.language ?? DEFAULT_LANGUAGE)
+      _setTheme(user.data.theme ?? DEFAULT_THEME)
     }
   };
 
   /**
-   * @description function to set app language
+   * @description private function to set app language
    * @param language string
    */
-  const setLanguage = (language: string): void => {
+  const _setLanguage = (language: string): void => {
     i18next.changeLanguage(language)
   };
 
   /**
-   * @description function to set app theme
+   * @description private function to set app theme
    * @param theme string
    */
-  const setTheme = (theme: string): void => {
+  const _setTheme = (theme: string): void => {
     document.documentElement.className = theme
   }
 

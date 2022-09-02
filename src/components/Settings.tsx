@@ -53,6 +53,10 @@ const Settings: FunctionComponent = () => {
     },
   ];
 
+  /**
+   * @description function to apply selected settings options
+   * @param event FormEvent<HTMLFormElement>
+   */
   const handleApply = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
 
@@ -72,6 +76,9 @@ const Settings: FunctionComponent = () => {
       })
   }
   
+  /**
+   * @description function to redirect to home route
+   */
   const handleCancel = (): void => navigate('/');
 
   return (

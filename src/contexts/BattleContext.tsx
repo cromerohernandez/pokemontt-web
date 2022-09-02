@@ -20,7 +20,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   const [opponentType, setOpponentType] = useState<OpponentTypes | undefined>()
 
   /**
-   * @description function to map pokemon data for battle
+   * @description private function to map pokemon data for battle
    * @param pokemonData Pokemon
    * @param randomMovesData Move[]
    * @returns IBattlePokemonData
@@ -41,7 +41,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   }
 
   /**
-   * @description function to map type names of a pokemon
+   * @description private function to map type names of a pokemon
    * @param pokemonData Pokemon
    * @returns string[]
    */
@@ -50,7 +50,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   }
 
   /**
-   * @description function to map random moves data for battle
+   * @description private function to map random moves data for battle
    * @param randomMovesData Move[]
    * @returns IBattleMoveData[]
    */

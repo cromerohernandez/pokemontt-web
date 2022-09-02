@@ -11,10 +11,18 @@ const useFormInput = (formInputData?: IUseFormInput) => {
   const [touch, setTouch] = useState(false)
   const [error, setError] = useState({active: true, message: ''})
 
+  /**
+   * @description function to manage input change event
+   * @param event ChangeEvent<HTMLInputElement | HTMLSelectElement>
+   */
   const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void =>{
     setValue(event.currentTarget.value)
   }
 
+  /**
+   * @description function to manage input blur event
+   * @param event ChangeEvent<HTMLInputElement | HTMLSelectElement>
+   */
   const onBlur = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const valid = validator ? validator(event.target.value) : true
 
@@ -22,6 +30,10 @@ const useFormInput = (formInputData?: IUseFormInput) => {
     setError({active: !valid, message: initialErrorMessage ?? ''})
   }
 
+  /**
+   * @description function to reset input error
+   * @param newMessage string
+   */
   const resetError = (newMessage: string): void => {
     setError({
       active: true,
