@@ -30,6 +30,8 @@ export interface ILoginViewProps {
     actions: IInputActions,
     validation?: IInputValidation,
   }[],
+  formError: string | null,
+  anyError: () => boolean,
   onLogin: (event: FormEvent<HTMLFormElement>) => void,
   onGoToSignUp: () => void,
 }
@@ -75,6 +77,8 @@ export interface ISignUpViewProps {
     actions: IInputActions,
     validation?: IInputValidation,
   }[],
+  formError: string | null,
+  anyError: () => boolean,
   onSignUp: (event: FormEvent<HTMLFormElement>) => void,
   onGoToLogin: () => void,
 }

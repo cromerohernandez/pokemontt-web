@@ -15,6 +15,9 @@ const Home: FunctionComponent = () => {
   const { setBattleOpponentType } = useContext(BattleContext)
   const navigate = useNavigate()
 
+  /**
+   * @description function to logout in auth context
+   */
   const handleLogout = (): void => {
     PokemonttService.logout()
       .then(() => {
@@ -26,12 +29,21 @@ const Home: FunctionComponent = () => {
       })
   }
 
+  /**
+   * @description function to redirect to settings route
+   */
   const handleSettings = (): void => navigate('/settings')
 
+  /**
+   * @description function to redirect to ranking route
+   */
   const handleRanking = (): void => {
     navigate('/ranking')
   }
   
+  /**
+   * @description function to redirect to battle route
+   */
   const handleBattle = (): void => {
     setBattleOpponentType(OpponentTypes.COMPUTER)
     navigate('/battle')

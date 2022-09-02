@@ -14,7 +14,7 @@ const FormSelect: FunctionComponent<IFormSelect> = (formSelectProps: IFormSelect
     onChange,
     onBlur,
     touch,
-    errorMessage,
+    error,
   } = formSelectProps
 
   return (
@@ -35,8 +35,8 @@ const FormSelect: FunctionComponent<IFormSelect> = (formSelectProps: IFormSelect
           <option key={index} value={option.value}>{ translate(option.name) }</option>
         )}
       </select>
-      {touch && errorMessage && (
-        <span>{ translate(errorMessage) }</span>
+      {touch && error?.active && (
+        <span>{ translate(error?.message ?? '') }</span>
       )}
     </>
   )

@@ -22,7 +22,7 @@ const Ranking: FunctionComponent = () => {
   }, [])
 
   /**
-   * @description function to go home
+   * @description function to redirect to home route
    */
   const handleGoHome = (): void => {
     navigate('/')
