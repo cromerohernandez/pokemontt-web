@@ -1,5 +1,5 @@
 export interface IUseFormInput {
   initialValue?: string,
-  validator?: (value: string | null) => boolean,
+  validator?: (value: string) => boolean,
   initialErrorMessage?: string,
 }

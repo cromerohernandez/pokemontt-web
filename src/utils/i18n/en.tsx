@@ -20,6 +20,21 @@ export const en = {
     START: 'Start',
     SURRENDER: 'Surrender',
   },
+  ERRORS: {
+    INVALID_LOGIN: 'Invalid username or password.',
+    INVALID_PASSWORD: 'Password is required and need at least 6 characters.',
+    INVALID_REPEAT_PASSWORD: 'The passwords must be the same.',
+    INVALID_USERNAME: 'Username is required.',
+    LOGIN_MISSING_CREDENTIALS: 'Username and password are required.',
+    POKEMON_WITHOUT_SELECTED_MOVE: 'The pokemon does not have the selected move available.',
+    RESOURCE_NOT_FOUND: 'Resource not found.',
+    USER_ALREADY_AUTHENTICATED: 'User is already authenticated.',
+    USER_NOT_AUTHENTICATED: 'User is not authenticated.',
+    USER_WITHOUT_BATTLES: 'User has not battles.',
+    USER_NOT_FOUND: 'User not found.',
+    USERS_NOT_FOUND: 'Users not found.',
+    USERNAME_ALREADY_EXISTS: 'Username already exists.',
+  },
   SETTINGS: {
     CANVAS: 'Canvas',
     DARK: 'Dark',
@@ -30,5 +45,5 @@ export const en = {
     RENDER: 'Render',
     SPANISH: 'Spanish',
     THEME: 'Theme',
-  }
+  },
 }

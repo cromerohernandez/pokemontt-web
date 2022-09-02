@@ -5,7 +5,7 @@ import FormInput from '../UI/form/FormInput';
 import { ISignUpViewProps } from '../../utils/models/props.models';
 import { translate } from '../../utils/i18n/i18n.index';
 
-const SignUpView: FunctionComponent<ISignUpViewProps> = ({ formData, onSignUp, onGoToLogin }) => {
+const SignUpView: FunctionComponent<ISignUpViewProps> = ({ formData, formError, anyError, onSignUp, onGoToLogin }) => {
   return (
     <form onSubmit={onSignUp}>
       {formData.map((input, index) =>
@@ -15,11 +15,16 @@ const SignUpView: FunctionComponent<ISignUpViewProps> = ({ formData, onSignUp, o
           value={input.value}
           label={input.label}
           {...input.actions}
+          {...input.validation}
           key={index}
         />
       )}
 
-      <button type='submit'>{ translate('BUTTONS.SIGN_UP') }</button>
+      {formError &&
+        <span>{ translate(`ERRORS.${formError}`) }</span>
+      }
+
+      <button disabled={anyError()} type='submit'>{ translate('BUTTONS.SIGN_UP') }</button>
       <button onClick={onGoToLogin}>{ translate('BUTTONS.LOGIN') }</button>
     </form>
   )

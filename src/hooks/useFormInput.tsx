@@ -9,7 +9,7 @@ const useFormInput = (formInputData?: IUseFormInput) => {
 
   const [value, setValue] = useState(initialValue ?? null)
   const [touch, setTouch] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
+  const [error, setError] = useState({active: true, message: ''})
 
   const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void =>{
     setValue(event.currentTarget.value)
@@ -19,11 +19,14 @@ const useFormInput = (formInputData?: IUseFormInput) => {
     const valid = validator ? validator(event.target.value) : true
 
     setTouch(true)
-    setErrorMessage(!valid ? (initialErrorMessage ?? '') : '')
+    setError({active: !valid, message: initialErrorMessage ?? ''})
   }
 
   const resetError = (newMessage: string): void => {
-    setErrorMessage(newMessage ? newMessage : (initialErrorMessage ?? ''))
+    setError({
+      active: true,
+      message: newMessage ? newMessage : (initialErrorMessage ?? '')
+    })
   }
 
   if (validator) {
@@ -36,7 +39,7 @@ const useFormInput = (formInputData?: IUseFormInput) => {
       },
       validation: {
         touch,
-        errorMessage,
+        error,
       },
     }
   } else {

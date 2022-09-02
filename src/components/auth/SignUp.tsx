@@ -1,4 +1,4 @@
-import { FormEvent, FunctionComponent } from 'react';
+import { FormEvent, FunctionComponent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import PokemonttService from '../../services/PokemonttService';
@@ -6,23 +6,34 @@ import useFormInput from '../../hooks/useFormInput';
 
 import SignUpView from './SignUpView';
 
+import { translate } from '../../utils/i18n/i18n.index';
+
+const validators = {
+  username: (val: any) => val,
+  password: (val: string) => val.length >= 6,
+}
+
 const SignUp: FunctionComponent = () => {
   const navigate = useNavigate();
+  const [formError, setFormError] = useState(null)
 
   const {
     value: username,
     actions: usernameActions,
-  } = useFormInput()
+    validation: usernameValidation,
+  } = useFormInput({validator: validators.username, initialErrorMessage: translate('ERRORS.INVALID_USERNAME')})
 
   const {
     value: password,
     actions: passwordActions,
-  } = useFormInput()
+    validation: passwordValidation,
+  } = useFormInput({validator: validators.password, initialErrorMessage: translate('ERRORS.INVALID_PASSWORD')})
 
   const {
     value: repeatPassword,
     actions: repetaPasswordActions,
-  } = useFormInput()
+    validation: repeatPasswordValidation,
+  } = useFormInput({validator: (val: string) => val === password, initialErrorMessage: translate('ERRORS.INVALID_REPEAT_PASSWORD')})
 
   const formData = [
     { 
@@ -30,42 +41,57 @@ const SignUp: FunctionComponent = () => {
       name: 'username',
       value: username,
       label: 'AUTH.USERNAME',
-      actions: usernameActions
+      actions: usernameActions,
+      validation: usernameValidation,
     },
     { 
       type: 'password',
       name: 'password',
       value: password,
       label: 'AUTH.PASSWORD',
-      actions: passwordActions
+      actions: passwordActions,
+      validation: passwordValidation,
     },
     { 
       type: 'password',
       name: 'repeatPassword',
       value: repeatPassword,
       label: 'AUTH.REPEAT_PASSWORD',
-      actions:  repetaPasswordActions
+      actions:  repetaPasswordActions,
+      validation: repeatPasswordValidation,
     },
   ]
+
+  const anyError = (): boolean => {
+    const errors = [
+      usernameValidation?.error.active,
+      passwordValidation?.error.active,
+      repeatPasswordValidation?.error.active,
+    ]
+
+    return errors.some(x => x === true)
+  }
 
   const handleSignUp = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
 
     const userData = { username, password }
 
+    setFormError(null)
+
     PokemonttService.signup(userData)
     .then(() => {
       navigate('/login')
     })
     .catch(error => {
-      console.log(error) //TODOCRH: delete
+      setFormError(error.response.data.message ?? error.message)
     })
   }
 
   const handleGoToLogin = (): void => navigate('/login');
 
   return (
-    <SignUpView formData={formData} onSignUp={handleSignUp} onGoToLogin={handleGoToLogin} />
+    <SignUpView formData={formData} formError={formError} anyError={anyError} onSignUp={handleSignUp} onGoToLogin={handleGoToLogin} />
   )
 }
  

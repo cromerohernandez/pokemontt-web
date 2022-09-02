@@ -14,7 +14,7 @@ const FormInput: FunctionComponent<IFormInput> = (formInputProps: IFormInput) =>
     onChange,
     onBlur,
     touch,
-    errorMessage,
+    error,
   } = formInputProps
 
   return (
@@ -30,8 +30,8 @@ const FormInput: FunctionComponent<IFormInput> = (formInputProps: IFormInput) =>
         onChange={onChange}
         onBlur={onBlur}
       />
-      {touch && errorMessage && (
-        <span>{ translate(errorMessage) }</span>
+      {touch && error?.active && (
+        <span>{ translate(error?.message ?? '') }</span>
       )}
     </>
   )

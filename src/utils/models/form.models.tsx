@@ -13,7 +13,10 @@ export interface IFormInput {
   resetError?: (newMessage: string) => void,
   //validation
   touch?: boolean,
-  errorMessage?: string,
+  error?: {
+    active: boolean,
+    message: string
+  }
 }
 
 export interface IFormSelect {
@@ -29,7 +32,10 @@ export interface IFormSelect {
   resetError?: (newMessage: string) => void,
   //validation
   touch?: boolean,
-  errorMessage?: string,
+  error?: {
+    active: boolean,
+    message: string
+  }
 }
 
 export interface ISelectOptions {

@@ -20,6 +20,21 @@ export const es = {
     START: 'Comenzar',
     SURRENDER: 'Rendirse',
   },
+  ERRORS: {
+    INVALID_LOGIN: 'Nombre de usuario o contraseña inválidos.',
+    INVALID_PASSWORD: 'La contraseña es requerida y debe tener al menos 6 caracteres.',
+    INVALID_REPEAT_PASSWORD: 'Las contraseñas deben ser iguales.',
+    INVALID_USERNAME: 'El nombre de usuario es requerido.',
+    LOGIN_MISSING_CREDENTIALS: 'El nombre de usuario y la contraseña son requeridos.',
+    POKEMON_WITHOUT_SELECTED_MOVE: 'El pokemon no tiene disponible el movimiento seleccionado.',
+    RESOURCE_NOT_FOUND: 'Recurso no encontrado.',
+    USER_ALREADY_AUTHENTICATED: 'El usuario ya está autenticado.',
+    USER_NOT_AUTHENTICATED: 'El usuario no está autenticado.',
+    USER_WITHOUT_BATTLES: 'El usuario no tiene batallas',
+    USER_NOT_FOUND: 'Usuario no encontrados.',
+    USERS_NOT_FOUND: 'Usuarios no encontrados.',
+    USERNAME_ALREADY_EXISTS: 'El nombre de usuario ya existe.',
+  },
   SETTINGS: {
     CANVAS: 'Canvas',
     DARK: 'Oscuro',
@@ -30,5 +45,5 @@ export const es = {
     RENDER: 'Render',
     SPANISH: 'Español',
     THEME: 'Tema',
-  }
+  },
 }
