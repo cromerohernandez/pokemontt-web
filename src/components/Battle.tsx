@@ -2,6 +2,7 @@ import { FunctionComponent, ChangeEvent, useContext, useCallback, useEffect } fr
 import { useNavigate } from 'react-router-dom';
 import { Move, MoveElement, Pokemon } from 'pokedex-promise-v2';
 
+import AuthContext from '../contexts/AuthContext';
 import BattleContext from '../contexts/BattleContext';
 import PokedexService from '../services/PokedexService';
 import PokemonttService from '../services/PokemonttService';
@@ -13,7 +14,8 @@ import { IAttackData, IBattlePokemonData } from '../utils/models/battle.models';
 import { OpponentTypes, OwnerTypes } from '../utils/const/battle.const';
 
 const Battle: FunctionComponent = () => {
-  const { 
+  const { currentUser, setUser } = useContext(AuthContext)
+  const {
     playerPokemon,
     playerCurrentMoveName,
     opponentPokemon,
@@ -148,13 +150,22 @@ const Battle: FunctionComponent = () => {
 
     PokemonttService.sendAttack(attackData)
       .then(response => {
-        const { damage, usedMoveName, newDefendignPokemonHealth, attackingPokemonScoreIncrease, defendingPokemonScoreIncrease } = response.data
+        const {
+          damage,
+          usedMoveName,
+          newDefendignPokemonHealth,
+          attackingPokemonScoreIncrease,
+          defendingPokemonScoreIncrease,
+          newAttackingPokemonScore,
+          newDefendingPokemonScore
+        } = response.data
+
         setAttackResult(attackingPokemonOwner, damage, usedMoveName, newDefendignPokemonHealth)
 
         if (newDefendignPokemonHealth > 0) {
           continueBattle(attackingPokemonOwner)
         } else {
-          finishBattle(attackingPokemonOwner, attackingPokemonScoreIncrease, defendingPokemonScoreIncrease)
+          finishBattle(attackingPokemonOwner, attackingPokemonScoreIncrease, defendingPokemonScoreIncrease, newAttackingPokemonScore, newDefendingPokemonScore)
         }
       })
       .catch(error => {
@@ -203,17 +214,42 @@ const Battle: FunctionComponent = () => {
    * @param attackingPokemonScoreIncrease number
    * @param defendingPokemonScoreIncrease number
   */
-  const finishBattle = (attackingPokemonOwner: OwnerTypes, attackingPokemonScoreIncrease: number, defendingPokemonScoreIncrease: number): void => {
+  const finishBattle = (
+    attackingPokemonOwner: OwnerTypes,
+    attackingPokemonScoreIncrease: number,
+    defendingPokemonScoreIncrease: number,
+    newAttackingPokemonScore: number,
+    newDefendingPokemonScore: number,
+    ): void => {
     changeTurn(undefined)
     setIsBattleInProgress(false)
 
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
+      setNewCurrentUserScore(newAttackingPokemonScore)
       console.log(`La batalla ha finalizado. ¡Has vencido y has ganado ${attackingPokemonScoreIncrease} puntos!`) //TODOCRH: to modal
     }
     
     if (attackingPokemonOwner === OwnerTypes.OPPONENT) {
+      setNewCurrentUserScore(newDefendingPokemonScore)
       console.log(`La batalla ha finalizado. Has sido derrotado... pero has conseguido ${defendingPokemonScoreIncrease} puntos!`) //TODOCRH: to modal
     }
+  }
+
+  /**
+   * @description function to set new currentUser score (AuthContext)
+   * @param newScore number
+   */
+  const setNewCurrentUserScore = (newScore: number): void => {
+    const newCurrentUserData = {
+      ...currentUser,
+      score: newScore
+    }
+
+    const updatedCurrentUser = {
+      data: newCurrentUserData
+    }
+
+    setUser(updatedCurrentUser)
   }
 
   /**
