@@ -1,14 +1,14 @@
 import { FormEvent, FunctionComponent, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import AuthContext from '../contexts/AuthContext';
-import PokemonttService from '../services/PokemonttService';
+import AuthContext from '../../contexts/AuthContext';
+import PokemonttService from '../../services/PokemonttService';
 
-import useFormInput from '../hooks/useFormInput';
+import useFormInput from '../../hooks/useFormInput';
 
 import SettingsView from './SettingsView';
 
-import { LANGUAGES_OPTIONS, RENDER_OPTIONS, THEME_OPTIONS } from '../utils/const/settings.const';
+import { LANGUAGES_OPTIONS, RENDER_OPTIONS, THEME_OPTIONS } from '../../utils/const/settings.const';
 
 const Settings: FunctionComponent = () => {
   const { currentUser, setUser } = useContext(AuthContext);

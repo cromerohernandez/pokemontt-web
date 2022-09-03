@@ -1,11 +1,40 @@
+@import '../settings/settings';
+
 .app-container {
   height: 100vh;
   width: 100vw;
-  background-color: var(--color_primary);
+  min-width: $app_min_width;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  background-color: var(--color_primary);
+
+  &__header {
+    height: $app_header_height;
+    min-height: $app_header_min_height;
+    width: 50%;
+    min-width: $board_min_width;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    
+    //background-color: lightgreen; //TODOCRH: delete
+  }
+
+  &__body {
+    height: $app_body_height;
+    min-height: $app_body_min_height;
+    width: 50%;
+    min-width: $board_min_width;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
   &__logo {
-      margin: 2%;
-      height: 15%;
+    margin-top: 1%;
+    height: 80%;
   }
 }

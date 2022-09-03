@@ -1,0 +1,25 @@
+.arena-html-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__item {
+    margin: 0 5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__img {
+    margin-top: 1rem;
+    height: 16rem;
+
+    &--symmetry {
+      transform: scaleX(-1);
+    }
+  }
+
+  &__icon {
+    height: 1.3rem;
+    margin: 2.5rem 0 0.5rem;
+  }
+}

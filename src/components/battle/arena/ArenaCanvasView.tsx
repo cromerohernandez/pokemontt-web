@@ -1,8 +1,8 @@
 import { FunctionComponent, useContext } from 'react';
 
-import BattleContext from '../contexts/BattleContext';
+import BattleContext from '../../../contexts/BattleContext';
 
-const ArenaCanvas: FunctionComponent = () => {
+const ArenaCanvasView: FunctionComponent = () => {
   const { playerPokemon, opponentPokemon } = useContext(BattleContext)
 
   return (
@@ -14,4 +14,4 @@ const ArenaCanvas: FunctionComponent = () => {
   )
 }
  
-export default ArenaCanvas;
+export default ArenaCanvasView;

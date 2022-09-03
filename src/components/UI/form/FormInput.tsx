@@ -18,22 +18,29 @@ const FormInput: FunctionComponent<IFormInput> = (formInputProps: IFormInput) =>
   } = formInputProps
 
   return (
-    <>
-      <label htmlFor={name}>{ translate(label ?? '') }</label>
-      <input
-        type={type}
-        id={name}
-        name={name}
-        placeholder={placeholder ? translate(placeholder) : ''}
-        disabled={disabled ? disabled : false}
-        defaultValue={value ?? ''}
-        onChange={onChange}
-        onBlur={onBlur}
-      />
-      {touch && error?.active && (
-        <span>{ translate(error?.message ?? '') }</span>
-      )}
-    </>
+    <div className='form-item-container'>
+      <div className='form-item-container__data'>
+        <label htmlFor={name} className='form-item-container__label'>{ translate(label ?? '') }</label>
+
+        <input
+          type={type}
+          id={name}
+          name={name}
+          placeholder={placeholder ? translate(placeholder) : ''}
+          disabled={disabled ? disabled : false}
+          defaultValue={value ?? ''}
+          onChange={onChange}
+          onBlur={onBlur}
+          className='form-item-container__item'
+        />
+      </div>
+
+      <div className='form-item-container__error'>
+        {touch && error?.active && (
+          <span>{ translate(error?.message ?? '') }</span>
+        )}
+      </div>
+    </div>
   )
 }
 

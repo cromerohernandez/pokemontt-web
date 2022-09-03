@@ -18,27 +18,34 @@ const FormSelect: FunctionComponent<IFormSelect> = (formSelectProps: IFormSelect
   } = formSelectProps
 
   return (
-    <>
-      <label htmlFor={name}>{ translate(label ?? '') }</label>
-      <select
-        id={name}
-        name={name}
-        disabled={disabled ? disabled : false}
-        defaultValue={value ?? ''}
-        onChange={onChange}
-        onBlur={onBlur}
-      >
-        {placeholder &&
-          <option value='default' disabled hidden>{ placeholder ? translate(placeholder) : name }</option>
-        }
-        {options.map((option, index) =>
-          <option key={index} value={option.value}>{ translate(option.name) }</option>
+    <div className='form-item-container'>
+      <div className='form-item-container__data'>
+        <label htmlFor={name} className='form-item-container__label'>{ translate(label ?? '') }</label>
+
+        <select
+          id={name}
+          name={name}
+          disabled={disabled ? disabled : false}
+          defaultValue={value ?? ''}
+          onChange={onChange}
+          onBlur={onBlur}
+          className='form-item-container__item'
+        >
+          {placeholder &&
+            <option value='default' disabled hidden>{ placeholder ? translate(placeholder) : name }</option>
+          }
+          {options.map((option, index) =>
+            <option key={index} value={option.value}>{ translate(option.name) }</option>
+          )}
+        </select>
+      </div>
+      
+      <div className='form-item-container__error'>
+        {touch && error?.active && (
+          <span>{ translate(error?.message ?? '') }</span>
         )}
-      </select>
-      {touch && error?.active && (
-        <span>{ translate(error?.message ?? '') }</span>
-      )}
-    </>
+      </div>
+    </div>
   )
 }
 

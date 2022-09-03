@@ -14,10 +14,12 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
 
   const [isPlayerTurn, setIsPlayerTurn] = useState<boolean | undefined>()
   const [isBattleInProgress, setIsBattleInProgress] = useState<boolean | undefined>()
+  const [isBattleOver, setIsBattleOver] = useState<boolean | undefined>()
   const [playerPokemon, setPlayerPokemon] = useState<IBattlePokemonData | undefined>()
   const [playerCurrentMoveName, setPlayerCurrentMoveName] = useState<string | undefined>()
   const [opponentPokemon, setOpponentPokemon] = useState<IBattlePokemonData | undefined>()
   const [opponentType, setOpponentType] = useState<OpponentTypes | undefined>()
+  const [battleMessage, setBattleMessage] = useState<string>()
 
   /**
    * @description private function to map pokemon data for battle
@@ -132,26 +134,32 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   const resetBattleData = (): void => {
     setIsPlayerTurn(BATTLE_DEFAULT_VALUES.isPlayerTurn)
     setIsBattleInProgress(BATTLE_DEFAULT_VALUES.isBattleInProgress)
+    setIsBattleOver(BATTLE_DEFAULT_VALUES.isBattleOver)
     setPlayerPokemon(BATTLE_DEFAULT_VALUES.playerPokemon)
-    setOpponentPokemon(BATTLE_DEFAULT_VALUES.opponentPokemon)
     setPlayerCurrentMoveName(BATTLE_DEFAULT_VALUES.playerCurrentMoveName)
+    setOpponentPokemon(BATTLE_DEFAULT_VALUES.opponentPokemon)
     setOpponentType(BATTLE_DEFAULT_VALUES.opponentType)
+    setBattleMessage(BATTLE_DEFAULT_VALUES.battleMessage)
   }
 
   const value: IBattleData = {
     isPlayerTurn: isPlayerTurn,
     isBattleInProgress: isBattleInProgress,
+    isBattleOver: isBattleOver,
     playerPokemon: playerPokemon,
     playerCurrentMoveName: playerCurrentMoveName,
     opponentPokemon: opponentPokemon,
     opponentType: opponentType,
+    battleMessage: battleMessage,
     changeTurn: changeTurn,
     setIsBattleInProgress: setIsBattleInProgress,
+    setIsBattleOver: setIsBattleOver,
     setPokemon: setPokemon,
     updatePokemonHealthInBattle: updatePokemonHealthInBattle,
     updatePlayerCurrentMove: updatePlayerCurrentMove,
     setBattleOpponentType: setBattleOpponentType,
-    resetBattleData: resetBattleData
+    setBattleMessage: setBattleMessage,
+    resetBattleData: resetBattleData,
   }
 
   return (
