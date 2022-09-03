@@ -14,6 +14,15 @@ export interface IBattleViewProps {
   onStart: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
+export interface IHealthBarProps {
+  owner: string
+}
+
+export interface IHealthBarViewProps {
+  currentHp: number | undefined,
+  owner: string,
+}
+
 export interface IHomeViewProps {
   onLogout: MouseEventHandler<HTMLButtonElement> | undefined;
   onSettings: MouseEventHandler<HTMLButtonElement> | undefined;
@@ -92,4 +101,10 @@ interface IInputActions {
 interface IInputValidation {
   touch?: boolean,
   errorMessage?: string,
+}
+
+export interface ITableRowViewProps {
+  tableType: string
+  rowKey: number,
+  rowData: IUserRanking,
 }

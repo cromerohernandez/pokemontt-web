@@ -1,14 +1,14 @@
 import { FunctionComponent, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import PokemonttService from '../services/PokemonttService';
+import PokemonttService from '../../services/PokemonttService';
 
-import AuthContext from '../contexts/AuthContext';
-import BattleContext from '../contexts/BattleContext';
+import AuthContext from '../../contexts/AuthContext';
+import BattleContext from '../../contexts/BattleContext';
 
 import HomeView from './HomeView';
 
-import { OpponentTypes } from '../utils/const/battle.const';
+import { OpponentTypes } from '../../utils/const/battle.const';
 
 const Home: FunctionComponent = () => {
   const auth = useContext(AuthContext)

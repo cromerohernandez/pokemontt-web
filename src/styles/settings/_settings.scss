@@ -1,14 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&display=swap');
+
+//TODOCRH: review
 $color_ntt-dark: #425272;
 $color_ntt-100: #6785C1;
 
+//CONTAINER HEIGHT
+//app = app_header + app_body
+$app_header_height: 15%;
+$app_header_min_height: 5rem;
+$app_body_height: 80%;
+$app_body_min_height: 30rem;
+//app_body = button_container + display_container
+$button_container_height: 15%;
+$button_container_min_height: 5.4rem;
+$display_container_height: 85%;
+$display_container_min_height: 25.6rem;
+
+//MIN WIDTH
+$app_min_width: 50rem;
+$board_min_width: 40rem;
+
+//THEME
 :root.light {
   --color_primary: #425272;
-  --color_secondary: #6785C1;
-  --color_text: black;
+  --color_secondary: #91a4ca;
+  --color_text: #91a4ca;
+  --color_error: #c79293;  
 }
   
 :root.dark {
   --color_primary: #1f293d;
-  --color_secondary: #3f588b;
-  --color_text: white;
+  --color_secondary: #6c7a96;
+  --color_text: #6c7a96;
+  --color_error: #9d7374;
+}
+
+//TODOCRH: review
+:root {
+  font-family: 'Dosis';
+  color: var(--color_text);
 }

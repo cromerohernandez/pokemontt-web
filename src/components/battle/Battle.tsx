@@ -1,17 +1,25 @@
-import { FunctionComponent, ChangeEvent, useContext, useCallback, useEffect } from 'react';
+import { FunctionComponent, ChangeEvent, useContext, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Move, MoveElement, Pokemon } from 'pokedex-promise-v2';
 
-import AuthContext from '../contexts/AuthContext';
-import BattleContext from '../contexts/BattleContext';
-import PokedexService from '../services/PokedexService';
-import PokemonttService from '../services/PokemonttService';
+import AuthContext from '../../contexts/AuthContext';
+import BattleContext from '../../contexts/BattleContext';
+import PokedexService from '../../services/PokedexService';
+import PokemonttService from '../../services/PokemonttService';
 
 import BattleView from './BattleView';
 
-import { getRandomMovesForBattle, getComputerMoveToAttack } from '../utils/helpers/moves.helpers';
-import { IAttackData, IBattlePokemonData } from '../utils/models/battle.models';
-import { OpponentTypes, OwnerTypes } from '../utils/const/battle.const';
+import {
+  getBattleLossMessage,
+  getBattleVictoryMessage,
+  getComputerMoveToAttack,
+  getRandomMovesForBattle,
+  getPlayerAttackResultMessage,
+  getOpponentAttackResultMessage
+} from '../../utils/helpers/battle.helpers';
+import { IAttackData, IBattlePokemonData } from '../../utils/models/battle.models';
+import { OpponentTypes, OwnerTypes } from '../../utils/const/battle.const';
+import { translate } from '../../utils/i18n/i18n.index';
 
 const Battle: FunctionComponent = () => {
   const { currentUser, setUser } = useContext(AuthContext)
@@ -22,9 +30,11 @@ const Battle: FunctionComponent = () => {
     opponentType,
     changeTurn,
     setIsBattleInProgress,
+    setIsBattleOver,
     setPokemon,
     updatePokemonHealthInBattle,
     updatePlayerCurrentMove,
+    setBattleMessage,
     resetBattleData
   } = useContext(BattleContext)
   const navigate = useNavigate()
@@ -41,14 +51,12 @@ const Battle: FunctionComponent = () => {
           .then((movesData: Move[] | void) => {
             setPokemon(owner, pokemonData, movesData)
           })
-          .catch(error => {
+          .catch(() => {
             getRandomPokemon(owner)
-            console.log(error) //TODOCRH
           })
       })
-      .catch(error => {
+      .catch(() => {
         getRandomPokemon(owner)
-        console.log(error) //TODOCRH
       })
   }, [setPokemon])
 
@@ -128,7 +136,7 @@ const Battle: FunctionComponent = () => {
       const computerAttack = getComputerMoveToAttack(opponentPokemon.moves)
       setTimeout(() => {
         _sendAttack(opponentPokemon, playerPokemon, OwnerTypes.OPPONENT, computerAttack.name)
-      }, 1500)
+      }, 2500)
     }
   }
 
@@ -172,7 +180,7 @@ const Battle: FunctionComponent = () => {
         }
       })
       .catch(error => {
-        console.log(error) //TODOCRH
+        setBattleMessage(error)
       })
   }
 
@@ -186,12 +194,12 @@ const Battle: FunctionComponent = () => {
   const _setAttackResult = (attackingPokemonOwner: OwnerTypes, damage: number, usedMoveName: string, newDefendignPokemonHealth: number): void => {
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
       updatePokemonHealthInBattle(OwnerTypes.OPPONENT, newDefendignPokemonHealth)
-      console.log(`Tu movimiento '${usedMoveName}' ha causado ${damage} punto${damage !== 1 ? 's' : ''} de daño a tu oponente.`) //TODOCRH: to modal
+      setBattleMessage(getPlayerAttackResultMessage(damage, usedMoveName, currentUser))
     }
     
     if (attackingPokemonOwner === OwnerTypes.OPPONENT) {
       updatePokemonHealthInBattle(OwnerTypes.PLAYER, newDefendignPokemonHealth)
-      console.log(`El movimiento '${usedMoveName}' de tu oponente te ha causado ${damage} punto${damage !== 1 ? 's' : ''} de daño.`) //TODOCRH: to modal
+      setBattleMessage(getOpponentAttackResultMessage(damage, usedMoveName, currentUser))
     }
   }
 
@@ -226,15 +234,16 @@ const Battle: FunctionComponent = () => {
     ): void => {
     changeTurn(undefined)
     setIsBattleInProgress(false)
+    setIsBattleOver(true)
 
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
       _setNewCurrentUserScore(newAttackingPokemonScore)
-      console.log(`La batalla ha finalizado. ¡Has vencido y has ganado ${attackingPokemonScoreIncrease} puntos!`) //TODOCRH: to modal
+      setBattleMessage(getBattleVictoryMessage(attackingPokemonScoreIncrease))
     }
     
     if (attackingPokemonOwner === OwnerTypes.OPPONENT) {
       _setNewCurrentUserScore(newDefendingPokemonScore)
-      console.log(`La batalla ha finalizado. Has sido derrotado... pero has conseguido ${defendingPokemonScoreIncrease} puntos!`) //TODOCRH: to modal
+      setBattleMessage(getBattleLossMessage(defendingPokemonScoreIncrease))
     }
   }
 
@@ -267,6 +276,7 @@ const Battle: FunctionComponent = () => {
    * @description function to go home
    */
     const handleGoHome = (): void => {
+      resetBattleData()
       navigate('/')
     }
 
@@ -275,7 +285,10 @@ const Battle: FunctionComponent = () => {
    */
   const handleStart = (): void => {
     const firstTurn = Math.random() < 0.5
+    const startMessage = firstTurn ? 'BATTLE.START_ATTACKING' : 'BATTLE.START_DEFENDING';
+
     changeTurn(firstTurn)
+    setBattleMessage(translate(startMessage))
     setIsBattleInProgress(true)
 
     if (!firstTurn && opponentType === OpponentTypes.COMPUTER) {

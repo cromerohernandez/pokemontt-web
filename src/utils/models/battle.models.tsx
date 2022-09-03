@@ -10,16 +10,20 @@ export interface IAttackData {
 export interface IBattleData {
   isPlayerTurn: boolean | undefined,
   isBattleInProgress: boolean | undefined,
+  isBattleOver: boolean | undefined,
   playerPokemon: IBattlePokemonData | undefined,
   playerCurrentMoveName: string | undefined,
   opponentPokemon: IBattlePokemonData | undefined,
   opponentType: OpponentTypes | undefined,
+  battleMessage: string | undefined,
   changeTurn: (isPlayerTurn: boolean | undefined) => void,
   setIsBattleInProgress: (setIsBattleInProgress: boolean | undefined) => void,
+  setIsBattleOver: (setIsBattleInProgress: boolean | undefined) => void,
   setPokemon: (owner: OwnerTypes, pokemonData: Pokemon | undefined, randomMovesData: Move[] | void) =>  void,
   updatePokemonHealthInBattle: (owner: OwnerTypes, damage: number) =>  void,
   updatePlayerCurrentMove: (updatedMove: string) => void,
   setBattleOpponentType: (type: OpponentTypes) => void,
+  setBattleMessage: (type: string) => void,
   resetBattleData: () => void,
 }
 

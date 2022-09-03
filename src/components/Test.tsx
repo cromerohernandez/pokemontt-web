@@ -5,7 +5,7 @@ import PokedexService from '../services/PokedexService';
 
 import TestView from './TestView';
 
-import { getRandomMovesForBattle } from '../utils/helpers/moves.helpers';
+import { getRandomMovesForBattle } from '../utils/helpers/battle.helpers';
 
 const Test: FunctionComponent = () => {
   const [pokemonA, setPokemonA] = useState<Pokemon>()

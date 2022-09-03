@@ -6,11 +6,21 @@
 //GENERIC
 
 //TAGS
-@import './tags/tags';
+@import './tags/_tags';
 
 //OBJECTS
+@import './objects/_button-container';
+@import './objects/_display-container';
+@import './objects/_form-container';
+@import './objects/_form-item';
 
 //COMPONENTS
 @import './components/_app';
+@import './components/_arena-html';
+@import './components/_battle';
+@import './components/_battle-preview';
+@import './components/_health-bar';
+@import './components/_module-button';
+@import './components/_table-row';
 
-//UTILITIES
+//UTILITIES;
