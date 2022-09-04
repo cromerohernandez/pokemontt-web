@@ -1,9 +1,16 @@
 import { ChangeEvent, ChangeEventHandler, FormEvent, MouseEventHandler } from 'react';
 
+import { OwnerTypes } from '../const/battle.const';
+import { IBattlePokemonData } from './battle.models';
 import { ISelectOptions } from './form.models';
 
 export interface IAuthenticatedRouteProps {
   children: JSX.Element
+}
+
+export interface IBattlePokemonInfoView {
+  battlePokemonData: IBattlePokemonData,
+  owner: OwnerTypes,
 }
 
 export interface IBattleViewProps {

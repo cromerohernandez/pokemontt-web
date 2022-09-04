@@ -42,6 +42,7 @@ export interface IBattlePokemonData {
 
 export interface IBattleMoveData {
   name: string,
+  value: string,
   power: number | null,
   type: string,
 }

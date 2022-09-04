@@ -1,0 +1,14 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+}
+
+.spinner-container__spinner {
+  margin: 0 0.6rem;
+  border: 3.5px solid var(--color_text);
+  border-left-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  width: 1.4rem;
+  height: 1.4rem;
+}

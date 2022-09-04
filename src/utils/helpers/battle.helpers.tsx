@@ -1,8 +1,9 @@
 import { MoveElement } from 'pokedex-promise-v2';
 
-import { IBattleMoveData } from '../models/battle.models'
 import { NUMBER_OF_MOVES_FOR_BATTLE } from '../const/move.const'
 import { Languages } from '../const/settings.const';
+import { IBattleMoveData } from '../models/battle.models'
+import { ICurrentUser } from '../models/context.models';
 import { translate } from '../i18n/i18n.index';
 
 /**
@@ -74,7 +75,7 @@ export const getRandomMovesForBattle = (pokemonMoves: MoveElement[]): MoveElemen
  * @param currentUser any
  * @returns string
  */
-export const getPlayerAttackResultMessage = (damage: number, usedMoveName: string, currentUser: any): string => {
+export const getPlayerAttackResultMessage = (damage: number, usedMoveName: string, currentUser: ICurrentUser): string => {
   let startMessage = ''
 
   if (currentUser.language === Languages.EN) {
@@ -101,7 +102,7 @@ export const getPlayerAttackResultMessage = (damage: number, usedMoveName: strin
    * @param currentUser any
    * @returns string
    */
-   export const getOpponentAttackResultMessage = (damage: number, usedMoveName: string, currentUser: any): string => {
+   export const getOpponentAttackResultMessage = (damage: number, usedMoveName: string, currentUser: ICurrentUser): string => {
     let resultMessage = ''
 
     if (currentUser.language === Languages.EN) {

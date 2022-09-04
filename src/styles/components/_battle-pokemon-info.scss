@@ -1,0 +1,20 @@
+
+.battle-pokemon-info-container {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+
+  &__player {
+    margin-top: 0.2rem;
+    height: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__icon {
+    margin-right: 0.4rem;
+    height: 0.8rem;
+  }
+}
+

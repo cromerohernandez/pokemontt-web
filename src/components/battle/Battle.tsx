@@ -1,4 +1,4 @@
-import { FunctionComponent, ChangeEvent, useContext, useCallback, useEffect, useState } from 'react';
+import { FunctionComponent, ChangeEvent, useContext, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Move, MoveElement, Pokemon } from 'pokedex-promise-v2';
 
@@ -192,12 +192,12 @@ const Battle: FunctionComponent = () => {
    * @param newDefendignPokemonHealth number
    */
   const _setAttackResult = (attackingPokemonOwner: OwnerTypes, damage: number, usedMoveName: string, newDefendignPokemonHealth: number): void => {
-    if (attackingPokemonOwner === OwnerTypes.PLAYER) {
+    if (attackingPokemonOwner === OwnerTypes.PLAYER && currentUser) {
       updatePokemonHealthInBattle(OwnerTypes.OPPONENT, newDefendignPokemonHealth)
       setBattleMessage(getPlayerAttackResultMessage(damage, usedMoveName, currentUser))
     }
     
-    if (attackingPokemonOwner === OwnerTypes.OPPONENT) {
+    if (attackingPokemonOwner === OwnerTypes.OPPONENT && currentUser) {
       updatePokemonHealthInBattle(OwnerTypes.PLAYER, newDefendignPokemonHealth)
       setBattleMessage(getOpponentAttackResultMessage(damage, usedMoveName, currentUser))
     }
@@ -239,11 +239,13 @@ const Battle: FunctionComponent = () => {
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
       _setNewCurrentUserScore(newAttackingPokemonScore)
       setBattleMessage(getBattleVictoryMessage(attackingPokemonScoreIncrease))
+      _reduceLoserPokemonOpacity(OwnerTypes.OPPONENT)
     }
     
     if (attackingPokemonOwner === OwnerTypes.OPPONENT) {
       _setNewCurrentUserScore(newDefendingPokemonScore)
       setBattleMessage(getBattleLossMessage(defendingPokemonScoreIncrease))
+      _reduceLoserPokemonOpacity(OwnerTypes.PLAYER)
     }
   }
 
@@ -262,6 +264,18 @@ const Battle: FunctionComponent = () => {
     }
 
     setUser(updatedCurrentUser)
+  }
+
+  /**
+   * @description private function to reduce opacity of loser pokemon img tag in html render
+   * @param owner OwnerTypes
+   */
+  const _reduceLoserPokemonOpacity = (owner: OwnerTypes): void => {
+    const loserPokemon = document.getElementById(owner === OwnerTypes.OPPONENT ? 'opponent-pokemon' : 'player-pokemon')
+
+    if (loserPokemon) {
+      loserPokemon.style.opacity = '0.4'
+    }
   }
 
   /**

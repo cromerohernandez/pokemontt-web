@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { IHealthBarViewProps } from '../../../utils/models/props.models';
+import { IHealthBarViewProps } from '../../../../utils/models/props.models';
 
 const HealthBarView: FunctionComponent<IHealthBarViewProps> = (healthBarViewProps: IHealthBarViewProps) => {
   const { currentHp, owner } = healthBarViewProps

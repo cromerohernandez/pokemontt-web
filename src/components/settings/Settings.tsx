@@ -17,17 +17,17 @@ const Settings: FunctionComponent = () => {
   const {
     value: language,
     actions: languageActions,
-  } = useFormInput({initialValue: currentUser.language});
+  } = useFormInput({initialValue: currentUser?.language});
 
   const {
     value: theme,
     actions: themeActions,
-  } = useFormInput({initialValue: currentUser.theme});
+  } = useFormInput({initialValue: currentUser?.theme});
 
   const {
     value: render,
     actions: renderActions,
-  } = useFormInput({initialValue: currentUser.render});
+  } = useFormInput({initialValue: currentUser?.render});
 
   const formData = [
     { 
@@ -71,7 +71,7 @@ const Settings: FunctionComponent = () => {
         setUser(updatedUser)
         navigate('/')
       })
-      .catch((error: any) => {
+      .catch(error => {
         console.log(error) //TODOCRH
       })
   }

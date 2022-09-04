@@ -15,7 +15,7 @@ export const es = {
     PLAYER: 'Jugador',
     POINT: ' punto',
     POINTS: ' puntos',
-    SELECT_MOVE: 'Selecciona un movimiento',
+    SELECT_MOVE: 'Selecciona un ataque',
     START_ATTACKING: 'Comienzas atacando.',
     START_DEFENDING: 'Comienzas defendiendo.',
     THE_BATTLE_IS_OVER: 'La batalla ha finalizado.',

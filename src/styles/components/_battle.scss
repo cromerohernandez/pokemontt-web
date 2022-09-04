@@ -1,20 +1,28 @@
-.battle-info-container {
-  height: 20%;
+.battle-message-container {
+  height: $battle-message-container_height;
+  min-height: $battle-message-container_min_height;
   width: 100%;
-
-  //background-color: lightblue; //TODOCRH: delete
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .battle-arena-container {
-  height: 70%;
+  height: $battle-arena-container_height;
   width: 100%;
 
   //background-color: lightcoral; //TODOCRH: delete
 }
 
-.battle-message-container {
-  height: 10%;
+.battle-info-container {
+  height: $battle-info-container_height;
+  min-height: $battle-info-container_min_height;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  //background-color: lightyellow; //TODOCRH: delete
+    &__arrow {
+      font-size: 1.5rem;
+    }
 }

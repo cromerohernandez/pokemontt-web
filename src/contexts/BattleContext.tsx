@@ -60,6 +60,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
     return randomMovesData.map(move => {
       return {
         name: move.name,
+        value: move.name,
         power: move.power ?? DEFAULT_POWER_MOVE_VALUE,
         type: move.type.name,
       }
@@ -85,7 +86,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
     
     if (owner === OwnerTypes.PLAYER) {
       if (battlePokemonData) {
-        battlePokemonData.userId = currentUser.id
+        battlePokemonData.userId = currentUser?.id ?? null
       }
       setPlayerPokemon(battlePokemonData)
     }

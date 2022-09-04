@@ -24,7 +24,7 @@ export interface IFormSelect {
   label?: string,
   placeholder?: string,
   options: ISelectOptions[],
-  value: string | null,
+  value: string | null | undefined,
   disabled?: boolean,
   //actions
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void,
