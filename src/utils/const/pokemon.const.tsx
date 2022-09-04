@@ -1,4 +1,4 @@
-export const POKEMON_MAX_HP = 180
+export const POKEMON_MAX_HP = 200
 
 export const POKEMON_REQUIRED_FIELDS = [
   //name

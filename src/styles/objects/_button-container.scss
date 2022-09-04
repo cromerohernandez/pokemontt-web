@@ -1,12 +1,11 @@
 @import '../settings/_settings';
 
 .button-container {
+  padding-top: max($button_container_min_padding, $button_container_min_padding_rem);
   height: $button_container_height;
   min-height: $button_container_min_height;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  
-  //background-color: lightcoral; //TODOCRH: delete
 }

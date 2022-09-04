@@ -8,6 +8,9 @@
 //TAGS
 @import './tags/_tags';
 
+//KEYFRAMES
+@import './keyframes/_keyframes';
+
 //OBJECTS
 @import './objects/_button-container';
 @import './objects/_display-container';
@@ -18,9 +21,12 @@
 @import './components/_app';
 @import './components/_arena-html';
 @import './components/_battle';
+@import './components/_battle-pokemon-info';
+@import './components/_battle-pokemon-preview';
 @import './components/_battle-preview';
 @import './components/_health-bar';
 @import './components/_module-button';
+@import './components/_spinner';
 @import './components/_table-row';
 
 //UTILITIES;

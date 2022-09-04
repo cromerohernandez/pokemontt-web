@@ -2,15 +2,20 @@
 
 .app-container {
   height: 100vh;
+  min-height: $app-min-heigth;
   width: 100vw;
   min-width: $app_min_width;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  background: url('../../assets/img/pokemontt-wallpaper.png');
+  background-position: center;
+  background-size: 500px 500px;
   background-color: var(--color_primary);
 
   &__header {
+    margin-top: $app_padding;
     height: $app_header_height;
     min-height: $app_header_min_height;
     width: 50%;
@@ -18,11 +23,10 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    
-    //background-color: lightgreen; //TODOCRH: delete
   }
 
   &__body {
+    margin-bottom: $app_padding;
     height: $app_body_height;
     min-height: $app_body_min_height;
     width: 50%;
@@ -34,7 +38,6 @@
   }
 
   &__logo {
-    margin-top: 1%;
-    height: 80%;
+    height: 100%;
   }
 }

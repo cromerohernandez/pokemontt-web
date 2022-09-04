@@ -20,7 +20,9 @@ const FormSelect: FunctionComponent<IFormSelect> = (formSelectProps: IFormSelect
   return (
     <div className='form-item-container'>
       <div className='form-item-container__data'>
-        <label htmlFor={name} className='form-item-container__label'>{ translate(label ?? '') }</label>
+        {label &&
+          <label htmlFor={name} className='form-item-container__label'>{ translate(label ?? '') }</label>
+        }
 
         <select
           id={name}
@@ -32,7 +34,7 @@ const FormSelect: FunctionComponent<IFormSelect> = (formSelectProps: IFormSelect
           className='form-item-container__item'
         >
           {placeholder &&
-            <option value='default' disabled hidden>{ placeholder ? translate(placeholder) : name }</option>
+            <option value='' disabled hidden>{ translate(placeholder) }</option>
           }
           {options.map((option, index) =>
             <option key={index} value={option.value}>{ translate(option.name) }</option>
@@ -40,11 +42,13 @@ const FormSelect: FunctionComponent<IFormSelect> = (formSelectProps: IFormSelect
         </select>
       </div>
       
-      <div className='form-item-container__error'>
-        {touch && error?.active && (
-          <span>{ translate(error?.message ?? '') }</span>
-        )}
-      </div>
+      {error &&
+        <div className='form-item-container__error'>
+          {touch && error?.active && (
+            <span>{ translate(error?.message ?? '') }</span>
+          )}
+        </div>
+      }
     </div>
   )
 }

@@ -5,21 +5,35 @@
 $color_ntt-dark: #425272;
 $color_ntt-100: #6785C1;
 
-//CONTAINER HEIGHT
-//app = app_header + app_body
-$app_header_height: 15%;
-$app_header_min_height: 5rem;
-$app_body_height: 80%;
-$app_body_min_height: 30rem;
-//app_body = button_container + display_container
-$button_container_height: 15%;
-$button_container_min_height: 5.4rem;
-$display_container_height: 85%;
-$display_container_min_height: 25.6rem;
+//APP HEIGHT
+//app = (2 x app_padding) + app_header + app_body
+//min-heigth = 35rem
+$app-min-heigth: 35rem;
+$app_padding: 2%;
+$app_min_padding: 0.7rem;
+$app_header_height: 13%;
+$app_header_min_height: 5.55rem; //13% + 1rem
+$app_body_height: 83%;
+$app_body_min_height: 28.05rem; //83% - 1rem
 
-//MIN WIDTH
-$app_min_width: 50rem;
-$board_min_width: 40rem;
+//app_body = button_container_padding + button_container + display_container
+$button_container_min_padding: 1%;
+$button_container_min_padding_rem: 1.2rem;
+$button_container_height: 11%;
+$button_container_min_height: 3.60rem;
+$display_container_height: 87%;
+$display_container_min_height: 21.45rem;
+
+//battle = display_container = message + arena + info
+$battle-message-container_height: 8%;
+$battle-message-container_min_height: 2.2rem;
+$battle-arena-container_height: 78%;
+$battle-info-container_height: 14%;
+$battle-info-container_min_height: 4rem;
+
+//APP WIDTH
+$app_min_width: 46.4rem;
+$board_min_width: 45rem;
 
 //THEME
 :root.light {
@@ -32,7 +46,7 @@ $board_min_width: 40rem;
 :root.dark {
   --color_primary: #1f293d;
   --color_secondary: #6c7a96;
-  --color_text: #6c7a96;
+  --color_text: #7f8fb1;
   --color_error: #9d7374;
 }
 

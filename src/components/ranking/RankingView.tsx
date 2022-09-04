@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import MenuButton from '../UI/buttons/MenuButton';
+import Spinner from '../UI/misc/spinner/Spinner';
 import TableRowView from '../UI/table/TableRowView';
 
 import { IRankingViewProps } from '../../utils/models/props.models';
@@ -15,12 +16,18 @@ const RankingView: FunctionComponent<IRankingViewProps> = ({ usersRanking, onGoH
       </div>
 
       <div className='display-container'>
-        <FontAwesomeIcon icon={icons.ranking} className='display-container__icon' />
+        {usersRanking ?
+          <>
+            <FontAwesomeIcon icon={icons.ranking} className='display-container__icon' />
 
-        {usersRanking &&
-          usersRanking.map((user, index) =>
-            <TableRowView key={index} tableType='ranking' rowKey={index} rowData={user}/>
-          )
+            {usersRanking &&
+              usersRanking.map((user, index) =>
+                <TableRowView key={index} tableType='ranking' rowKey={index} rowData={user}/>
+              )
+            }
+          </>
+        :
+          <Spinner />
         }
       </div>
     </>
