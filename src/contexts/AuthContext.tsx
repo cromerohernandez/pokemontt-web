@@ -48,7 +48,7 @@ export const AuthContextProvider = (props: ProviderProps<IAuthData>) => {
     PokemonttService.logout()
       .then(() => {
         localStorage.removeItem('user')
-        setUser('') //TODOCRH: review value
+        setUser('')
       })
   };
 

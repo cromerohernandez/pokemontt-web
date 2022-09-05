@@ -25,6 +25,7 @@ const getRanking = () => http.get('/users/ranking');
 const updateSettings = (settingsData: ISettingsDataForRequest) => http.patch('/users/update/settings', settingsData);
 
 //battles
+const getUserBattles = () => http.get('/battles/history');
 const sendAttack = (attackData: IAttackData) => http.post('/battles/attack', attackData);
 
 //sessions
@@ -35,6 +36,7 @@ const PokemonttService = {
   signup,
   getRanking,
   updateSettings,
+  getUserBattles,
   sendAttack,
   login,
   logout

@@ -33,6 +33,7 @@ export const es = {
     BACK: 'Volver',
     BATTLE: 'Batalla',
     CANCEL: 'Cancelar',
+    HISTORY: 'Histórico',
     LOGIN: 'Login',
     LOGOUT: 'Logout',
     RANKING: 'Ranking',
@@ -56,6 +57,14 @@ export const es = {
     USERS_NOT_FOUND: 'Usuarios no encontrados.',
     USERNAME_ALREADY_EXISTS: 'El nombre de usuario ya existe.',
   },
+  HISTORY: {
+    DEFEAT: 'derrota',
+    VICTORY: 'victoria',
+    NO_BATTLES_YET: 'Todavía no has disputado ninguna batalla.',
+  },
+  RANKING: {
+    CURRENT_SCORE: 'Tu puntuación actual es ',
+  },
   SETTINGS: {
     CANVAS: 'Canvas',
     DARK: 'Oscuro',
@@ -67,7 +76,4 @@ export const es = {
     SPANISH: 'Español',
     THEME: 'Tema',
   },
-  RANKING: {
-    CURRENT_SCORE: 'Tu puntuación actual es ',
-  }
 }

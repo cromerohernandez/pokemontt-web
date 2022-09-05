@@ -1,21 +1,16 @@
 import { FunctionComponent, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import BattleContext from '../../contexts/BattleContext';
+import BattleContext from '../../../contexts/BattleContext';
 
-import Spinner from '../UI/misc/spinner/Spinner';
+import Spinner from '../../UI/misc/spinner/Spinner';
 
-import { icons } from '../../assets/icons/icons';
-import { OpponentTypes, OwnerTypes } from '../../utils/const/battle.const';
-import { translate } from '../../utils/i18n/i18n.index';
-import { IBattlePokemonData } from '../../utils/models/battle.models';
+import { ICONS } from '../../../assets/icons/icons';
+import { OpponentTypes, OwnerTypes } from '../../../utils/const/battle.const';
+import { IBattlePokemonPreviewViewProps } from '../../../utils/models/props.models';
+import { translate } from '../../../utils/i18n/i18n.index';
 
-interface CRHTester {
-  owner: OwnerTypes,
-  battlePokemonData: IBattlePokemonData | undefined
-}
-
-const BattlePokemonPreviewView: FunctionComponent<CRHTester> = ({ owner, battlePokemonData }) => {
+const BattlePokemonPreviewView: FunctionComponent<IBattlePokemonPreviewViewProps> = ({ owner, battlePokemonData }) => {
   const { opponentType } = useContext(BattleContext)
 
   return (
@@ -34,7 +29,7 @@ const BattlePokemonPreviewView: FunctionComponent<CRHTester> = ({ owner, battleP
 
           <FontAwesomeIcon
             icon={
-              owner === OwnerTypes.OPPONENT ? (opponentType === OpponentTypes.COMPUTER ? icons.computer : icons.human) : icons.human
+              owner === OwnerTypes.OPPONENT ? (opponentType === OpponentTypes.COMPUTER ? ICONS.computer : ICONS.human) : ICONS.human
             }
             className='battle-pokemon-preview-container__icon'
           />

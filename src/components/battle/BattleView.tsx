@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AuthContext from '../../contexts/AuthContext';
 import BattleContext from '../../contexts/BattleContext';
 
-import ArenaCanvasView from './arena/ArenaCanvasView';
+import ArenaCanvas from './arena/ArenaCanvas';
 import ArenaHtmlView from './arena/ArenaHtmlView';
-import BattlePreviewView from './BattlePreviewView';
+import BattlePreviewView from './battle-preview/BattlePreviewView';
 import BattlePokemonInfoView from './battle-pokemon-info/BattlePokemonInfoView';
 import FormSelect from '../UI/form/FormSelect';
-import MenuButton from '../UI/buttons/MenuButton';
+import MenuButton from '../UI/buttons/menu-button/MenuButton';
 
-import { icons } from '../../assets/icons/icons';
+import { ICONS } from '../../assets/icons/icons';
 import { RenderTypes } from '../../utils/const/settings.const';
 import { OwnerTypes } from '../../utils/const/battle.const';
 import { IBattleViewProps } from '../../utils/models/props.models';
@@ -74,9 +74,9 @@ const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttac
                 <span>{ battleMessage }</span>
             </div>
 
-            <div className='battle-arena-container'>
+            <div id='battle-arena-container' className='battle-arena-container'>
               {currentUser?.render === RenderTypes.CANVAS &&
-                <ArenaCanvasView />
+                <ArenaCanvas />
               }
 
               {currentUser?.render === RenderTypes.HTML &&
@@ -87,7 +87,9 @@ const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttac
             <div className='battle-info-container'>
               <BattlePokemonInfoView battlePokemonData={opponentPokemon} owner={OwnerTypes.OPPONENT} />
 
-              <FontAwesomeIcon icon={isPlayerTurn ? icons.arrow_left : icons.arrow_right} className='battle-info-container__arrow'/>
+              {isBattleInProgress &&
+                <FontAwesomeIcon icon={isPlayerTurn ? ICONS.arrow_left : ICONS.arrow_right} className='battle-info-container__arrow'/>
+              }
 
               <BattlePokemonInfoView battlePokemonData={playerPokemon} owner={OwnerTypes.PLAYER} />
             </div>

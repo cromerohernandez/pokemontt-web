@@ -1,12 +1,12 @@
 import { FormEvent, FunctionComponent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import PokemonttService from '../../services/PokemonttService';
-import useFormInput from '../../hooks/useFormInput';
+import PokemonttService from '../../../services/PokemonttService';
+import useFormInput from '../../../hooks/useFormInput';
 
 import SignUpView from './SignUpView';
 
-import { translate } from '../../utils/i18n/i18n.index';
+import { translate } from '../../../utils/i18n/i18n.index';
 
 const validators = {
   username: (val: any) => val,

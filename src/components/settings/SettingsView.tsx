@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import FormSelect from '../UI/form/FormSelect';
-import MenuButton from '../UI/buttons/MenuButton';
+import MenuButton from '../UI/buttons/menu-button/MenuButton';
 
 import { BUTTON_TYPES } from '../../utils/const/button.const';
 import { ISettingsViewProps } from '../../utils/models/props.models';

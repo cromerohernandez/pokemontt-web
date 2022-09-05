@@ -15,10 +15,12 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   const [isPlayerTurn, setIsPlayerTurn] = useState<boolean | undefined>()
   const [isBattleInProgress, setIsBattleInProgress] = useState<boolean | undefined>()
   const [isBattleOver, setIsBattleOver] = useState<boolean | undefined>()
+  const [pokemonStartsAttack, setPokemonStartsAttack] = useState<OwnerTypes>()
   const [playerPokemon, setPlayerPokemon] = useState<IBattlePokemonData | undefined>()
   const [playerCurrentMoveName, setPlayerCurrentMoveName] = useState<string | undefined>()
   const [opponentPokemon, setOpponentPokemon] = useState<IBattlePokemonData | undefined>()
   const [opponentType, setOpponentType] = useState<OpponentTypes | undefined>()
+  const [loser, setLoser] = useState<OwnerTypes | undefined>()
   const [battleMessage, setBattleMessage] = useState<string>()
 
   /**
@@ -30,6 +32,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   const _mapBattlePokemonData = (pokemonData: Pokemon, randomMovesData: Move[]): IBattlePokemonData => {
     return {
       userId: null,
+      userName: null,
       name: pokemonData.name,
       types: _mapTypeNames(pokemonData),
       experience: pokemonData.base_experience,
@@ -87,11 +90,16 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
     if (owner === OwnerTypes.PLAYER) {
       if (battlePokemonData) {
         battlePokemonData.userId = currentUser?.id ?? null
+        battlePokemonData.userName = currentUser?.username ?? null
       }
       setPlayerPokemon(battlePokemonData)
     }
 
     if (owner === OwnerTypes.OPPONENT) {
+      if (battlePokemonData && opponentType === OpponentTypes.COMPUTER) {
+        battlePokemonData.userId = null
+        battlePokemonData.userName = 'computer'
+      }
       setOpponentPokemon(battlePokemonData)
     }
   }
@@ -114,32 +122,18 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   }
 
   /**
-   * @description function to update player current move
-   * @param updatedMove string
-   */
-  const updatePlayerCurrentMove = (updatedMove: string): void => {
-    setPlayerCurrentMoveName(updatedMove)
-  }
-
-  /**
-   * @description function to set opponent type for the battle
-   * @param type OpponentTypes
-   */
-  const setBattleOpponentType = (type: OpponentTypes): void => {
-    setOpponentType(type)
-  }
-
-  /**
    * @description function to reset battle data 
    */
   const resetBattleData = (): void => {
     setIsPlayerTurn(BATTLE_DEFAULT_VALUES.isPlayerTurn)
     setIsBattleInProgress(BATTLE_DEFAULT_VALUES.isBattleInProgress)
     setIsBattleOver(BATTLE_DEFAULT_VALUES.isBattleOver)
+    setPokemonStartsAttack(BATTLE_DEFAULT_VALUES.pokemonStartsAttack)
     setPlayerPokemon(BATTLE_DEFAULT_VALUES.playerPokemon)
     setPlayerCurrentMoveName(BATTLE_DEFAULT_VALUES.playerCurrentMoveName)
     setOpponentPokemon(BATTLE_DEFAULT_VALUES.opponentPokemon)
     setOpponentType(BATTLE_DEFAULT_VALUES.opponentType)
+    setLoser(BATTLE_DEFAULT_VALUES.loser)
     setBattleMessage(BATTLE_DEFAULT_VALUES.battleMessage)
   }
 
@@ -147,18 +141,22 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
     isPlayerTurn: isPlayerTurn,
     isBattleInProgress: isBattleInProgress,
     isBattleOver: isBattleOver,
+    pokemonStartsAttack: pokemonStartsAttack,
     playerPokemon: playerPokemon,
     playerCurrentMoveName: playerCurrentMoveName,
     opponentPokemon: opponentPokemon,
     opponentType: opponentType,
+    loser: loser,
     battleMessage: battleMessage,
     changeTurn: changeTurn,
     setIsBattleInProgress: setIsBattleInProgress,
     setIsBattleOver: setIsBattleOver,
+    setPokemonStartsAttack: setPokemonStartsAttack,
     setPokemon: setPokemon,
     updatePokemonHealthInBattle: updatePokemonHealthInBattle,
-    updatePlayerCurrentMove: updatePlayerCurrentMove,
-    setBattleOpponentType: setBattleOpponentType,
+    setPlayerCurrentMoveName: setPlayerCurrentMoveName,
+    setOpponentType: setOpponentType,
+    setLoser: setLoser,
     setBattleMessage: setBattleMessage,
     resetBattleData: resetBattleData,
   }

@@ -17,9 +17,11 @@ import {
   getPlayerAttackResultMessage,
   getOpponentAttackResultMessage
 } from '../../utils/helpers/battle.helpers';
+import { MIN_DELAY_COMPUTER_ATTACK, MAX_DELAY_COMPUTER_ATTACK, OpponentTypes, OwnerTypes } from '../../utils/const/battle.const';
+import { MOVE_FRAME_TIME, MOVE_FRAMES, NUMBER_OF_OPACITY_CHANGES, OPACITY_CHANGE_TIME } from '../../utils/const/move.const';
 import { IAttackData, IBattlePokemonData } from '../../utils/models/battle.models';
-import { OpponentTypes, OwnerTypes } from '../../utils/const/battle.const';
 import { translate } from '../../utils/i18n/i18n.index';
+import { RenderTypes } from '../../utils/const/settings.const';
 
 const Battle: FunctionComponent = () => {
   const { currentUser, setUser } = useContext(AuthContext)
@@ -31,9 +33,11 @@ const Battle: FunctionComponent = () => {
     changeTurn,
     setIsBattleInProgress,
     setIsBattleOver,
+    setPokemonStartsAttack,
     setPokemon,
     updatePokemonHealthInBattle,
-    updatePlayerCurrentMove,
+    setPlayerCurrentMoveName,
+    setLoser,
     setBattleMessage,
     resetBattleData
   } = useContext(BattleContext)
@@ -115,7 +119,7 @@ const Battle: FunctionComponent = () => {
    * @param event ChangeEvent<HTMLSelectElement>
    */
   const handleChangeMove = (event: ChangeEvent<HTMLSelectElement>): void => {
-    updatePlayerCurrentMove(event.target.value)
+    setPlayerCurrentMoveName(event.target.value)
   }
 
   /**
@@ -123,8 +127,8 @@ const Battle: FunctionComponent = () => {
    */
   const handleAttack = (): void => {
     if (playerPokemon && opponentPokemon && playerCurrentMoveName) {
+      setPokemonStartsAttack(OwnerTypes.PLAYER)
       _sendAttack(playerPokemon, opponentPokemon, OwnerTypes.PLAYER, playerCurrentMoveName)
-      changeTurn(false)
     }
   }
 
@@ -134,9 +138,12 @@ const Battle: FunctionComponent = () => {
   const _startComputerAttack = (): void => {
     if (playerPokemon && opponentPokemon) {
       const computerAttack = getComputerMoveToAttack(opponentPokemon.moves)
+      const delayTime = (Math.random() * (MAX_DELAY_COMPUTER_ATTACK - MIN_DELAY_COMPUTER_ATTACK + 1)) + MIN_DELAY_COMPUTER_ATTACK
+
       setTimeout(() => {
+        setPokemonStartsAttack(OwnerTypes.OPPONENT)
         _sendAttack(opponentPokemon, playerPokemon, OwnerTypes.OPPONENT, computerAttack.name)
-      }, 2500)
+      }, delayTime)
     }
   }
 
@@ -159,29 +166,37 @@ const Battle: FunctionComponent = () => {
       attackMoveName: attackMoveName,
     }
 
-    PokemonttService.sendAttack(attackData)
-      .then(response => {
-        const {
-          damage,
-          usedMoveName,
-          newDefendignPokemonHealth,
-          attackingPokemonScoreIncrease,
-          defendingPokemonScoreIncrease,
-          newAttackingPokemonScore,
-          newDefendingPokemonScore
-        } = response.data
+    setTimeout(() => {
+      PokemonttService.sendAttack(attackData)
+        .then(response => {
+          const {
+            damage,
+            usedMoveName,
+            newDefendignPokemonHealth,
+            attackingPokemonScoreIncrease,
+            defendingPokemonScoreIncrease,
+            newAttackingPokemonScore,
+            newDefendingPokemonScore
+          } = response.data
 
-        _setAttackResult(attackingPokemonOwner, damage, usedMoveName, newDefendignPokemonHealth)
+          _setAttackResult(attackingPokemonOwner, damage, usedMoveName, newDefendignPokemonHealth)
 
-        if (newDefendignPokemonHealth > 0) {
-          _continueBattle(attackingPokemonOwner)
-        } else {
-          _finishBattle(attackingPokemonOwner, attackingPokemonScoreIncrease, defendingPokemonScoreIncrease, newAttackingPokemonScore, newDefendingPokemonScore)
-        }
-      })
-      .catch(error => {
-        setBattleMessage(error)
-      })
+          if (newDefendignPokemonHealth > 0) {
+            _continueBattle(attackingPokemonOwner)
+          } else {
+            _finishBattle(
+              attackingPokemonOwner,
+              attackingPokemonScoreIncrease,
+              defendingPokemonScoreIncrease,
+              newAttackingPokemonScore,
+              newDefendingPokemonScore
+            )
+          }
+        })
+        .catch(error => {
+          setBattleMessage(error)
+        })
+    }, (MOVE_FRAME_TIME * MOVE_FRAMES) + (OPACITY_CHANGE_TIME * NUMBER_OF_OPACITY_CHANGES) + 200)
   }
 
   /**
@@ -212,6 +227,7 @@ const Battle: FunctionComponent = () => {
       if (opponentType === OpponentTypes.COMPUTER) {
         _startComputerAttack()
       }
+      changeTurn(false)
     }
     
     if (attackingPokemonOwner === OwnerTypes.OPPONENT) {
@@ -233,20 +249,24 @@ const Battle: FunctionComponent = () => {
     newDefendingPokemonScore: number,
     ): void => {
     changeTurn(undefined)
+    setPokemonStartsAttack(undefined)
     setIsBattleInProgress(false)
     setIsBattleOver(true)
 
     if (attackingPokemonOwner === OwnerTypes.PLAYER) {
       _setNewCurrentUserScore(newAttackingPokemonScore)
       setBattleMessage(getBattleVictoryMessage(attackingPokemonScoreIncrease))
-      _reduceLoserPokemonOpacity(OwnerTypes.OPPONENT)
+      setLoser(OwnerTypes.OPPONENT)
+      _launchEndingEffects(OwnerTypes.OPPONENT)
     }
     
     if (attackingPokemonOwner === OwnerTypes.OPPONENT) {
       _setNewCurrentUserScore(newDefendingPokemonScore)
       setBattleMessage(getBattleLossMessage(defendingPokemonScoreIncrease))
-      _reduceLoserPokemonOpacity(OwnerTypes.PLAYER)
+      setLoser(OwnerTypes.PLAYER)
+      _launchEndingEffects(OwnerTypes.PLAYER)
     }
+
   }
 
   /**
@@ -267,11 +287,20 @@ const Battle: FunctionComponent = () => {
   }
 
   /**
-   * @description private function to reduce opacity of loser pokemon img tag in html render
-   * @param owner OwnerTypes
+   * @description private function to launch effects at the end of the battle, depending on the rener type
+   * @param loserOwner OwnerTypes
    */
-  const _reduceLoserPokemonOpacity = (owner: OwnerTypes): void => {
-    const loserPokemon = document.getElementById(owner === OwnerTypes.OPPONENT ? 'opponent-pokemon' : 'player-pokemon')
+  const _launchEndingEffects = (loserOwner: OwnerTypes): void => {
+    if (currentUser?.render === RenderTypes.HTML) {
+      _reduceLoserPokemonOpacity(loserOwner)
+    }
+  }
+
+  /**
+   * @description private function to reduce opacity of loser pokemon img tag in html render
+   */
+  const _reduceLoserPokemonOpacity = (loserOwner: OwnerTypes): void => {
+    const loserPokemon = document.getElementById(loserOwner === OwnerTypes.OPPONENT ? 'opponent-pokemon' : 'player-pokemon')
 
     if (loserPokemon) {
       loserPokemon.style.opacity = '0.4'

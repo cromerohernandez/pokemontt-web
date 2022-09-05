@@ -1,14 +1,19 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import MenuButton from '../UI/buttons/MenuButton';
+import AuthContext from '../../contexts/AuthContext';
+
+import MenuButton from '../UI/buttons/menu-button/MenuButton';
 import Spinner from '../UI/misc/spinner/Spinner';
-import TableRowView from '../UI/table/TableRowView';
+import TableRowView from '../UI/table/table-row/TableRowView';
 
 import { IRankingViewProps } from '../../utils/models/props.models';
-import { icons } from '../../assets/icons/icons';
+import { ICONS } from '../../assets/icons/icons';
+import { translate } from '../../utils/i18n/i18n.index';
 
 const RankingView: FunctionComponent<IRankingViewProps> = ({ usersRanking, onGoHome }) => {
+  const { currentUser } = useContext(AuthContext)
+
   return (
     <>
       <div className='button-container'>
@@ -18,12 +23,16 @@ const RankingView: FunctionComponent<IRankingViewProps> = ({ usersRanking, onGoH
       <div className='display-container'>
         {usersRanking ?
           <>
-            <FontAwesomeIcon icon={icons.ranking} className='display-container__icon' />
+            <FontAwesomeIcon icon={ICONS.ranking} className='display-container__icon' />
 
             {usersRanking &&
               usersRanking.map((user, index) =>
                 <TableRowView key={index} tableType='ranking' rowKey={index} rowData={user}/>
               )
+            }
+
+            {currentUser &&
+              <span className='ranking-user-score'>{ `· ${translate('RANKING.CURRENT_SCORE')} ${currentUser.score} ·` }</span>
             }
           </>
         :
