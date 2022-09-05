@@ -24,8 +24,8 @@ export interface IBattleData {
   setPokemonStartsAttack: (owner: OwnerTypes | undefined) => void,
   setPokemon: (owner: OwnerTypes, pokemonData: Pokemon | undefined, randomMovesData: Move[] | void) =>  void,
   updatePokemonHealthInBattle: (owner: OwnerTypes, damage: number) =>  void,
-  updatePlayerCurrentMove: (updatedMove: string) => void,
-  setBattleOpponentType: (type: OpponentTypes) => void,
+  setPlayerCurrentMoveName: (updatedMove: string) => void,
+  setOpponentType: (type: OpponentTypes) => void,
   setLoser: (type: OwnerTypes) => void, 
   setBattleMessage: (type: string) => void,
   resetBattleData: () => void,
@@ -33,6 +33,7 @@ export interface IBattleData {
 
 export interface IBattlePokemonData {
   userId: number | null,
+  userName: string | null,
   name: string,
   types: string[],
   experience: number,

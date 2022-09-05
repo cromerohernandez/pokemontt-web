@@ -12,7 +12,7 @@ import { OpponentTypes } from '../../utils/const/battle.const';
 
 const Home: FunctionComponent = () => {
   const auth = useContext(AuthContext)
-  const { setBattleOpponentType } = useContext(BattleContext)
+  const { setOpponentType } = useContext(BattleContext)
   const navigate = useNavigate()
 
   /**
@@ -40,17 +40,30 @@ const Home: FunctionComponent = () => {
   const handleRanking = (): void => {
     navigate('/ranking')
   }
+
+  /**
+   * @description function to redirect to history route
+   */
+  const handleHistory = (): void => {
+    navigate('/history')
+  }
   
   /**
    * @description function to redirect to battle route
    */
   const handleBattle = (): void => {
-    setBattleOpponentType(OpponentTypes.COMPUTER)
+    setOpponentType(OpponentTypes.COMPUTER)
     navigate('/battle')
   }
 
   return (
-    <HomeView onLogout={handleLogout} onSettings={handleSettings} onRanking={handleRanking} onBattle={handleBattle} />
+    <HomeView
+      onLogout={handleLogout}
+      onSettings={handleSettings}
+      onRanking={handleRanking}
+      onHistory={handleHistory}
+      onBattle={handleBattle}
+    />
   )
 }
  

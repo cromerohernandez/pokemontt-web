@@ -36,7 +36,7 @@ const Battle: FunctionComponent = () => {
     setPokemonStartsAttack,
     setPokemon,
     updatePokemonHealthInBattle,
-    updatePlayerCurrentMove,
+    setPlayerCurrentMoveName,
     setLoser,
     setBattleMessage,
     resetBattleData
@@ -119,7 +119,7 @@ const Battle: FunctionComponent = () => {
    * @param event ChangeEvent<HTMLSelectElement>
    */
   const handleChangeMove = (event: ChangeEvent<HTMLSelectElement>): void => {
-    updatePlayerCurrentMove(event.target.value)
+    setPlayerCurrentMoveName(event.target.value)
   }
 
   /**
@@ -139,7 +139,6 @@ const Battle: FunctionComponent = () => {
     if (playerPokemon && opponentPokemon) {
       const computerAttack = getComputerMoveToAttack(opponentPokemon.moves)
       const delayTime = (Math.random() * (MAX_DELAY_COMPUTER_ATTACK - MIN_DELAY_COMPUTER_ATTACK + 1)) + MIN_DELAY_COMPUTER_ATTACK
-      console.log('CRH-delayTime', delayTime)
 
       setTimeout(() => {
         setPokemonStartsAttack(OwnerTypes.OPPONENT)

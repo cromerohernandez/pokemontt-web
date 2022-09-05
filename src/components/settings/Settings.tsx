@@ -72,7 +72,7 @@ const Settings: FunctionComponent = () => {
         navigate('/')
       })
       .catch(error => {
-        console.log(error) //TODOCRH
+        console.log(error) //TODOCRH: to modal
       })
   }
   

@@ -7,15 +7,10 @@ import Spinner from '../../UI/misc/spinner/Spinner';
 
 import { ICONS } from '../../../assets/icons/icons';
 import { OpponentTypes, OwnerTypes } from '../../../utils/const/battle.const';
+import { IBattlePokemonPreviewViewProps } from '../../../utils/models/props.models';
 import { translate } from '../../../utils/i18n/i18n.index';
-import { IBattlePokemonData } from '../../../utils/models/battle.models';
 
-interface CRHTester {
-  owner: OwnerTypes,
-  battlePokemonData: IBattlePokemonData | undefined
-}
-
-const BattlePokemonPreviewView: FunctionComponent<CRHTester> = ({ owner, battlePokemonData }) => {
+const BattlePokemonPreviewView: FunctionComponent<IBattlePokemonPreviewViewProps> = ({ owner, battlePokemonData }) => {
   const { opponentType } = useContext(BattleContext)
 
   return (

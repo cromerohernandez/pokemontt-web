@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import AuthenticatedRoute from './components/auth/auth-route/AuthenticatedRoute';
 import Battle from './components/battle/Battle';
+import History from './components/history/History';
 import Home from './components/home/Home';
 import Login from './components/auth/login/Login';
 import NotAuthenticatedRoute from './components/auth/auth-route/NotAuthenticatedRoute';
@@ -62,6 +63,15 @@ const App: FunctionComponent = () => {
             element={
               <AuthenticatedRoute>
                 <Ranking />
+              </AuthenticatedRoute>
+            }
+          />
+
+          <Route 
+            path='/history'
+            element={
+              <AuthenticatedRoute>
+                <History />
               </AuthenticatedRoute>
             }
           />

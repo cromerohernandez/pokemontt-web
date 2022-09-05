@@ -8,9 +8,20 @@ export interface IAuthenticatedRouteProps {
   children: JSX.Element
 }
 
+export interface IBattleHistory {
+  win: boolean,
+  opponentName: string,
+  userScoreIncrement: number,
+}
+
 export interface IBattlePokemonInfoView {
   battlePokemonData: IBattlePokemonData,
   owner: OwnerTypes,
+}
+
+export interface IBattlePokemonPreviewViewProps {
+  owner: OwnerTypes,
+  battlePokemonData: IBattlePokemonData | undefined
 }
 
 export interface IBattleViewProps {
@@ -30,10 +41,16 @@ export interface IHealthBarViewProps {
   owner: string,
 }
 
+export interface IHistoryViewProps {
+  battlesHistory: IBattleHistory[] | undefined;
+  onGoHome: MouseEventHandler<HTMLButtonElement> | undefined;
+}
+
 export interface IHomeViewProps {
   onLogout: MouseEventHandler<HTMLButtonElement> | undefined;
   onSettings: MouseEventHandler<HTMLButtonElement> | undefined;
   onRanking: MouseEventHandler<HTMLButtonElement> | undefined;
+  onHistory: MouseEventHandler<HTMLButtonElement> | undefined;
   onBattle: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
@@ -113,5 +130,13 @@ interface IInputValidation {
 export interface ITableRowViewProps {
   tableType: string
   rowKey: number,
-  rowData: IUserRanking,
+  rowData: {
+    //history
+    win?: boolean,
+    opponentName?: string,
+    userScoreIncrement?: number,
+    //ranking
+    username?: string,
+    score?: number
+  }
 }

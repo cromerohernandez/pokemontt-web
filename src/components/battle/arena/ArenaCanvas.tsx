@@ -238,7 +238,7 @@ const ArenaCanvas: FunctionComponent = () => {
    * @description private function to set move image
    */
    const _setMove = (): void => {
-    const moveType = 'water' //TODO CRH: dev
+    const moveType = 'fire' //TODO CRH: dev
     
     var img = new Image()
     img.src = MOVE_SPRITES[moveType] ?? MOVE_SPRITES[DEFAULT_MOVE_TYPE]
@@ -362,7 +362,6 @@ const ArenaCanvas: FunctionComponent = () => {
    */
   const _changePokemonOpacity = (pokemonToChange: OwnerTypes, newOpacity: number): void => {
     if (ctx) {
-      console.log('CRH-entraChangeOpacity')
       _clearCanvas()
       _drawBackground()
       ctx.globalAlpha = newOpacity;

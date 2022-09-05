@@ -3,21 +3,21 @@ import { useNavigate } from 'react-router-dom';
 
 import PokemonttService from '../../services/PokemonttService';
 
-import RankingView from './RankingView';
+import HistoryView from './HistoryView';
 
-import { IUserRanking } from '../../utils/models/props.models';
+import { IBattleHistory } from '../../utils/models/props.models';
 
 const Ranking: FunctionComponent = () => {
   const navigate = useNavigate()
-  const [usersRanking, setUsersRanking] = useState<IUserRanking[]>();
+  const [battlesHistory, setBattlesHistory] = useState<IBattleHistory[]>();
 
   /**
-   * @description useEffect function to get users ranking
+   * @description useEffect function to get history user battles
    */
   useEffect((): void => {
-    PokemonttService.getRanking()
+    PokemonttService.getUserBattles()
       .then((response: any) => { //TODOCRH: type any
-        setUsersRanking(response.data)
+        setBattlesHistory(response.data)
       })
       .catch(error => {
         console.log(error) //TODOCRH: delete
@@ -32,7 +32,7 @@ const Ranking: FunctionComponent = () => {
   }
 
   return (
-    <RankingView usersRanking={usersRanking} onGoHome={handleGoHome} />
+    <HistoryView battlesHistory={battlesHistory} onGoHome={handleGoHome} />
   )
 }
 
