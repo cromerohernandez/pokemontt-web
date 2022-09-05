@@ -1,9 +1,9 @@
 import { FunctionComponent, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import AuthContext from '../../contexts/AuthContext';
+import AuthContext from '../../../contexts/AuthContext';
 
-import { IAuthenticatedRouteProps } from '../../utils/models/props.models';
+import { IAuthenticatedRouteProps } from '../../../utils/models/props.models';
 
 const AuthenticatedRoute: FunctionComponent<IAuthenticatedRouteProps> = (props: IAuthenticatedRouteProps) => {
   const { currentUser } = useContext(AuthContext)

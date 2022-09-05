@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import MenuButton from '../UI/buttons/MenuButton';
+import MenuButton from '../UI/buttons/menu-button/MenuButton';
 import Spinner from '../UI/misc/spinner/Spinner';
-import TableRowView from '../UI/table/TableRowView';
+import TableRowView from '../UI/table/table-row/TableRowView';
 
 import { IRankingViewProps } from '../../utils/models/props.models';
-import { icons } from '../../assets/icons/icons';
+import { ICONS } from '../../assets/icons/icons';
 
 const RankingView: FunctionComponent<IRankingViewProps> = ({ usersRanking, onGoHome }) => {
   return (
@@ -18,7 +18,7 @@ const RankingView: FunctionComponent<IRankingViewProps> = ({ usersRanking, onGoH
       <div className='display-container'>
         {usersRanking ?
           <>
-            <FontAwesomeIcon icon={icons.ranking} className='display-container__icon' />
+            <FontAwesomeIcon icon={ICONS.ranking} className='display-container__icon' />
 
             {usersRanking &&
               usersRanking.map((user, index) =>

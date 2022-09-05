@@ -6,7 +6,7 @@ import BattleContext from '../../../contexts/BattleContext';
 
 import HealthBar from '../../UI/misc/health-bar/HealthBar';
 
-import { icons } from '../../../assets/icons/icons';
+import { ICONS } from '../../../assets/icons/icons';
 import { OpponentTypes, OwnerTypes } from '../../../utils/const/battle.const';
 import { IBattlePokemonInfoView } from '../../../utils/models/props.models';
 
@@ -23,7 +23,7 @@ const BattlePokemonInfoView: FunctionComponent<IBattlePokemonInfoView> = ({ batt
       <div className='battle-pokemon-info-container__player'>
         <FontAwesomeIcon 
           icon={
-            owner === OwnerTypes.OPPONENT ? (opponentType === OpponentTypes.COMPUTER ? icons.computer : icons.human) : icons.human
+            owner === OwnerTypes.OPPONENT ? (opponentType === OpponentTypes.COMPUTER ? ICONS.computer : ICONS.human) : ICONS.human
           }
           className='battle-pokemon-info-container__icon'
         />

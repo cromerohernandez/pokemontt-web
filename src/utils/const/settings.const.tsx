@@ -3,6 +3,16 @@ export enum Languages {
   ES = 'es',
 }
 
+export enum RenderTypes {
+  CANVAS = 'canvas',
+  HTML = 'html',
+}
+
+export enum ThemeTypes {
+  DARK = 'dark',
+  LIGHT = 'light',
+}
+
 export const LANGUAGES_OPTIONS = [
   {
     name: 'SETTINGS.ENGLISH',
@@ -14,11 +24,6 @@ export const LANGUAGES_OPTIONS = [
   }
 ]
 
-export enum RenderTypes {
-  CANVAS = 'canvas',
-  HTML = 'html',
-}
-
 export const RENDER_OPTIONS = [
   {
     name: 'SETTINGS.CANVAS',
@@ -29,11 +34,6 @@ export const RENDER_OPTIONS = [
     value: RenderTypes.HTML,
   },
 ]
-
-export enum ThemeTypes {
-  DARK = 'dark',
-  LIGHT = 'light',
-}
 
 export const THEME_OPTIONS = [
   {

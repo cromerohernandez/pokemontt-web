@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from 'react';
 
 import MenuButtonView from './MenuButtonView';
 
-import { IMenuButtonProps } from '../../../utils/models/button.models';
+import { IMenuButtonProps } from '../../../../utils/models/button.models';
 
 const MenuButton: FunctionComponent<IMenuButtonProps> = (menuButtonProps: IMenuButtonProps) => {
   const { type, disabled, label, icon, handleClick } = menuButtonProps

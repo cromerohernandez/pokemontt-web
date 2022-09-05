@@ -1,9 +1,9 @@
 import { FormEvent, FunctionComponent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import AuthContext from '../../contexts/AuthContext';
-import PokemonttService from '../../services/PokemonttService';
-import useFormInput from '../../hooks/useFormInput';
+import AuthContext from '../../../contexts/AuthContext';
+import PokemonttService from '../../../services/PokemonttService';
+import useFormInput from '../../../hooks/useFormInput';
 
 import LoginView from './LoginView';
 

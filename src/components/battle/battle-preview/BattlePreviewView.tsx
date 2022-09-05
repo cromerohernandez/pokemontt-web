@@ -1,9 +1,9 @@
 import { FunctionComponent, useContext } from 'react';
 
-import BattleContext from '../../contexts/BattleContext';
-import BattlePokemonPreviewView from './BattlePokemonPreview';
+import BattleContext from '../../../contexts/BattleContext';
+import BattlePokemonPreviewView from '../battle-pokemon-preview/BattlePokemonPreview';
 
-import { OwnerTypes } from '../../utils/const/battle.const';
+import { OwnerTypes } from '../../../utils/const/battle.const';
 
 const BattlePreviewView: FunctionComponent = () => {
   const { playerPokemon, opponentPokemon } = useContext(BattleContext)

@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import MenuButton from '../UI/buttons/MenuButton';
+import MenuButton from '../UI/buttons/menu-button/MenuButton';
 
 import { IHomeViewProps } from '../../utils/models/props.models';
 

@@ -16,14 +16,11 @@ import {
   faTrophy,
   faUser,
   faXmark,
-  IconDefinition
 } from '@fortawesome/free-solid-svg-icons'
 
-interface ICRH {
-  [key:string] : IconDefinition
-}
+import { IFontAwesomeIcon } from '../../utils/models/asset.models';
 
-export const icons: ICRH = {
+export const ICONS: IFontAwesomeIcon = {
   apply: faCheck,
   arrow_left: faArrowLeft,
   arrow_right: faArrowRight,

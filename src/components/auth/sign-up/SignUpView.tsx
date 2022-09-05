@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import FormInput from '../UI/form/FormInput';
-import MenuButton from '../UI/buttons/MenuButton';
+import FormInput from '../../UI/form/FormInput';
+import MenuButton from '../../UI/buttons/menu-button/MenuButton';
 
-import { ISignUpViewProps } from '../../utils/models/props.models';
-import { translate } from '../../utils/i18n/i18n.index';
-import { BUTTON_TYPES } from '../../utils/const/button.const';
+import { ISignUpViewProps } from '../../../utils/models/props.models';
+import { translate } from '../../../utils/i18n/i18n.index';
+import { BUTTON_TYPES } from '../../../utils/const/button.const';
 
 const SignUpView: FunctionComponent<ISignUpViewProps> = ({ formData, formError, anyError, onSignUp, onGoToLogin }) => {
   return (
