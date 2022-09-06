@@ -11,7 +11,7 @@ import Settings from './components/settings/Settings';
 import Ranking from './components/ranking/Ranking';
 import SignUp from './components/auth/sign-up/SignUp';
 
-import pokemonttLogo from './assets/img/pokemonttLogo.png';
+import pokemonttLogo from './assets/img/pokemontt-logo.png';
 
 const App: FunctionComponent = () => {
   return (

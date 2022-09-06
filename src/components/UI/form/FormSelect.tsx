@@ -34,10 +34,10 @@ const FormSelect: FunctionComponent<IFormSelect> = (formSelectProps: IFormSelect
           className='form-item-container__item'
         >
           {placeholder &&
-            <option value='' disabled hidden>{ translate(placeholder) }</option>
+            <option value='' disabled hidden className='form-item-container__option'>{ translate(placeholder) }</option>
           }
           {options.map((option, index) =>
-            <option key={index} value={option.value}>{ translate(option.name) }</option>
+            <option key={index} value={option.value} className='form-item-container__option'>{ translate(option.name) }</option>
           )}
         </select>
       </div>
