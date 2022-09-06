@@ -17,7 +17,7 @@ import {
   getPlayerAttackResultMessage,
   getOpponentAttackResultMessage
 } from '../../utils/helpers/battle.helpers';
-import { MIN_DELAY_COMPUTER_ATTACK, MAX_DELAY_COMPUTER_ATTACK, OpponentTypes, OwnerTypes } from '../../utils/const/battle.const';
+import { MIN_DELAY_COMPUTER_ATTACK, MAX_DELAY_COMPUTER_ATTACK, OpponentTypes, OwnerTypes, DELAY_COMPUTER_START_ATTACK } from '../../utils/const/battle.const';
 import { MOVE_FRAME_TIME, MOVE_FRAMES, NUMBER_OF_OPACITY_CHANGES, OPACITY_CHANGE_TIME } from '../../utils/const/move.const';
 import { IAttackData, IBattlePokemonData } from '../../utils/models/battle.models';
 import { translate } from '../../utils/i18n/i18n.index';
@@ -26,10 +26,14 @@ import { RenderTypes } from '../../utils/const/settings.const';
 const Battle: FunctionComponent = () => {
   const { currentUser, setUser } = useContext(AuthContext)
   const {
+    isNewBattleDataRequested,
+    isBattleInProgress,
+    isBattleOver,
     playerPokemon,
     playerCurrentMoveName,
     opponentPokemon,
     opponentType,
+    setIsNewBattleDataRequested,
     changeTurn,
     setIsBattleInProgress,
     setIsBattleOver,
@@ -80,13 +84,22 @@ const Battle: FunctionComponent = () => {
   }, [getPokemonData])
 
   useEffect(() => {
-    !playerPokemon && getRandomPokemon(OwnerTypes.PLAYER)
+    if (!isNewBattleDataRequested && !isBattleInProgress && !isBattleOver) {
+      navigate('/')
+    } else {
+      !playerPokemon && getRandomPokemon(OwnerTypes.PLAYER)
+    }
   }, [playerPokemon])
 
   useEffect(() => {
     !opponentPokemon && getRandomPokemon(OwnerTypes.OPPONENT)
   }, [opponentPokemon])
 
+  useEffect(() => {
+    if (playerPokemon && opponentPokemon) {
+      setIsNewBattleDataRequested(false)
+    }
+  }, [playerPokemon, opponentPokemon, setIsNewBattleDataRequested])
 
   /**
    * @description private function to get pokemon data from PokedexService and set pokemon data in BattleContext
@@ -134,8 +147,9 @@ const Battle: FunctionComponent = () => {
 
   /**
    * @description private function to start computer attack
+   * @param additionalDelay (optional) number
    */
-  const _startComputerAttack = (): void => {
+  const _startComputerAttack = (additionalDelay?: number): void => {
     if (playerPokemon && opponentPokemon) {
       const computerAttack = getComputerMoveToAttack(opponentPokemon.moves)
       const delayTime = (Math.random() * (MAX_DELAY_COMPUTER_ATTACK - MIN_DELAY_COMPUTER_ATTACK + 1)) + MIN_DELAY_COMPUTER_ATTACK
@@ -143,12 +157,12 @@ const Battle: FunctionComponent = () => {
       setTimeout(() => {
         setPokemonStartsAttack(OwnerTypes.OPPONENT)
         _sendAttack(opponentPokemon, playerPokemon, OwnerTypes.OPPONENT, computerAttack.name)
-      }, delayTime)
+      }, delayTime + (additionalDelay ?? 0))
     }
   }
 
   /**
-   * @description private function to send an attack from attackingPokemon to defendingPokemon
+   * @description private function to map attack data and request attack result
    * @param attackingPokemon IBattlePokemonData
    * @param defendingPokemon IBattlePokemonData
    * @param attackingPokemonOwner OwnerTypes
@@ -167,37 +181,46 @@ const Battle: FunctionComponent = () => {
     }
 
     setTimeout(() => {
-      PokemonttService.sendAttack(attackData)
-        .then(response => {
-          const {
-            damage,
-            usedMoveName,
-            newDefendignPokemonHealth,
-            attackingPokemonScoreIncrease,
-            defendingPokemonScoreIncrease,
-            newAttackingPokemonScore,
-            newDefendingPokemonScore
-          } = response.data
-
-          _setAttackResult(attackingPokemonOwner, damage, usedMoveName, newDefendignPokemonHealth)
-
-          if (newDefendignPokemonHealth > 0) {
-            _continueBattle(attackingPokemonOwner)
-          } else {
-            _finishBattle(
-              attackingPokemonOwner,
-              attackingPokemonScoreIncrease,
-              defendingPokemonScoreIncrease,
-              newAttackingPokemonScore,
-              newDefendingPokemonScore
-            )
-          }
-        })
-        .catch(error => {
-          setBattleMessage(error)
-        })
+      _getAttackResult(attackData, attackingPokemonOwner)
     }, (MOVE_FRAME_TIME * MOVE_FRAMES) + (OPACITY_CHANGE_TIME * NUMBER_OF_OPACITY_CHANGES) + 200)
   }
+
+  /**
+   * @description private function to get attack result from PokemonttService
+   * @param attackData IAttackData
+   * @param attackingPokemonOwner OwnerTypes
+   */
+  const _getAttackResult = ((attackData: IAttackData, attackingPokemonOwner: OwnerTypes): void => {
+    PokemonttService.sendAttack(attackData)
+    .then(response => {
+      const {
+        damage,
+        usedMoveName,
+        newDefendignPokemonHealth,
+        attackingPokemonScoreIncrease,
+        defendingPokemonScoreIncrease,
+        newAttackingPokemonScore,
+        newDefendingPokemonScore
+      } = response.data
+
+      _setAttackResult(attackingPokemonOwner, damage, usedMoveName, newDefendignPokemonHealth)
+
+      if (newDefendignPokemonHealth > 0) {
+        _continueBattle(attackingPokemonOwner)
+      } else {
+        _finishBattle(
+          attackingPokemonOwner,
+          attackingPokemonScoreIncrease,
+          defendingPokemonScoreIncrease,
+          newAttackingPokemonScore,
+          newDefendingPokemonScore
+        )
+      }
+    })
+    .catch(error => {
+      setBattleMessage(error)
+    })
+  })
 
   /**
    * @description private function to set defending pokemon's health and message from attack result
@@ -335,7 +358,7 @@ const Battle: FunctionComponent = () => {
     setIsBattleInProgress(true)
 
     if (!firstTurn && opponentType === OpponentTypes.COMPUTER) {
-      _startComputerAttack()
+      _startComputerAttack(DELAY_COMPUTER_START_ATTACK)
     }
   }
 
