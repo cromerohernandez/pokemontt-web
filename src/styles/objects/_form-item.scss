@@ -16,7 +16,7 @@
     margin: 0.1rem 0 0 10rem;
     height: 1.2rem;
     width: 12rem;
-    font-size: 0.85rem;
+    font-size: $font_xsm;
     color: var(--color_error);
   }
 
@@ -28,8 +28,12 @@
     border-radius: 0.5rem;
     text-align: center;
     background-color: var(--color_text);
-    font-size: 1rem;
-    font-family: 'Dosis';
+    font-size: $font_sm;
+    font-family: 'Dosis', 'Calibri';
+  }
+
+  &__option {
+    font-size: $font_md;
   }
 
   &__label {

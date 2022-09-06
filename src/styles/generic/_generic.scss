@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&display=swap');
+
+/**
+ * FONT
+ */
+:root {
+  font-family: 'Dosis', 'Calibri';
+  color: var(--color_text);
+}
+
+/**
+ * THEME
+ */
+:root.light {
+  --color_primary: #425272;
+  --color_fill: #425272;
+  --color_text: #91a4ca;
+  --color_error: #c79293;  
+}
+  
+:root.dark {
+  --color_primary: #1f293d;
+  --color_fill: #7f8fb1;
+  --color_text: #7f8fb1;
+  --color_error: #9d7374;
+}

@@ -8,6 +8,7 @@ export interface IAttackData {
 }
 
 export interface IBattleData {
+  isNewBattleDataRequested: boolean | undefined,
   isPlayerTurn: boolean | undefined,
   isBattleInProgress: boolean | undefined,
   isBattleOver: boolean | undefined,
@@ -18,6 +19,7 @@ export interface IBattleData {
   opponentType: OpponentTypes | undefined,
   loser: OwnerTypes | undefined,
   battleMessage: string | undefined,
+  setIsNewBattleDataRequested: (isNewBattleDataRequested: boolean | undefined) => void,
   changeTurn: (isPlayerTurn: boolean | undefined) => void,
   setIsBattleInProgress: (setIsBattleInProgress: boolean | undefined) => void,
   setIsBattleOver: (setIsBattleInProgress: boolean | undefined) => void,

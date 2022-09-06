@@ -1,13 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&display=swap');
-
-//TODOCRH: review
-$color_ntt-dark: #425272;
-$color_ntt-100: #6785C1;
-
-//APP HEIGHT
+/**
+ * APP HEIGHT
+ */
 //app = (2 x app_padding) + app_header + app_body
-//min-heigth = 35rem
 $app-min-heigth: 35rem;
 $app_padding: 2%;
 $app_min_padding: 0.7rem;
@@ -31,27 +25,17 @@ $battle-arena-container_height: 78%;
 $battle-info-container_height: 14%;
 $battle-info-container_min_height: 4rem;
 
-//APP WIDTH
+/**
+ * APP WIDTH
+ */
 $app_min_width: 46.4rem;
 $board_min_width: 45rem;
 
-//THEME
-:root.light {
-  --color_primary: #425272;
-  --color_secondary: #91a4ca;
-  --color_text: #91a4ca;
-  --color_error: #c79293;  
-}
-  
-:root.dark {
-  --color_primary: #1f293d;
-  --color_secondary: #6c7a96;
-  --color_text: #7f8fb1;
-  --color_error: #9d7374;
-}
-
-//TODOCRH: review
-:root {
-  font-family: 'Dosis';
-  color: var(--color_text);
-}
+/**
+ * FONT SIZE
+ */
+$font_xlg: 1.6rem;
+$font_lg: 1.4rem;
+$font_md: 1.05rem;
+$font_sm: 0.95rem;
+$font_xsm: 0.85rem;

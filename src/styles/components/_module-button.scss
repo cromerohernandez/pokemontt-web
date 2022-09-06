@@ -12,7 +12,7 @@
     width: 2.8rem;
     border-radius: 50%;
     cursor: pointer;
-    background-color: var(--color_primary);
+    background-color: var(--color_fill);
 
     &:hover {
       background-color: var(--color_text);
@@ -21,13 +21,13 @@
 
   &__icon {
     margin-top: 0.2rem;
-    font-size: 1.4rem;
+    font-size: $font_lg;
   }
 
   &__label {
     margin: 0;
     padding: 0.2rem;
-    font-size: 0.8rem;
+    font-size: $font_xsm;
     font-weight: bold;
     color: var(--color_text);
     opacity: 0;
