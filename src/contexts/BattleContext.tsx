@@ -12,9 +12,10 @@ const BattleContext = createContext<IBattleData>(BATTLE_DEFAULT_VALUES);
 export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   const { currentUser } = useContext(AuthContext)
 
+  const [isNewBattleDataRequested, setIsNewBattleDataRequested ] = useState<boolean | undefined>(false)
   const [isPlayerTurn, setIsPlayerTurn] = useState<boolean | undefined>()
-  const [isBattleInProgress, setIsBattleInProgress] = useState<boolean | undefined>()
-  const [isBattleOver, setIsBattleOver] = useState<boolean | undefined>()
+  const [isBattleInProgress, setIsBattleInProgress] = useState<boolean | undefined>(false)
+  const [isBattleOver, setIsBattleOver] = useState<boolean | undefined>(false)
   const [pokemonStartsAttack, setPokemonStartsAttack] = useState<OwnerTypes>()
   const [playerPokemon, setPlayerPokemon] = useState<IBattlePokemonData | undefined>()
   const [playerCurrentMoveName, setPlayerCurrentMoveName] = useState<string | undefined>()
@@ -125,6 +126,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
    * @description function to reset battle data 
    */
   const resetBattleData = (): void => {
+    setIsNewBattleDataRequested(BATTLE_DEFAULT_VALUES.isNewBattleDataRequested)
     setIsPlayerTurn(BATTLE_DEFAULT_VALUES.isPlayerTurn)
     setIsBattleInProgress(BATTLE_DEFAULT_VALUES.isBattleInProgress)
     setIsBattleOver(BATTLE_DEFAULT_VALUES.isBattleOver)
@@ -138,6 +140,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
   }
 
   const value: IBattleData = {
+    isNewBattleDataRequested: isNewBattleDataRequested,
     isPlayerTurn: isPlayerTurn,
     isBattleInProgress: isBattleInProgress,
     isBattleOver: isBattleOver,
@@ -148,6 +151,7 @@ export const BattleContextProvider = (props: ProviderProps<IBattleData>) => {
     opponentType: opponentType,
     loser: loser,
     battleMessage: battleMessage,
+    setIsNewBattleDataRequested: setIsNewBattleDataRequested,
     changeTurn: changeTurn,
     setIsBattleInProgress: setIsBattleInProgress,
     setIsBattleOver: setIsBattleOver,

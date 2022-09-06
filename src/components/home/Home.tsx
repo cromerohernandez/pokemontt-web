@@ -12,7 +12,7 @@ import { OpponentTypes } from '../../utils/const/battle.const';
 
 const Home: FunctionComponent = () => {
   const auth = useContext(AuthContext)
-  const { setOpponentType } = useContext(BattleContext)
+  const { setIsNewBattleDataRequested, setOpponentType } = useContext(BattleContext)
   const navigate = useNavigate()
 
   /**
@@ -52,6 +52,7 @@ const Home: FunctionComponent = () => {
    * @description function to redirect to battle route
    */
   const handleBattle = (): void => {
+    setIsNewBattleDataRequested(true)
     setOpponentType(OpponentTypes.COMPUTER)
     navigate('/battle')
   }

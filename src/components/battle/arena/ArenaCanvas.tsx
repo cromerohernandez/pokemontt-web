@@ -44,12 +44,24 @@ const ArenaCanvas: FunctionComponent = () => {
   })
 
   /**
-   * @description useEffect function to set canvas and draw background and both pokemon when arena container is set
+   * @description useEffect function to set canvas, background and both pokemon when arena container is set
    */
   useEffect((): void => {
     _setCanvas()
-    _draw()
+    _setCanvasItems()
   }, [canvasContainer])
+
+
+  /**
+   * @description useEffect function to draw when background and pokemon are set
+   */
+   useEffect((): void => {
+    if (backgroundImg && playerImg && opponentImg) {
+      setTimeout(() => {
+        _drawCanvasItems()
+      }, 250)
+    }
+  }, [backgroundImg, playerImg, opponentImg])
 
   /**
    * @description useEffect function to change the pokemont opacity when it has lost the battle
@@ -77,7 +89,7 @@ const ArenaCanvas: FunctionComponent = () => {
   useEffect((): void => {
     if (ctx && moveFrameIndex !== null) {
       _clearCanvas()
-      _draw()
+      _drawCanvasItems()
 
       if (moveFrameIndex === 0) {
         _setMove()
@@ -125,12 +137,22 @@ const ArenaCanvas: FunctionComponent = () => {
   }, [opacityChangeCounter])
 
   /**
-   * @description private function to draw background and pokemon on the canvas
+   * @description private function to set background and pokemon items
    */
-  const _draw = (): void => {
+    const _setCanvasItems = (): void => {
     _setBackground()
     _setOpponent()
     _setPlayer()
+    _setMove()
+  }
+
+  /**
+   * @description private function to draw background and pokemon on the canvas
+   */
+  const _drawCanvasItems = (): void => {
+    _drawBackground()
+    _drawOpponent()
+    _drawPlayer()
   }
 
   /**
@@ -164,7 +186,6 @@ const ArenaCanvas: FunctionComponent = () => {
     img.src = arenaBackground
 
     setBackgroundImg(img)
-    _drawBackground()
   }
 
   /**
@@ -190,7 +211,6 @@ const ArenaCanvas: FunctionComponent = () => {
     img.src = opponentPokemon?.image ?? ''
 
     setOpponentImg(img)
-    _drawOpponent()
   }
 
   /**
@@ -216,7 +236,6 @@ const ArenaCanvas: FunctionComponent = () => {
     img.src = playerPokemon?.image ?? ''
 
     setPlayerImg(img)
-    _drawPlayer()
   }
 
   /**

@@ -9,6 +9,7 @@ export enum OwnerTypes {
 }
 
 export const BATTLE_DEFAULT_VALUES = {
+  isNewBattleDataRequested: false,
   isPlayerTurn: undefined,
   isBattleInProgress: false,
   isBattleOver: false,
@@ -19,6 +20,7 @@ export const BATTLE_DEFAULT_VALUES = {
   opponentType: undefined,
   loser: undefined,
   battleMessage: undefined,
+  setIsNewBattleDataRequested: () => undefined,
   changeTurn: () => undefined,
   setIsBattleInProgress: () => undefined,
   setIsBattleOver: () => undefined,
@@ -35,3 +37,5 @@ export const BATTLE_DEFAULT_VALUES = {
 export const MIN_DELAY_COMPUTER_ATTACK = 1800
 
 export const MAX_DELAY_COMPUTER_ATTACK = 2800
+
+export const DELAY_COMPUTER_START_ATTACK = 2000
