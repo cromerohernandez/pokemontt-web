@@ -2,7 +2,7 @@ export const es = {
   AUTH: {
     DONT_HAVE_ACCOUNT: "¿No tienes una cuenta? ",
     HAVE_ACCOUNT: "¿Tienes una cuenta? ",
-    LOGIN: 'Entrar',
+    LOGIN: 'Inicia sesión',
     PASSWORD: 'Contraseña',
     REPEAT_PASSWORD: 'Repetir contraseña',
     SIGN_UP: 'Regístrate',
