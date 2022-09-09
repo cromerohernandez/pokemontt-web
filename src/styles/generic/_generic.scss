@@ -16,12 +16,14 @@
   --color_primary: #425272;
   --color_fill: #425272;
   --color_text: #91a4ca;
-  --color_error: #c79293;  
+  --color_text_link: #5682db;
+  --color_text_error: #c79293;  
 }
   
 :root.dark {
   --color_primary: #1f293d;
   --color_fill: #7f8fb1;
   --color_text: #7f8fb1;
-  --color_error: #9d7374;
+  --color_text_link: #5682db;
+  --color_text_error: #9d7374;
 }

@@ -7,15 +7,10 @@ import { ILoginViewProps } from '../../../utils/models/props.models';
 import { translate } from '../../../utils/i18n/i18n.index';
 import { BUTTON_TYPES } from '../../../utils/const/button.const';
 
-const LoginView: FunctionComponent<ILoginViewProps> = ({ formData, formError, anyError, onLogin, onGoToSignUp }) => {
+const LoginView: FunctionComponent<ILoginViewProps> = ({ formData, formError, anyError, onLogin }) => {
   return (
     <form onSubmit={onLogin} className='form-container'>
-      <div className='button-container'>
-        <MenuButton type={BUTTON_TYPES.button} label={'BUTTONS.SIGN_UP'} icon={'signup'} handleClick={onGoToSignUp} />
-        <MenuButton type={BUTTON_TYPES.submit} disabled={anyError()} label={'BUTTONS.LOGIN'} icon={'login'} />
-      </div>
-
-      <div className='display-container'>
+      <div className='display-container--auth'>
         {formData.map((input, index) =>
           <FormInput
             type={input.type}
@@ -33,6 +28,15 @@ const LoginView: FunctionComponent<ILoginViewProps> = ({ formData, formError, an
             <span>{ translate(`ERRORS.${formError}`) }</span>
           }
         </div>
+
+        <MenuButton type={BUTTON_TYPES.submit} disabled={anyError()} label={'BUTTONS.LOGIN'} icon={'login'} />
+
+        <hr className='form-container__hr'></hr>
+        
+        <p className='form-container__p'>
+          { translate('AUTH.DONT_HAVE_ACCOUNT') } 
+          <span><a href='/signup'>{ translate('AUTH.SIGN_UP') }</a></span>
+        </p>
       </div>
     </form>
   )
