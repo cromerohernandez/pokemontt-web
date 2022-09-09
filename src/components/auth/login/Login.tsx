@@ -81,13 +81,8 @@ const Login: FunctionComponent = () => {
       })
   }
 
-  /**
-   * @description function to redirect to signup route
-   */
-  const handleGoToSignUp = (): void => navigate('/signup');
-
   return (
-    <LoginView formData={formData} formError={formError} anyError={anyError} onLogin={handleLogin} onGoToSignUp={handleGoToSignUp} />
+    <LoginView formData={formData} formError={formError} anyError={anyError} onLogin={handleLogin} />
   )
 }
  

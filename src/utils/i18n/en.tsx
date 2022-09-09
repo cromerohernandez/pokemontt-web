@@ -1,8 +1,12 @@
 export const en = {
   AUTH: {
-    USERNAME: 'Username',
+    DONT_HAVE_ACCOUNT: "Don't have an account? ",
+    HAVE_ACCOUNT: "Have an account? ",
+    LOGIN: 'Login',
     PASSWORD: 'Password',
     REPEAT_PASSWORD: 'Repeat password',
+    SIGN_UP: 'Sign up',
+    USERNAME: 'Username',    
   },
   BATTLE: {
     BUT_YOU_HAVE_ACHIEVED: 'But you have achieved ',
@@ -47,7 +51,7 @@ export const en = {
     INVALID_PASSWORD: 'Password is required and need at least 6 characters.',
     INVALID_REPEAT_PASSWORD: 'The passwords must be the same.',
     INVALID_USERNAME: 'Username is required.',
-    LOGIN_MISSING_CREDENTIALS: 'Username and password are required.',
+    MISSING_CREDENTIALS: 'Username and password are required.',
     POKEMON_WITHOUT_SELECTED_MOVE: 'The pokemon does not have the selected move available.',
     RESOURCE_NOT_FOUND: 'Resource not found.',
     USER_ALREADY_AUTHENTICATED: 'User is already authenticated.',

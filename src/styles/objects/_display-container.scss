@@ -9,6 +9,16 @@
   justify-content: center;
   align-items: center;
 
+    &--auth {
+      margin-top: $button_container_height;
+      height: $display_container_height;
+      min-height: $display_container_min_height;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
     &__icon {
       margin: 2% 0;
       height: 8%;
