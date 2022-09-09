@@ -1,5 +1,5 @@
 {
-  "homepage":"https://cromerohernandez.github.io/pokemonnt-web/",
+  "homepage": "https://cromerohernandez.github.io/pokemonnt-web/",
   "name": "pokemonnt-web",
   "version": "0.1.0",
   "private": true,
@@ -16,6 +16,7 @@
     "@types/react-dom": "^18.0.6",
     "axios": "^0.27.2",
     "i18next": "^21.9.1",
+    "netlify-cli": "^11.7.0",
     "pokedex-promise-v2": "^4.0.0",
     "qs": "^6.11.0",
     "react": "^18.2.0",
@@ -32,8 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
