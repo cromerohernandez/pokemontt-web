@@ -16,7 +16,10 @@ const useFormInput = (formInputData?: IUseFormInput) => {
    * @param event ChangeEvent<HTMLInputElement | HTMLSelectElement>
    */
   const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void =>{
+    const valid = validator ? validator(event.currentTarget.value) : true
+
     setValue(event.currentTarget.value)
+    setError({active: !valid, message: initialErrorMessage ?? ''})
   }
 
   /**

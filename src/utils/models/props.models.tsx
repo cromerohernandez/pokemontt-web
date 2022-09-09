@@ -66,7 +66,6 @@ export interface ILoginViewProps {
   formError: string | null,
   anyError: () => boolean,
   onLogin: (event: FormEvent<HTMLFormElement>) => void,
-  onGoToSignUp: () => void,
 }
 
 export interface INotAuthenticatedRouteProps {
@@ -113,7 +112,6 @@ export interface ISignUpViewProps {
   formError: string | null,
   anyError: () => boolean,
   onSignUp: (event: FormEvent<HTMLFormElement>) => void,
-  onGoToLogin: () => void,
 }
 
 interface IInputActions {
