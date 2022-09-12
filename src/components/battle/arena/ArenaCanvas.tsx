@@ -47,13 +47,15 @@ const ArenaCanvas: FunctionComponent = () => {
    * @description useEffect function to set canvas, background and both pokemon when arena container is set
    */
   useEffect((): void => {
-    _setCanvas()
-    _setCanvasItems()
+    if (canvasContainer) {
+      _setCanvas()
+      _setCanvasItems()
+    }
   }, [canvasContainer])
 
 
   /**
-   * @description useEffect function to draw when background and pokemon are set
+   * @description useEffect function to draw canvas items when background and pokemon are set
    */
    useEffect((): void => {
     if (backgroundImg && playerImg && opponentImg) {
@@ -134,7 +136,31 @@ const ArenaCanvas: FunctionComponent = () => {
         setOpacityChangeCounter(null)
       }
     }
-  }, [opacityChangeCounter])
+  }, [pokemonStartsAttack, opacityChangeCounter])
+
+
+
+
+
+
+
+  
+
+  /**
+   * @description private function to set canvas context
+   */
+    const _setCanvas = (): void => {
+    const canvas = document.getElementById('arena-canvas') as HTMLCanvasElement
+
+    if (canvasContainer) {
+      canvas.height = canvasContainer.offsetHeight * 0.85
+      canvas.width = canvasContainer?.offsetWidth * 0.98
+    }
+
+    const canvasCtx = canvas?.getContext('2d')
+
+    setCtx(canvasCtx)
+  }
 
   /**
    * @description private function to set background and pokemon items
@@ -153,22 +179,6 @@ const ArenaCanvas: FunctionComponent = () => {
     _drawBackground()
     _drawOpponent()
     _drawPlayer()
-  }
-
-  /**
-   * @description private function to set canvas context
-   */
-  const _setCanvas = (): void => {
-    const canvas = document.getElementById('arena-canvas') as HTMLCanvasElement
-
-    if (canvasContainer) {
-      canvas.height = canvasContainer.offsetHeight * 0.85
-      canvas.width = canvasContainer?.offsetWidth * 0.98
-    }
-
-    const canvasCtx = canvas?.getContext('2d')
-
-    setCtx(canvasCtx)
   }
   
   /**
