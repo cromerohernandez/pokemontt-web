@@ -51,11 +51,11 @@ const Battle: FunctionComponent = () => {
   const [isPendingGetOpponentPokemon, setIsPendingGetOpponentPokemon] = useState(true)
 
   /**
-   * @description function to get pokemon data from PokedexService and set pokemon data in BattleContext
+   * @description private function to get pokemon data from PokedexService and set pokemon data in BattleContext
    * @param owner OwnerTypes
    * @param pokemonName string
    */
-  const getPokemonData = useCallback((owner: OwnerTypes, pokemonName: string): void => {
+  const _getPokemonData = useCallback((owner: OwnerTypes, pokemonName: string): void => {
     PokedexService.getPokemonDataByName(pokemonName)
       .then((pokemonData: Pokemon | undefined) => {      
         _getMovesData(pokemonData?.moves)
@@ -72,19 +72,19 @@ const Battle: FunctionComponent = () => {
   }, [setPokemon])
 
   /**
-   * @description function to get pokemon data from PokedexService
+   * @description private function to get pokemon data from PokedexService
    * @param owner OwnerTypes
    * @param pokemonName string
    */
-  const getRandomPokemon = useCallback((owner: OwnerTypes) => {
+  const _getRandomPokemon = useCallback((owner: OwnerTypes) => {
     PokedexService.getRandomPokemonName()
       .then(response => {
-        getPokemonData(owner, response)
+        _getPokemonData(owner, response)
       })
       .catch(error => {
         console.log(error) //TODOCRH
       })
-  }, [getPokemonData])
+  }, [_getPokemonData])
 
   /**
    * @description useEffect function to get a random pokemon for the player
@@ -95,10 +95,10 @@ const Battle: FunctionComponent = () => {
         navigate('/')
       } else {
         setIsPendingGetPlayerPokemon(false)
-        getRandomPokemon(OwnerTypes.PLAYER)
+        _getRandomPokemon(OwnerTypes.PLAYER)
       }
     }
-  }, [isPendingGetPlayerPokemon, isNewBattleDataRequested, isBattleInProgress, isBattleOver, navigate, getRandomPokemon ])
+  }, [isPendingGetPlayerPokemon, isNewBattleDataRequested, isBattleInProgress, isBattleOver, navigate, _getRandomPokemon ])
 
   /**
    * @description useEffect function to get a random pokemon for the opponent
@@ -106,9 +106,9 @@ const Battle: FunctionComponent = () => {
   useEffect(() => {
     if (isPendingGetOpponentPokemon) {
       setIsPendingGetOpponentPokemon(false)
-      getRandomPokemon(OwnerTypes.OPPONENT)
+      _getRandomPokemon(OwnerTypes.OPPONENT)
     }
-  }, [isPendingGetOpponentPokemon, getRandomPokemon])
+  }, [isPendingGetOpponentPokemon, _getRandomPokemon])
 
   useEffect(() => {
     if (playerPokemon && opponentPokemon) {
