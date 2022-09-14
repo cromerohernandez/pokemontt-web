@@ -5,7 +5,6 @@ import { ISettingsDataForRequest, IUserDataForRequest } from '../utils/models/us
 
 const http = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
-  headers: {'Access-Control-Allow-Origin': 'https://pokemontt-arena.netlify.app'},
   withCredentials: true,
 });
 
