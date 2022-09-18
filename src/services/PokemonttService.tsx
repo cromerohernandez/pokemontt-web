@@ -20,17 +20,17 @@ http.interceptors.response.use(
 );
 
 //users
-const signup = (userData: IUserDataForRequest) => http.post('/users/new', userData);
-const getRanking = () => http.get('/users/ranking');
-const updateSettings = (settingsData: ISettingsDataForRequest) => http.patch('/users/update/settings', settingsData);
+const signup = (userData: IUserDataForRequest) => http.post('/users/new', userData, {withCredentials: true});
+const getRanking = () => http.get('/users/ranking', {withCredentials: true});
+const updateSettings = (settingsData: ISettingsDataForRequest) => http.patch('/users/update/settings', settingsData, {withCredentials: true});
 
 //battles
 const getUserBattles = () => http.get('/battles/history');
-const sendAttack = (attackData: IAttackData) => http.post('/battles/attack', attackData);
+const sendAttack = (attackData: IAttackData) => http.post('/battles/attack', attackData, {withCredentials: true});
 
 //sessions
-const login = (loginData: IUserDataForRequest) => http.post('/login', loginData);
-const logout = () => http.post('/logout');
+const login = (loginData: IUserDataForRequest) => http.post('/login', loginData, {withCredentials: true});
+const logout = () => http.post('/logout', {withCredentials: true});
 
 const PokemonttService = {
   signup,
