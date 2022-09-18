@@ -2,12 +2,13 @@ import { FunctionComponent } from 'react';
 
 import FormInput from '../../UI/form/FormInput';
 import MenuButton from '../../UI/buttons/menu-button/MenuButton';
+import Spinner from '../../UI/misc/spinner/Spinner';
 
 import { ILoginViewProps } from '../../../utils/models/props.models';
 import { translate } from '../../../utils/i18n/i18n.index';
 import { BUTTON_TYPES } from '../../../utils/const/button.const';
 
-const LoginView: FunctionComponent<ILoginViewProps> = ({ formData, formError, anyError, onLogin }) => {
+const LoginView: FunctionComponent<ILoginViewProps> = ({ formData, isLoginRequested, formError, anyError, onLogin }) => {
   return (
     <form onSubmit={onLogin} className='form-container'>
       <div className='display-container--auth'>
@@ -29,7 +30,13 @@ const LoginView: FunctionComponent<ILoginViewProps> = ({ formData, formError, an
           }
         </div>
 
-        <MenuButton type={BUTTON_TYPES.submit} disabled={anyError()} label={'BUTTONS.LOGIN'} icon={'login'} />
+        <div className='form-container__button'>
+          {!isLoginRequested ?
+            <MenuButton type={BUTTON_TYPES.submit} disabled={anyError()} label={'BUTTONS.LOGIN'} icon={'login'} />
+            :
+            <Spinner />
+          }
+        </div>
 
         <hr className='form-container__hr'></hr>
         

@@ -12,6 +12,13 @@
     color: var(--color_text_error);
   }
 
+  &__button {
+    height: 4.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__hr {
     width: 20rem;
     border: 0;

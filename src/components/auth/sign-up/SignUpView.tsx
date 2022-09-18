@@ -2,12 +2,13 @@ import { FunctionComponent } from 'react';
 
 import FormInput from '../../UI/form/FormInput';
 import MenuButton from '../../UI/buttons/menu-button/MenuButton';
+import Spinner from '../../UI/misc/spinner/Spinner';
 
 import { ISignUpViewProps } from '../../../utils/models/props.models';
 import { BUTTON_TYPES } from '../../../utils/const/button.const';
 import { translate } from '../../../utils/i18n/i18n.index';
 
-const SignUpView: FunctionComponent<ISignUpViewProps> = ({ formData, formError, anyError, onSignUp }) => {
+const SignUpView: FunctionComponent<ISignUpViewProps> = ({ formData, isSignUpRequested, formError, anyError, onSignUp }) => {
   return (
     <form onSubmit={onSignUp} className='form-container'>
       <div className='display-container--auth'>
@@ -29,7 +30,14 @@ const SignUpView: FunctionComponent<ISignUpViewProps> = ({ formData, formError, 
           }
         </div>
 
-        <MenuButton type={BUTTON_TYPES.submit} disabled={anyError()} label={'BUTTONS.SIGN_UP'} icon={'signup'} />
+        <div className='form-container__button'>
+          {!isSignUpRequested ?
+            <MenuButton type={BUTTON_TYPES.submit} disabled={anyError()} label={'BUTTONS.SIGN_UP'} icon={'signup'} />
+            :
+            <Spinner />
+          }
+        </div>
+
 
         <hr className='form-container__hr'></hr>
         

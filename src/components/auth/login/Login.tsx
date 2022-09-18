@@ -15,6 +15,7 @@ const validators = {
 const Login: FunctionComponent = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  const [isLoginRequested, setIsLoginRequested] = useState(false)
   const [formError, setFormError] = useState(null)
 
   const {
@@ -69,20 +70,23 @@ const Login: FunctionComponent = () => {
     event.preventDefault();
     const loginData = { username, password };
 
+    setIsLoginRequested(true)
     setFormError(null)
 
     PokemonttService.login(loginData)
       .then(user => {
         auth.setUser(user)
+        setIsLoginRequested(false)
         navigate('/')
       })
       .catch(error => {
+        setIsLoginRequested(false)
         setFormError(error.response.data.message ?? error.message)
       })
   }
 
   return (
-    <LoginView formData={formData} formError={formError} anyError={anyError} onLogin={handleLogin} />
+    <LoginView formData={formData} isLoginRequested={isLoginRequested} formError={formError} anyError={anyError} onLogin={handleLogin} />
   )
 }
  

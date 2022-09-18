@@ -15,6 +15,7 @@ const validators = {
 
 const SignUp: FunctionComponent = () => {
   const navigate = useNavigate();
+  const [isSignUpRequested, setIsSignUpRequested] = useState(false)
   const [formError, setFormError] = useState(null)
 
   const {
@@ -85,19 +86,22 @@ const SignUp: FunctionComponent = () => {
 
     const userData = { username, password }
 
+    setIsSignUpRequested(true)
     setFormError(null)
 
     PokemonttService.signup(userData)
     .then(() => {
+      setIsSignUpRequested(false)
       navigate('/login')
     })
     .catch(error => {
+      setIsSignUpRequested(false)
       setFormError(error.response.data.message ?? error.message)
     })
   }
 
   return (
-    <SignUpView formData={formData} formError={formError} anyError={anyError} onSignUp={handleSignUp} />
+    <SignUpView formData={formData} isSignUpRequested={isSignUpRequested} formError={formError} anyError={anyError} onSignUp={handleSignUp} />
   )
 }
  
