@@ -34,8 +34,8 @@ export const BATTLE_DEFAULT_VALUES = {
   resetBattleData: () => undefined,
 }
 
-export const MIN_DELAY_COMPUTER_ATTACK = 1800
+export const MIN_DELAY_COMPUTER_ATTACK = 1600
 
-export const MAX_DELAY_COMPUTER_ATTACK = 2800
+export const MAX_DELAY_COMPUTER_ATTACK = 2600
 
 export const DELAY_COMPUTER_START_ATTACK = 2000
