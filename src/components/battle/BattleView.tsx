@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AuthContext from '../../contexts/AuthContext';
 import BattleContext from '../../contexts/BattleContext';
 
-//import ArenaCanvas from './arena/ArenaCanvas';
+import ArenaCanvas from './arena/ArenaCanvas';
 import ArenaHtmlView from './arena/ArenaHtmlView';
 import BattlePreviewView from './battle-preview/BattlePreviewView';
 import BattlePokemonInfoView from './battle-pokemon-info/BattlePokemonInfoView';
@@ -76,7 +76,7 @@ const BattleView: FunctionComponent<IBattleViewProps> = ({ onChangeMove, onAttac
 
             <div id='battle-arena-container' className='battle-arena-container'>
               {currentUser?.render === RenderTypes.CANVAS &&
-                <ArenaHtmlView />
+                <ArenaCanvas />
               }
 
               {currentUser?.render === RenderTypes.HTML &&
